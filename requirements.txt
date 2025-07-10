@@ -1,0 +1,71 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+langchain
+langchain-openai
+langchain-community
+langgraph
+langchainhub
+tiktoken
+chromadb
+# text-generation # 似乎没有被直接使用，且可能与其他库冲突
+pydantic
+unstructured[all-docs] # 使用unstructured[all-docs]可以一次性安装处理各种文档类型的依赖
+bs4
+pandas
+requests
+scikit-learn
+lark
+jq
+numpy
+pillow
+urllib3
+# certifi # 通常由其他库作为依赖引入
+# charset-normalizer # 通常由其他库作为依赖引入
+# soupsieve # 通常由其他库作为依赖引入
+docx2txt
+packaging
+multimethod
+pypdf
+openai
+weaviate-client # 注意：当前代码似乎未使用weaviate，主要使用ChromaDB
+pytesseract
+# unstructured-pytesseract # 已包含在 unstructured[all-docs] 中
+# unstructured.pytesseract # 已包含在 unstructured[all-docs] 中
+pywin32
+pdf2image
+# pdfminer # 已包含在 unstructured[all-docs] 中
+pdfminer.six
+pdfplumber
+pikepdf
+pypdfium2
+# chardet # 通常由其他库作为依赖引入
+lxml
+nltk
+# scipy # 通常由其他库作为依赖引入
+tabulate
+tqdm
+xlsx2csv
+yarl
+aiohttp
+aiosignal
+async-timeout
+attrs
+frozenlist
+idna
+multidict
+
+# --- 新增依赖 ---
+
+# 用于实现Web搜索工具
+tavily-python
+
+# 用于实现图像搜索工具
+google-search-results
+
+# 用于构建Web UI
+streamlit
+
+# 用于测试
+pytest
+httpx 
