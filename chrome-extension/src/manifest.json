@@ -1,0 +1,24 @@
+{
+  "name": "AI Feynman Agent",
+  "description": "Ask questions about any webpage using the Feynman technique.",
+  "version": "0.1.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "src/assets/react.svg",
+    "48": "src/assets/react.svg",
+    "128": "src/assets/react.svg"
+  },
+  "background": {
+    "service_worker": "src/background.ts"
+  },
+  "content_scripts": [
+    {
+      "js": ["src/main.tsx"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["storage", "activeTab"]
+}
