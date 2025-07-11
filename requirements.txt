@@ -30,9 +30,9 @@ pypdf
 openai
 weaviate-client # 注意：当前代码似乎未使用weaviate，主要使用ChromaDB
 pytesseract
+# pywin32 # Windows-specific, remove for WSL/Linux
 # unstructured-pytesseract # 已包含在 unstructured[all-docs] 中
 # unstructured.pytesseract # 已包含在 unstructured[all-docs] 中
-pywin32
 pdf2image
 # pdfminer # 已包含在 unstructured[all-docs] 中
 pdfminer.six

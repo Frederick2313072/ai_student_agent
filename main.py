@@ -4,11 +4,16 @@ AI学生费曼学习系统 - 主启动文件
 """
 import uuid
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import List, Dict
+from dotenv import load_dotenv
+
+# 加载环境变量
+load_dotenv()
 
 # 导入我们重构后的Agent核心
-from ai_student_agent.agent.agent import build_graph
+from agent.agent import build_graph
 
 # --- 数据模型定义 ---
 
@@ -35,6 +40,16 @@ app = FastAPI(
     description="一个基于费曼学习法的AI学生Agent，通过API提供服务。",
     version="3.1"
 )
+
+# --- CORS中间件配置 ---
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 允许所有来源的跨域请求
+    allow_credentials=True,
+    allow_methods=["*"],  # 允许所有HTTP方法
+    allow_headers=["*"],  # 允许所有HTTP头
+)
+
 
 langgraph_app = build_graph()
 

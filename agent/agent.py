@@ -1,8 +1,7 @@
 
 import os
 import json
-from typing import List, Dict, Any, TypedDict, Annotated
-from operator import itemgetter
+from typing import List, Dict, Any, TypedDict
 import datetime
 
 from dotenv import load_dotenv
@@ -15,12 +14,16 @@ from langgraph.prebuilt import create_react_agent
 # 从新模块中导入
 from .tools import knowledge_retriever, memory_retriever, file_operation, web_search, image_search
 from .prompts import react_prompt
-from ..core.memory import add_new_memory
+from core.memory import add_new_memory
 
 # --- 环境和模型初始化 ---
 load_dotenv()
-os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2", "true")
-os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY", "")
+# 彻底禁用 LangSmith 追踪以避免 403 错误
+os.environ["LANGCHAIN_TRACING_V2"] = "false"
+os.environ["LANGCHAIN_ENDPOINT"] = ""
+os.environ["LANGCHAIN_API_KEY"] = ""
+# os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2", "true") # 禁用LangSmith以消除403错误
+# os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY", "")
 os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY", "")
 
 # 确保关键API密钥已设置
@@ -38,12 +41,12 @@ class AgentState(TypedDict):
     unclear_points: List[str]
     question_queue: List[str]
     short_term_memory: List[Dict] # 短期记忆：最近K轮对话
-    messages: Annotated[list, itemgetter("messages")]
+    messages: List[BaseMessage]
 
 
 # --- 构建ReAct Agent ---
 tools = [knowledge_retriever, memory_retriever, file_operation, web_search, image_search]
-react_agent_executor = create_react_agent(model, tools=tools, messages_prompt=react_prompt)
+react_agent_executor = create_react_agent(model, tools=tools)
 
 
 # --- LangGraph 节点定义 ---
@@ -120,7 +123,14 @@ def memory_manager(state: AgentState) -> AgentState:
     
     summarization_chain = summary_prompt | model
     
-    conversation_str = "\n".join([f"{msg['role']}: {msg['content']}" for msg in state.get("short_term_memory", [])])
+    # 兼容处理 'role' 和 'type' 两种键名
+    conversation_parts = []
+    for msg in state.get("short_term_memory", []):
+        role = msg.get("role") or msg.get("type", "unknown")
+        content = msg.get("content", "")
+        conversation_parts.append(f"{role}: {content}")
+        
+    conversation_str = "\n".join(conversation_parts)
     
     if not conversation_str.strip():
         print("--- 短期记忆为空，跳过记忆固化。 ---")

@@ -1,0 +1,26 @@
+{
+  "name": "ai-student-agent",
+  "private": true,
+  "version": "0.0.1",
+  "description": "An AI agent for learning with the Feynman technique.",
+  "scripts": {
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:chrome": "pnpm --filter chrome-extension dev",
+    "build:frontend": "pnpm --filter frontend build",
+    "build:chrome": "pnpm --filter chrome-extension build"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "react",
+    "chrome-extension",
+    "vite"
+  ],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.13.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

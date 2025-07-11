@@ -1,0 +1,313 @@
+/* General Layout & Theme */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #141414;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 800px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background-color: #1f1f1f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: #252525;
+  flex-shrink: 0;
+}
+
+.chat-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+.chat-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: #1a1a1a;
+}
+
+.chat-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chat-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.welcome-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: -0.5rem;
+}
+
+.welcome-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+.prompts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.prompt-card {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+}
+
+.prompt-card:hover {
+  transform: translateY(-2px);
+  border-color: #1677ff !important;
+  box-shadow: 0 8px 25px rgba(22, 119, 255, 0.15);
+  background-color: rgba(22, 119, 255, 0.05) !important;
+}
+
+.prompt-title {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.prompt-question {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.4;
+}
+
+/* 消息容器和操作按钮样式 */
+.message-wrapper {
+  width: 100%;
+}
+
+.message-content {
+  color: rgba(255, 255, 255, 0.95) !important;
+  margin-bottom: 6px;
+}
+
+.message-content * {
+  color: inherit !important;
+}
+
+.message-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 4px;
+  padding-top: 4px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.message-wrapper:hover .message-actions {
+  opacity: 1;
+}
+
+.action-button {
+  color: rgba(255, 255, 255, 0.6) !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  height: 28px !important;
+  width: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+}
+
+.action-button:hover {
+  color: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  transform: scale(1.1) !important;
+}
+
+.action-button:focus {
+  color: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.3) !important;
+}
+
+/* Ant Design 组件样式覆盖 - 参考 Gemini 设计 */
+.ant-bubble {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  margin: 4px 0 !important;
+}
+
+.ant-bubble * {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.ant-bubble[data-placement="start"] {
+  background-color: rgba(42, 42, 42, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.ant-bubble[data-placement="start"] * {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.ant-bubble[data-placement="end"] {
+  background-color: rgba(22, 119, 255, 0.15) !important;
+  border-color: rgba(22, 119, 255, 0.4) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* 用户消息专用样式 - 使用更高优先级 */
+.ant-bubble-list .ant-bubble[data-placement="end"] {
+  padding: 6px 10px !important;
+}
+
+.ant-bubble[data-placement="end"] * {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.ant-bubble[data-placement="end"] .message-content {
+  margin-bottom: 6px !important;
+}
+
+/* 加载状态特殊样式 */
+.ant-bubble-loading {
+  background-color: rgba(42, 42, 42, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.ant-bubble-loading * {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 头像样式 */
+.ant-avatar {
+  border: 2px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.ant-sender {
+  background-color: #252525 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  padding: 1rem 1.5rem !important;
+}
+
+.ant-input {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.ant-input:focus,
+.ant-input:hover {
+  border-color: #1677ff !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.ant-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 气泡列表容器 */
+.ant-bubble-list {
+  background: transparent !important;
+}
+
+.ant-bubble-list-item {
+  background: transparent !important;
+}
+
+/* 打字效果和加载动画 */
+.ant-bubble-typing {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Tooltip样式 */
+.ant-tooltip .ant-tooltip-inner {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 代码块样式覆盖 */
+pre,
+code {
+  color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 确保所有文本都是白色 */
+p,
+span,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+td,
+th {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+strong,
+b {
+  color: rgba(255, 255, 255, 1) !important;
+}
