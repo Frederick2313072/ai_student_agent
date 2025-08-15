@@ -2,10 +2,10 @@
 import streamlit as st
 import requests
 import json
-from typing import List, Dict
+from typing import List, Dict, Generator
 
 # --- 配置 ---
-API_URL = "http://127.0.0.1:8000/chat"
+API_URL = "http://127.0.0.1:8000/chat/stream" # V3.3: 改为流式接口
 st.set_page_config(page_title="🎓 AI学生费曼学习系统", layout="wide")
 
 
@@ -24,16 +24,47 @@ def init_session_state():
         st.session_state.chat_history = []
 
 
-# --- API 调用函数 ---
-def call_chat_api(topic: str, explanation: str, session_id: str, memory: List[Dict]) -> requests.Response:
-    """调用后端的Agent聊天API。"""
+# --- API 调用函数 (V3.3: 流式改造) ---
+def stream_chat_api(topic: str, explanation: str, session_id: str, memory: List[Dict]) -> Generator[str, None, None]:
+    """调用后端的Agent流式聊天API。"""
     payload = {
         "topic": topic,
         "explanation": explanation,
         "session_id": session_id,
         "short_term_memory": memory
     }
-    return requests.post(API_URL, json=payload, timeout=300)
+    try:
+        with requests.post(API_URL, json=payload, stream=True, timeout=300) as response:
+            response.raise_for_status()
+            for line in response.iter_lines():
+                if line:
+                    decoded_line = line.decode('utf-8')
+                    if decoded_line.startswith('data: '):
+                        try:
+                            # V3.4: 解析JSON编码的数据
+                            content_json = decoded_line[len('data: '):]
+                            content = json.loads(content_json)
+                            if content != "[END_OF_STREAM]":
+                                yield content
+                        except json.JSONDecodeError:
+                            # 忽略无法解析的行
+                            continue
+    except requests.exceptions.RequestException as e:
+        st.error(f"API请求失败: {e}")
+        yield "" # 发生错误时，生成器也应终止
+
+def call_memorize_api(topic: str, memory: List[Dict]):
+    """调用后端的记忆API（即发即忘）。"""
+    try:
+        requests.post(
+            "http://127.0.0.1:8000/memorize", 
+            json={"topic": topic, "conversation_history": memory},
+            timeout=5 # 设置一个短超时
+        )
+    except requests.exceptions.RequestException as e:
+        # 这里可以选择性地在UI上显示一个不打扰的警告
+        print(f"后台记忆请求失败: {e}")
+
 
 # --- UI 渲染函数 ---
 def render_chat_history():
@@ -91,31 +122,27 @@ def render_main_ui():
         with st.chat_message("user"):
             st.markdown(user_explanation)
 
-        # 调用API
-        with st.spinner("🧠 AI学生正在思考中，请稍候..."):
-            try:
-                response = call_chat_api(
-                    st.session_state.current_topic,
-                    user_explanation,
-                    st.session_state.session_id,
-                    st.session_state.short_term_memory
-                )
-                response.raise_for_status()
-                
-                api_response = response.json()
-                questions = api_response.get("questions", [])
-                st.session_state.short_term_memory = api_response.get("short_term_memory", [])
-                
-                # 显示AI的回答
-                ai_message = "\n\n".join(questions) if questions else "我完全理解了，没有更多问题了！"
-                st.session_state.chat_history.append({"role": "assistant", "content": ai_message})
-                with st.chat_message("assistant"):
-                    st.markdown(ai_message)
-
-            except requests.exceptions.RequestException as e:
-                st.error(f"API请求失败: {e}")
-            except (json.JSONDecodeError, KeyError) as e:
-                st.error(f"无法解析API响应或响应格式错误: {e}")
+        # V3.4: 改造UI渲染逻辑以正确渲染Markdown流
+        with st.chat_message("assistant"):
+            placeholder = st.empty()
+            full_response = ""
+            response_generator = stream_chat_api(
+                st.session_state.current_topic,
+                user_explanation,
+                st.session_state.session_id,
+                st.session_state.short_term_memory
+            )
+            for chunk in response_generator:
+                full_response += chunk
+                placeholder.markdown(full_response)
+        
+        # 将完整的流式响应添加到聊天历史和短期记忆中
+        st.session_state.chat_history.append({"role": "assistant", "content": full_response})
+        st.session_state.short_term_memory.append({"role": "user", "content": user_explanation})
+        st.session_state.short_term_memory.append({"role": "assistant", "content": full_response})
+        
+        # V3.3: 异步调用记忆API
+        call_memorize_api(st.session_state.current_topic, st.session_state.short_term_memory)
 
 
 if __name__ == "__main__":

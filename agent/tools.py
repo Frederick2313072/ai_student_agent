@@ -13,9 +13,14 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 ABS_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAG_DB_DIR = os.path.join(ABS_PATH, "knowledge_base")
 MEMORY_DB_DIR = os.path.join(ABS_PATH, "long_term_memory")
-IMAGE_SEARCH_API_URL = "http://127.0.0.1:8001/search" # MCP服务器地址
+# MCP服务器地址，支持通过环境变量覆盖
+IMAGE_SEARCH_API_URL = os.getenv("IMAGE_SEARCH_API_URL", "http://127.0.0.1:8001/search")
 
-embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+base_url = os.getenv("OPENAI_BASE_URL", "").strip()
+if base_url:
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-small", base_url=base_url)
+else:
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
 rag_db = Chroma(persist_directory=RAG_DB_DIR, embedding_function=embeddings) if os.path.exists(RAG_DB_DIR) else None
 memory_db = Chroma(persist_directory=MEMORY_DB_DIR, embedding_function=embeddings) if os.path.exists(MEMORY_DB_DIR) else None
@@ -64,11 +69,22 @@ def file_operation(operation: str, file_name: str, content: str = None) -> str:
     except Exception as e:
         return f"文件操作失败: {e}"
 
-# 使用Tavily实现网络搜索和网页抓取
-# include_raw_content=True 可以让它获取网页内容，从而同时实现搜索和抓取
-web_search = TavilySearchResults(max_results=3, include_raw_content=True)
-web_search.name = "web_search"
-web_search.description = "执行网络搜索并抓取网页内容，以验证信息或获取最新知识。输入应该是详细的搜索查询。"
+"""
+根据是否配置 TAVILY_API_KEY 决定启用真实的 Tavily 搜索工具，
+否则降级为提示性占位工具，避免应用在启动阶段抛出校验错误。
+"""
+tavily_api_key = os.getenv("TAVILY_API_KEY", "").strip()
+if tavily_api_key:
+    # 使用Tavily实现网络搜索和网页抓取
+    # include_raw_content=True 可以让它获取网页内容，从而同时实现搜索和抓取
+    web_search = TavilySearchResults(max_results=3, include_raw_content=True)
+    web_search.name = "web_search"
+    web_search.description = "执行网络搜索并抓取网页内容，以验证信息或获取最新知识。输入应该是详细的搜索查询。"
+else:
+    @tool
+    def web_search(query: str) -> str:
+        """占位网络搜索工具。未设置 TAVILY_API_KEY 时返回提示信息。"""
+        return "未配置 TAVILY_API_KEY，网络搜索工具不可用。请在 .env 设置 TAVILY_API_KEY 后重启服务。"
 
 # 废弃旧的占位符函数
 # @tool

@@ -2,14 +2,15 @@
 import os
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
+from langchain_community.embeddings import ZhipuAIEmbeddings # 新增导入
 
 # --- 常量定义 ---
 # 获取当前文件所在目录的绝对路径
 ABS_PATH = os.path.dirname(os.path.abspath(__file__)) 
 # 定义长期记忆数据库的持久化存储目录
 MEMORY_DB_DIR = os.path.join(ABS_PATH, "..", "..", "long_term_memory")
-# 定义嵌入模型
-EMBEDDING_MODEL = "text-embedding-3-small"
+# 定义嵌入模型 (V3.2: 移除硬编码，改为动态选择)
+# EMBEDDING_MODEL = "text-embedding-3-small"
 
 
 class LongTermMemoryManager:
@@ -19,9 +20,29 @@ class LongTermMemoryManager:
     使用ChromaDB作为向量存储，用于持久化和检索对话摘要。
     """
     def __init__(self):
-        """初始化长期记忆管理器。"""
+        """初始化长期记忆管理器，并根据环境变量动态选择嵌入模型。"""
         print(f"--- 初始化长期记忆数据库于: {MEMORY_DB_DIR} ---")
-        self._embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL)
+
+        zhipu_api_key = os.getenv("ZHIPU_API_KEY", "").strip()
+        openai_api_key = os.getenv("OPENAI_API_KEY", "").strip()
+
+        if zhipu_api_key:
+            # 使用智谱AI的嵌入模型
+            self._embeddings = ZhipuAIEmbeddings(
+                api_key=zhipu_api_key,
+                model=os.getenv("ZHIPU_EMBEDDING_MODEL", "embedding-2") # 默认使用 embedding-2
+            )
+        elif openai_api_key:
+            # 使用OpenAI的嵌入模型
+            base_url = os.getenv("OPENAI_BASE_URL", "").strip()
+            model_name = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
+            if base_url:
+                self._embeddings = OpenAIEmbeddings(model=model_name, base_url=base_url)
+            else:
+                self._embeddings = OpenAIEmbeddings(model=model_name)
+        else:
+            raise ValueError("错误：未能找到 ZHIPU_API_KEY 或 OPENAI_API_KEY 用于初始化嵌入模型。")
+            
         self._vectorstore = Chroma(
             persist_directory=MEMORY_DB_DIR,
             embedding_function=self._embeddings

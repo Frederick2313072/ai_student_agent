@@ -2,34 +2,76 @@
 import os
 import json
 from typing import List, Dict, Any, TypedDict, Annotated
-from operator import itemgetter
+from operator import add
 import datetime
 
-from dotenv import load_dotenv
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
+from langchain_community.chat_models import ChatZhipuAI # 新增导入
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import create_react_agent
 
 # 从新模块中导入
 from .tools import knowledge_retriever, memory_retriever, file_operation, web_search, image_search
 from .prompts import react_prompt
-from ..core.memory import add_new_memory
+from core.memory import add_new_memory
 
-# --- 环境和模型初始化 ---
-load_dotenv()
-os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2", "true")
-os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY", "")
+# --- 环境和模型初始化 --- (V3.2: 环境变量加载移至 main.py)
+# LangSmith：仅当存在 API Key 时才默认打开，否则强制关闭，避免未授权报错
+langsmith_key = os.getenv("LANGCHAIN_API_KEY", "").strip()
+if langsmith_key:
+    os.environ["LANGCHAIN_API_KEY"] = langsmith_key
+    os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2", "true")
+else:
+    os.environ["LANGCHAIN_TRACING_V2"] = "false"
+
 os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY", "")
 
+# --- 模型初始化 ---
+def initialize_model():
+    """根据环境变量初始化并返回相应的LLM。"""
+    
+    zhipu_api_key = os.getenv("ZHIPU_API_KEY", "").strip()
+    openai_api_key = os.getenv("OPENAI_API_KEY", "").strip()
+
+    if zhipu_api_key:
+        print("检测到智谱AI配置，优先使用智谱AI。")
+        return ChatZhipuAI(
+            api_key=zhipu_api_key,
+            model=os.getenv("ZHIPU_MODEL", "glm-4"),
+            temperature=float(os.getenv("OPENAI_TEMPERATURE", 0.7)),
+        )
+    
+    if openai_api_key:
+        print("未检测到智谱AI配置，使用OpenAI。")
+        openai_base_url = os.getenv("OPENAI_BASE_URL", "").strip()
+        model_kwargs = {
+            "temperature": float(os.getenv("OPENAI_TEMPERATURE", 0.7)),
+            "model": os.getenv("OPENAI_MODEL", "gpt-4o"),
+        }
+        if openai_base_url:
+            model_kwargs["base_url"] = openai_base_url
+        
+        return ChatOpenAI(**model_kwargs)
+
+    raise ValueError("错误：请在.env文件中设置 ZHIPU_API_KEY 或 OPENAI_API_KEY")
+
+model = initialize_model()
+
+
 # 确保关键API密钥已设置
-if not os.getenv("OPENAI_API_KEY"):
-    raise ValueError("错误：请在.env文件中设置OPENAI_API_KEY")
+# if not os.getenv("OPENAI_API_KEY"):
+#     raise ValueError("错误：请在.env文件中设置OPENAI_API_KEY")
 if not os.getenv("TAVILY_API_KEY"):
     print("警告：TAVILY_API_KEY未设置，web_search工具将无法工作。")
 
-model = ChatOpenAI(temperature=0, model=os.getenv("OPENAI_MODEL_NAME", "gpt-4o"))
+# 允许通过 OPENAI_BASE_URL 指定 OpenAI 兼容端点（如代理/Azure/OpenRouter兼容端点）
+# openai_base_url = os.getenv("OPENAI_BASE_URL", "").strip()
+# if openai_base_url:
+#     model = ChatOpenAI(temperature=0, model=os.getenv("OPENAI_MODEL_NAME", "gpt-4o"), base_url=openai_base_url)
+# else:
+#     model = ChatOpenAI(temperature=0, model=os.getenv("OPENAI_MODEL_NAME", "gpt-4o"))
 
 # --- Agent状态定义 (V3.1) ---
 class AgentState(TypedDict):
@@ -38,12 +80,13 @@ class AgentState(TypedDict):
     unclear_points: List[str]
     question_queue: List[str]
     short_term_memory: List[Dict] # 短期记忆：最近K轮对话
-    messages: Annotated[list, itemgetter("messages")]
+    messages: Annotated[List[BaseMessage], add]
 
 
 # --- 构建ReAct Agent ---
 tools = [knowledge_retriever, memory_retriever, file_operation, web_search, image_search]
-react_agent_executor = create_react_agent(model, tools=tools, messages_prompt=react_prompt)
+# 使用默认的ReAct提示词，避免自定义Prompt变量不匹配导致的启动错误
+react_agent_executor = create_react_agent(model, tools=tools)
 
 
 # --- LangGraph 节点定义 ---
@@ -66,13 +109,16 @@ def user_input_handler(state: AgentState) -> AgentState:
     return {
         "messages": [HumanMessage(content=prompt_text)],
         "short_term_memory": short_term_memory,
+        "topic": topic,
+        "user_explanation": user_explanation,
     }
 
 
 def gap_identifier_react(state: AgentState) -> AgentState:
     """运行ReAct Agent来识别知识缺口。"""
     print("--- 节点: gap_identifier (ReAct) ---")
-    agent_output = react_agent_executor.invoke(state)
+    # 仅将 messages 传入 ReAct 执行器
+    agent_output = react_agent_executor.invoke({"messages": state.get("messages", [])})
     final_answer = agent_output['messages'][-1].content
     print(f"--- ReAct Agent Final Answer: {final_answer} ---")
     
@@ -107,9 +153,13 @@ def question_generator(state: AgentState) -> AgentState:
     return {"question_queue": questions, "short_term_memory": updated_memory}
 
 
-def memory_manager(state: AgentState) -> AgentState:
-    """对话结束后，对短期记忆进行总结，并固化到长期记忆中。"""
-    print("--- 节点: memory_manager ---")
+# --- V3.2: 后台记忆固化 ---
+
+def summarize_conversation_for_memory(topic: str, conversation_history: List[Dict]):
+    """
+    (后台任务) 对话结束后，对短期记忆进行总结，并固化到长期记忆中。
+    """
+    print("--- 后台任务: memory_manager ---")
     
     summary_prompt = ChatPromptTemplate.from_messages([
         ("system", 
@@ -120,11 +170,11 @@ def memory_manager(state: AgentState) -> AgentState:
     
     summarization_chain = summary_prompt | model
     
-    conversation_str = "\n".join([f"{msg['role']}: {msg['content']}" for msg in state.get("short_term_memory", [])])
+    conversation_str = "\n".join([f"{msg['role']}: {msg['content']}" for msg in conversation_history])
     
     if not conversation_str.strip():
         print("--- 短期记忆为空，跳过记忆固化。 ---")
-        return {}
+        return
 
     summary = summarization_chain.invoke({"conversation_str": conversation_str}).content
     
@@ -132,32 +182,27 @@ def memory_manager(state: AgentState) -> AgentState:
     
     # 定义元数据
     metadata = {
-        "topic": state.get("topic", "N/A"),
+        "topic": topic,
         "timestamp": datetime.datetime.now().isoformat()
     }
     
     # 将摘要存入长期记忆
     add_new_memory(summary, metadata)
-    
-    # 在这个流程中，我们暂时不清空短期记忆，以便FastAPI可以返回完整的会话历史
-    return {}
 
 
-# --- 构建LangGraph图 (V3.1) ---
+# --- 构建LangGraph图 (V3.2) ---
 
 def build_graph():
-    workflow = StateGraph(AgentState)
+    workflow = StateGraph(AgentState)  # type: ignore[arg-type]
 
     workflow.add_node("user_input_handler", user_input_handler)
     workflow.add_node("gap_identifier", gap_identifier_react)
     workflow.add_node("question_generator", question_generator)
-    workflow.add_node("memory_manager", memory_manager)
 
     workflow.set_entry_point("user_input_handler")
     workflow.add_edge("user_input_handler", "gap_identifier")
     workflow.add_edge("gap_identifier", "question_generator")
-    workflow.add_edge("question_generator", "memory_manager")
-    workflow.add_edge("memory_manager", END)
+    workflow.add_edge("question_generator", END) # 在此结束主流程
 
     app = workflow.compile()
     return app
