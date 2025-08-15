@@ -1,6 +1,8 @@
 # 🎓 AI学生费曼学习系统 (V3)
 
-一个基于 **LangGraph** 和 **FastAPI** 的高级AI Agent，它扮演“AI学生”的角色，通过费曼学习法帮助用户巩固和深化知识。
+一个基于 **LangGraph** 和 **FastAPI** 的高级AI Agent，它扮演"AI学生"的角色，通过费曼学习法帮助用户巩固和深化知识。
+
+> **最新更新**: 系统已完成重构，采用模块化架构，支持多种工具集成和异步处理。
 
 ## 🌟 项目特色
 
@@ -76,22 +78,29 @@ graph TD
 
 ### 2. 配置环境变量
 
-- 复制配置文件模板：
+- 使用现有配置文件：
   ```bash
-  cp .env.example .env
+  # 编辑环境配置文件
+  nano environments/test.env
   ```
-- 编辑 `.env` 文件，填入你的API密钥。至少需要 `OPENAI_API_KEY`。
+- 确保以下关键配置项已设置：
   ```dotenv
+  # OpenAI API (必需)
+  OPENAI_API_KEY="sk-your-openai-api-key-here"
+  OPENAI_MODEL="gpt-4o"
+  OPENAI_TEMPERATURE=0.7
+
   # LangChain/LangSmith (可选, 用于调试)
   LANGCHAIN_TRACING_V2="true"
   LANGCHAIN_API_KEY="..."
 
-  # OpenAI API (必需)
-  OPENAI_API_KEY="..."
-
   # 工具API (可选, 但强烈推荐)
   TAVILY_API_KEY="..."   # 用于网络搜索
   SERPAPI_API_KEY="..."    # 用于图像搜索
+
+  # 开发配置
+  DEBUG=true
+  ENVIRONMENT=development
   ```
 
 ### 3. 构建本地知识库 (可选)
@@ -114,18 +123,27 @@ graph TD
 
 - **终端 1: 启动图像搜索微服务**
   ```bash
+  # 激活虚拟环境并启动图像搜索服务
+  source .venv/bin/activate  # Linux/Mac
+  # 或 .venv\Scripts\activate  # Windows
   uvicorn mcp_servers.image_search_server.main:app --reload --port 8001
   ```
 
 - **终端 2: 启动主应用API**
   ```bash
+  # 激活虚拟环境并启动主API服务
+  source .venv/bin/activate
   uvicorn main:app --reload --port 8000
   ```
 
 - **终端 3: 启动Streamlit Web界面**
   ```bash
-  streamlit run ui.py
+  # 激活虚拟环境并启动Web界面
+  source .venv/bin/activate
+  streamlit run ui.py --server.port 8501
   ```
+
+> **提示**: 建议使用虚拟环境来管理Python依赖，避免版本冲突。
 
 ### 5. 开始使用
 
@@ -158,13 +176,95 @@ graph TD
 
 若要添加新工具，请在 `agent/tools.py` 中定义它，然后在 `agent/agent.py` 中将其添加到 `tools` 列表中。
 
-### 运行测试 (待实现)
+### 运行测试
 
-我们计划使用 `pytest` 进行测试。
+系统包含单元测试和集成测试：
 ```bash
+# 运行所有测试
 pytest
+
+# 运行特定测试文件
+pytest tests/test_api.py
+
+# 运行集成测试
+pytest tests/integration/
 ```
+
+## 🛠️ 故障排除
+
+### 常见问题
+
+1. **端口冲突**
+   - 确保端口 8000, 8001, 8501 未被占用
+   - 可以修改启动命令中的端口号
+
+2. **API密钥问题**
+   - 确保 `environments/test.env` 中的 OpenAI API 密钥有效
+   - 检查网络连接和API配额
+
+3. **依赖安装问题**
+   - 使用虚拟环境避免依赖冲突
+   - 确保Python版本为3.9+
+
+4. **服务启动失败**
+   - 检查日志输出中的错误信息
+   - 确保所有必需的环境变量已设置
+
+### 获取帮助
+
+- 查看 `logs/` 目录中的日志文件
+- 检查 FastAPI 自动生成的文档: `http://localhost:8000/docs`
+- 提交 GitHub Issues 报告问题
+
+## 📁 项目结构说明
+
+```
+ai_student_agent/
+├── agent/                 # AI Agent 核心逻辑
+│   ├── agent.py          # LangGraph 工作流定义
+│   ├── tools.py          # 工具集成
+│   └── prompts.py        # 提示词模板
+├── mcp_servers/          # 微服务
+│   └── image_search_server/  # 图像搜索服务
+├── core/                 # 核心组件
+│   ├── memory.py         # 记忆管理
+│   └── monitoring/       # 监控组件
+├── data/                 # 知识库数据
+├── environments/         # 环境配置
+├── logs/                 # 日志文件
+├── tests/                # 测试代码
+├── main.py              # FastAPI 主应用
+├── ui.py                # Streamlit Web 界面
+├── ingest.py            # 数据注入脚本
+└── requirements.txt     # Python 依赖
+```
+
+## 📋 版本信息
+
+### 当前版本: V3.0
+- ✅ 基于 LangGraph 的 ReAct Agent 架构
+- ✅ 支持多种工具集成（网络搜索、图像搜索、RAG）
+- ✅ 长短期记忆管理
+- ✅ 异步 FastAPI 后端
+- ✅ Streamlit Web 界面
+- ✅ 微服务架构设计
+
+### 主要依赖
+- **Python**: 3.9+
+- **LangChain**: 最新版本
+- **LangGraph**: 工作流引擎
+- **FastAPI**: Web 框架
+- **Streamlit**: 前端界面
+- **ChromaDB**: 向量数据库
+- **OpenAI**: GPT 模型
+
+### 更新日志
+- **V3.0**: 完全重构，采用 LangGraph 架构
+- **V2.x**: 多智能体系统（已废弃）
+- **V1.x**: 基础费曼学习实现（已废弃）
 
 ---
 
-**通过向AI学生教授来真正掌握知识！** 🚀 
+**通过向AI学生教授来真正掌握知识！** 🚀
+
+*基于费曼学习法的原理：教授他人是最好的学习方式。* 
