@@ -194,6 +194,7 @@ chromadb/
 # Environment files
 .env*
 !.env.example
+test.env
 
 # Temporary files
 temp/

@@ -171,7 +171,7 @@ python scripts/config_validator.py --show-guide
   uvicorn main:app --reload --port 8000
   ```
 
-- **终端 3: 启动Streamlit Web界面**
+- **终端 2: 启动Streamlit Web界面**
   ```bash
   # 使用 uv
   uv run streamlit run src/feynman/interfaces/web/streamlit_ui.py --server.port 8501
