@@ -21,21 +21,113 @@ st.set_page_config(page_title="🎓 AI学生费曼学习系统", layout="wide")
 
 # --- 初始化会话状态 ---
 def init_session_state():
-    """初始化Streamlit的会话状态变量。"""
-    if "session_id" not in st.session_state:
-        st.session_state.session_id = None
-    if "short_term_memory" not in st.session_state:
-        st.session_state.short_term_memory = []
-    if "current_topic" not in st.session_state:
-        st.session_state.current_topic = ""
-    if "teaching_input" not in st.session_state:
-        st.session_state.teaching_input = ""
-    if "chat_history" not in st.session_state:
-        st.session_state.chat_history = []
-    if "kg_enabled" not in st.session_state:
-        st.session_state.kg_enabled = False
-    if "current_tab" not in st.session_state:
-        st.session_state.current_tab = "对话"
+    """初始化Streamlit的会话状态变量，并支持持久化。"""
+    # 基本状态变量
+    state_defaults = {
+        "session_id": None,
+        "short_term_memory": [],
+        "current_topic": "",
+        "teaching_input": "",
+        "chat_history": [],
+        "kg_enabled": False,
+        "current_tab": "对话",
+        "viz_options": {},
+        "last_activity": None
+    }
+
+    for key, default_value in state_defaults.items():
+        if key not in st.session_state:
+            st.session_state[key] = default_value
+
+    # 从持久化存储恢复状态（如果存在）
+    load_persistent_state()
+
+def save_persistent_state():
+    """保存关键状态到持久化存储"""
+    try:
+        import json
+        import os
+        from datetime import datetime
+
+        persistent_data = {
+            "session_id": st.session_state.session_id,
+            "current_topic": st.session_state.current_topic,
+            "chat_history": st.session_state.chat_history,
+            "short_term_memory": st.session_state.short_term_memory,
+            "kg_enabled": st.session_state.kg_enabled,
+            "last_activity": str(st.session_state.get("last_activity", "")),
+            "saved_at": str(datetime.now())
+        }
+
+        # 保存到session_state（这会在浏览器会话中保持）
+        st.session_state["_persistent_data"] = persistent_data
+
+        # 同时保存到文件作为服务器端备份
+        try:
+            persist_dir = os.path.join(os.getcwd(), "data", "streamlit_cache")
+            os.makedirs(persist_dir, exist_ok=True)
+            cache_file = os.path.join(persist_dir, "session_cache.json")
+            with open(cache_file, 'w', encoding='utf-8') as f:
+                json.dump(persistent_data, f, ensure_ascii=False, indent=2)
+        except Exception:
+            # 如果文件保存失败，继续执行（文件权限问题等）
+            pass
+
+    except Exception as e:
+        st.warning(f"保存状态失败: {e}")
+
+def load_persistent_state():
+    """从持久化存储加载状态"""
+    try:
+        import json
+        import os
+        from datetime import datetime, timedelta
+
+        # 首先尝试从session_state加载（浏览器级别缓存）
+        if "_persistent_data" in st.session_state:
+            persistent_data = st.session_state["_persistent_data"]
+            # 检查数据是否过期（可选，24小时过期）
+            if "saved_at" in persistent_data:
+                try:
+                    saved_time = datetime.fromisoformat(persistent_data["saved_at"])
+                    if datetime.now() - saved_time < timedelta(hours=24):
+                        # 恢复状态
+                        for key, value in persistent_data.items():
+                            if key in st.session_state and key not in ["_persistent_data", "saved_at"]:
+                                st.session_state[key] = value
+                        return
+                except (ValueError, TypeError):
+                    pass
+
+        # 如果session_state中没有有效数据，尝试从文件加载
+        try:
+            cache_file = os.path.join(os.getcwd(), "data", "streamlit_cache", "session_cache.json")
+            if os.path.exists(cache_file):
+                with open(cache_file, 'r', encoding='utf-8') as f:
+                    persistent_data = json.load(f)
+
+                # 检查数据是否过期
+                if "saved_at" in persistent_data:
+                    saved_time = datetime.fromisoformat(persistent_data["saved_at"])
+                    if datetime.now() - saved_time < timedelta(hours=24):
+                        # 恢复状态到session_state
+                        for key, value in persistent_data.items():
+                            if key in st.session_state and key not in ["_persistent_data", "saved_at"]:
+                                st.session_state[key] = value
+                        st.session_state["_persistent_data"] = persistent_data
+                        return
+        except Exception:
+            # 如果文件加载失败，继续执行
+            pass
+
+    except Exception as e:
+        st.warning(f"加载状态失败: {e}")
+
+def update_last_activity():
+    """更新最后活动时间"""
+    from datetime import datetime
+    st.session_state.last_activity = datetime.now()
+    save_persistent_state()
 
 
 # --- API 调用函数 (V3.3: 流式改造) ---
@@ -117,18 +209,32 @@ def render_chat_interface():
     with st.sidebar:
         st.header("⚙️ 会话控制")
         if st.button("开始新会话", use_container_width=True):
+            # 重置所有状态
             st.session_state.session_id = None
             st.session_state.short_term_memory = []
             st.session_state.current_topic = ""
             st.session_state.teaching_input = ""
             st.session_state.chat_history = []
+            st.session_state.last_activity = None
+
+            # 保存重置状态
+            save_persistent_state()
+
             st.success("新会话已开始！")
-            st.rerun()
+            st.info("页面将自动刷新以应用更改...")
 
         st.markdown("---")
         st.header("💡 当前状态")
         st.text_input("当前会话ID:", value=st.session_state.session_id, disabled=True)
         st.session_state.current_topic = st.text_input("当前学习主题:", value=st.session_state.current_topic)
+
+        # 显示状态信息
+        if st.session_state.chat_history:
+            st.info(f"📝 对话轮数: {len([msg for msg in st.session_state.chat_history if msg['role'] == 'user'])}")
+            st.caption("💾 对话状态已自动保存")
+
+        if st.session_state.last_activity:
+            st.caption(f"🕒 最后活动: {st.session_state.last_activity.strftime('%H:%M:%S') if hasattr(st.session_state.last_activity, 'strftime') else '刚刚'}")
         
         # 知识图谱侧边栏控制
         kg_enabled, viz_type, viz_options = kg_ui.render_sidebar_controls()
@@ -172,7 +278,9 @@ def render_chat_interface():
         st.session_state.chat_history.append({"role": "assistant", "content": full_response})
         st.session_state.short_term_memory.append({"role": "user", "content": user_explanation})
         st.session_state.short_term_memory.append({"role": "assistant", "content": full_response})
-        
+
+        # 更新活动时间并保存状态
+        update_last_activity()
 
         call_memorize_api(st.session_state.current_topic, st.session_state.short_term_memory)
         

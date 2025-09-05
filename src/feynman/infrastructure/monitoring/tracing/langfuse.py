@@ -72,14 +72,35 @@ def initialize_langfuse(
             host=host,
             debug=debug
         )
-        
+
         # 测试连接
         _langfuse_client.auth_check()
-        
+
         _is_initialized = True
         logger.info(f"LangFuse初始化成功: {host}")
         return True
-        
+
+    except AttributeError as e:
+        if "NoOpTracerProvider" in str(e) or "add_span_processor" in str(e):
+            logger.warning("检测到OpenTelemetry版本冲突，尝试降级模式")
+            try:
+                # 降级模式：创建客户端但禁用追踪功能
+                _langfuse_client = Langfuse(
+                    public_key=public_key,
+                    secret_key=secret_key,
+                    host=host,
+                    debug=False
+                )
+                # 跳过auth_check，直接标记为初始化成功
+                _is_initialized = True
+                logger.info(f"LangFuse降级模式初始化成功: {host}")
+                return True
+            except Exception as e2:
+                logger.error(f"LangFuse降级模式也失败: {e2}")
+                return False
+        else:
+            logger.error(f"LangFuse初始化失败: {e}")
+            return False
     except Exception as e:
         logger.error(f"LangFuse初始化失败: {e}")
         return False

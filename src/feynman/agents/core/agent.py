@@ -79,18 +79,18 @@ os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY", "")
 
 
 def initialize_model():
-    """根据环境变量初始化并返回相应的LLM。"""
+    """根据环境变量初始化并返回相应的LLM和模型提供商。"""
     
     zhipu_api_key = os.getenv("ZHIPU_API_KEY", "").strip()
     openai_api_key = os.getenv("OPENAI_API_KEY", "").strip()
 
     if zhipu_api_key:
-
-        return ChatZhipuAI(
+        model = ChatZhipuAI(
             api_key=zhipu_api_key,
             model=os.getenv("ZHIPU_MODEL", "glm-4"),
             temperature=float(os.getenv("OPENAI_TEMPERATURE", 0.7)),
         )
+        return model, "zhipu"
     
     if openai_api_key:
         print("未检测到智谱AI配置，使用OpenAI。")
@@ -102,18 +102,17 @@ def initialize_model():
         if openai_base_url:
             model_kwargs["base_url"] = openai_base_url
         
-        return ChatOpenAI(**model_kwargs)
+        model = ChatOpenAI(**model_kwargs)
+        return model, "openai"
 
-
-    return None
+    return None, None
 
 # 条件初始化模型
 try:
-    model = initialize_model()
+    model, model_provider = initialize_model()
     MODEL_AVAILABLE = model is not None
 except Exception as e:
-
-    model = None
+    model, model_provider = None, None
     MODEL_AVAILABLE = False
 
 
@@ -130,6 +129,15 @@ class AgentState(TypedDict):
 
 # Agent工具和模型
 tools = ALL_TOOLS
+# 如果是智谱AI，则禁用部分搜索工具
+if model_provider == "zhipu":
+    from feynman.agents.tools.tools import web_search, search_academic_papers, search_wikipedia
+    
+    # 移除联网搜索工具
+    disabled_tools = {web_search.name, search_academic_papers.name, search_wikipedia.name}
+    tools = [tool for tool in ALL_TOOLS if tool.name not in disabled_tools]
+    
+
 if MODEL_AVAILABLE and model:
     react_agent_executor = create_react_agent(model, tools=tools)
 else:

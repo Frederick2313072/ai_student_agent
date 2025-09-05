@@ -6,7 +6,7 @@ import hashlib
 import time
 from typing import List, Dict, Optional
 from langchain_core.tools import tool
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 
 # 导入统一提示词管理
