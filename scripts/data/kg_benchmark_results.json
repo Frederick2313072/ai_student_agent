@@ -1,0 +1,251 @@
+{
+  "test_timestamp": "2025-08-23 03:29:49",
+  "data_source": "data/test_corpus",
+  "batch_processing": {
+    "total_files": 13,
+    "processed_files": 10,
+    "successful_files": 9,
+    "failed_files": 1,
+    "total_batch_time_seconds": 10.11,
+    "total_triples_extracted": 34,
+    "total_size_kb": 5.37,
+    "avg_processing_time_seconds": 0.01,
+    "overall_speed_kb_per_sec": 0.53,
+    "file_results": [
+      {
+        "file_path": "data/test_corpus/001_区块链技术.txt",
+        "file_size_kb": 0.59765625,
+        "content_length": 288,
+        "build_time_seconds": 0.01,
+        "triples_added": 6,
+        "total_nodes": 10,
+        "total_edges": 6,
+        "processing_speed_kb_per_sec": 55.22,
+        "success": true
+      },
+      {
+        "file_path": "data/test_corpus/010_深度学习.txt",
+        "file_size_kb": 0.51953125,
+        "content_length": 274,
+        "build_time_seconds": 0.0,
+        "triples_added": 2,
+        "total_nodes": 14,
+        "total_edges": 8,
+        "processing_speed_kb_per_sec": 145.74,
+        "success": true
+      },
+      {
+        "file_path": "data/test_corpus/006_元宇宙技术发展.txt",
+        "file_size_kb": 0.4892578125,
+        "content_length": 255,
+        "build_time_seconds": 0.01,
+        "triples_added": 3,
+        "total_nodes": 20,
+        "total_edges": 11,
+        "processing_speed_kb_per_sec": 72.76,
+        "success": true
+      },
+      {
+        "file_path": "data/test_corpus/012_Python.txt",
+        "file_size_kb": 0.5732421875,
+        "content_length": 283,
+        "build_time_seconds": 0.0,
+        "triples_added": 2,
+        "total_nodes": 24,
+        "total_edges": 13,
+        "processing_speed_kb_per_sec": 142.18,
+        "success": true
+      },
+      {
+        "file_path": "data/test_corpus/002_云计算.txt",
+        "file_size_kb": 0.6220703125,
+        "content_length": 359,
+        "build_time_seconds": 0.01,
+        "triples_added": 6,
+        "total_nodes": 36,
+        "total_edges": 19,
+        "processing_speed_kb_per_sec": 85.46,
+        "success": true
+      },
+      {
+        "file_path": "data/test_corpus/000_人工智能.txt",
+        "file_size_kb": 0.71484375,
+        "content_length": 342,
+        "build_time_seconds": 0.01,
+        "triples_added": 5,
+        "total_nodes": 46,
+        "total_edges": 24,
+        "processing_speed_kb_per_sec": 101.21,
+        "success": true
+      },
+      {
+        "file_path": "data/test_corpus/005_ChatGPT推动AI革命.txt",
+        "file_size_kb": 0.4755859375,
+        "content_length": 283,
+        "build_time_seconds": 0.0,
+        "triples_added": 2,
+        "total_nodes": 50,
+        "total_edges": 26,
+        "processing_speed_kb_per_sec": 98.3,
+        "success": true
+      },
+      {
+        "file_path": "data/test_corpus/004_网络安全.txt",
+        "file_size_kb": 0.59375,
+        "content_length": 292,
+        "build_time_seconds": 0.01,
+        "triples_added": 3,
+        "total_nodes": 56,
+        "total_edges": 29,
+        "processing_speed_kb_per_sec": 42.9,
+        "success": true
+      },
+      {
+        "file_path": "data/test_corpus/011_神经网络.txt",
+        "file_size_kb": 0.7119140625,
+        "build_time_seconds": 0.0,
+        "error": "未从文件 data/test_corpus/011_神经网络.txt 中抽取到知识三元组",
+        "success": false
+      },
+      {
+        "file_path": "data/test_corpus/009_机器学习.txt",
+        "file_size_kb": 0.7880859375,
+        "content_length": 365,
+        "build_time_seconds": 0.01,
+        "triples_added": 5,
+        "total_nodes": 64,
+        "total_edges": 34,
+        "processing_speed_kb_per_sec": 127.33,
+        "success": true
+      }
+    ]
+  },
+  "query_performance": {
+    "full_graph_query_time": 0.0007679462432861328,
+    "entity_search_time": 0.0008690357208251953,
+    "subgraph_query_time": 0.00048613548278808594
+  },
+  "final_graph_stats": {
+    "basic": {
+      "num_nodes": 64,
+      "num_edges": 34,
+      "avg_degree": 1.06,
+      "max_degree": 2,
+      "relationships": {
+        "是": 19,
+        "基于": 2,
+        "包含": 4,
+        "使用": 2,
+        "提供": 3,
+        "支持": 1,
+        "开发": 2,
+        "属于": 1
+      },
+      "last_updated": "2025-08-23T03:29:49.245697"
+    },
+    "structure": {
+      "node_analysis": {
+        "total_nodes": 64,
+        "avg_degree": 1.0625,
+        "max_degree": 2,
+        "min_degree": 1
+      },
+      "edge_analysis": {
+        "total_edges": 34,
+        "relationship_types": {
+          "是": 19,
+          "基于": 2,
+          "包含": 4,
+          "使用": 2,
+          "提供": 3,
+          "支持": 1,
+          "开发": 2,
+          "属于": 1
+        },
+        "most_common_relation": [
+          "是",
+          19
+        ]
+      },
+      "connectivity": {
+        "num_components": 32,
+        "largest_component_size": 2,
+        "average_component_size": 2.0
+      },
+      "metadata": {
+        "total_nodes": 64,
+        "total_edges": 34,
+        "filtered": false
+      }
+    },
+    "top_entities": [
+      {
+        "entity": "去中心化金融DeFi",
+        "id": "去中心化金融defi",
+        "degree": 2,
+        "type": "entity"
+      },
+      {
+        "entity": "区块链的金融服务",
+        "id": "区块链的金融服务",
+        "degree": 2,
+        "type": "entity"
+      },
+      {
+        "entity": "所以部分的机器学习研究",
+        "id": "所以部分的机器学习研究",
+        "degree": 2,
+        "type": "entity"
+      },
+      {
+        "entity": "容易处理的近似算法",
+        "id": "容易处理的近似算法",
+        "degree": 2,
+        "type": "entity"
+      },
+      {
+        "entity": "区块链",
+        "id": "区块链",
+        "degree": 1,
+        "type": "entity"
+      },
+      {
+        "entity": "一种分布式数据库技术",
+        "id": "一种分布式数据库技术",
+        "degree": 1,
+        "type": "entity"
+      },
+      {
+        "entity": "比特币",
+        "id": "比特币",
+        "degree": 1,
+        "type": "entity"
+      },
+      {
+        "entity": "第一个成功应用区块链技术的加密货币",
+        "id": "第一个成功应用区块链技术的加密货币",
+        "degree": 1,
+        "type": "entity"
+      },
+      {
+        "entity": "智能合约",
+        "id": "智能合约",
+        "degree": 1,
+        "type": "entity"
+      },
+      {
+        "entity": "自动执行的合约",
+        "id": "自动执行的合约",
+        "degree": 1,
+        "type": "entity"
+      }
+    ]
+  },
+  "test_summary": {
+    "total_processing_time": 10.11,
+    "total_triples": 34,
+    "final_nodes": 64,
+    "final_edges": 34,
+    "success_rate": "9/10"
+  }
+}

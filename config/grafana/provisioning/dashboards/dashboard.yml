@@ -1,0 +1,29 @@
+# Grafana仪表板自动配置
+
+apiVersion: 1
+
+providers:
+  # 费曼学习系统仪表板
+  - name: 'feynman-dashboards'
+    orgId: 1
+    folder: '费曼学习系统'
+    type: file
+    disableDeletion: false
+    editable: true
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards
+
+  # 系统仪表板
+  - name: 'system-dashboards'
+    orgId: 1
+    folder: '系统监控'
+    type: file
+    disableDeletion: false
+    editable: true
+    updateIntervalSeconds: 60
+    options:
+      path: /var/lib/grafana/dashboards/system
+
+

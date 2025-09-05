@@ -1,0 +1,430 @@
+# 费曼学习系统告警规则
+
+groups:
+# ======================
+# API与系统告警
+# ======================
+- name: feynman_api_alerts
+  rules:
+  # API高延迟告警
+  - alert: HighAPILatency
+    expr: histogram_quantile(0.95, rate(fastapi_request_duration_seconds_bucket[5m])) > 5
+    for: 2m
+    labels:
+      severity: warning
+      component: api
+    annotations:
+      summary: "API响应延迟过高"
+      description: "95分位API延迟 {{ $value | humanizeDuration }} 超过5秒阈值 (端点: {{ $labels.endpoint }})"
+      runbook_url: "https://runbook.example.com/high-api-latency"
+
+  # API错误率过高
+  - alert: HighAPIErrorRate
+    expr: |
+      (
+        sum(rate(fastapi_requests_total{status_code=~"5.."}[5m])) /
+        sum(rate(fastapi_requests_total[5m]))
+      ) > 0.05
+    for: 1m
+    labels:
+      severity: critical
+      component: api
+    annotations:
+      summary: "API错误率过高"
+      description: "5分钟内API错误率 {{ $value | humanizePercentage }} 超过5%阈值"
+      runbook_url: "https://runbook.example.com/high-error-rate"
+
+  # API服务不可用
+  - alert: APIServiceDown
+    expr: up{job="feynman-api"} == 0
+    for: 30s
+    labels:
+      severity: critical
+      component: api
+    annotations:
+      summary: "API服务不可用"
+      description: "费曼学习API服务已停止响应超过30秒"
+      runbook_url: "https://runbook.example.com/service-down"
+
+  # 活跃连接过多
+  - alert: TooManyActiveConnections
+    expr: fastapi_active_connections > 100
+    for: 5m
+    labels:
+      severity: warning
+      component: api
+    annotations:
+      summary: "活跃连接数过多"
+      description: "当前活跃连接数 {{ $value }}，超过100个连接阈值"
+
+# ======================
+# 系统资源告警
+# ======================
+- name: feynman_system_alerts
+  rules:
+  # 高CPU使用率
+  - alert: HighCPUUsage
+    expr: system_cpu_usage_percent > 80
+    for: 5m
+    labels:
+      severity: warning
+      component: system
+    annotations:
+      summary: "CPU使用率过高"
+      description: "系统CPU使用率 {{ $value }}% 持续5分钟超过80%"
+
+  # 高内存使用率
+  - alert: HighMemoryUsage
+    expr: (system_memory_usage_bytes / (system_memory_usage_bytes + system_memory_available_bytes)) * 100 > 85
+    for: 5m
+    labels:
+      severity: critical
+      component: system
+    annotations:
+      summary: "内存使用率过高"
+      description: "系统内存使用率 {{ $value }}% 持续5分钟超过85%"
+
+  # 磁盘空间不足
+  - alert: LowDiskSpace
+    expr: (system_disk_usage_bytes / (system_disk_usage_bytes + system_disk_free_bytes)) * 100 > 90
+    for: 1m
+    labels:
+      severity: critical
+      component: system
+    annotations:
+      summary: "磁盘空间不足"
+      description: "磁盘使用率 {{ $value }}% 超过90% (挂载点: {{ $labels.mount_point }})"
+
+# ======================
+# LangGraph工作流告警
+# ======================
+- name: feynman_workflow_alerts
+  rules:
+  # 工作流执行失败率过高
+  - alert: HighWorkflowFailureRate
+    expr: |
+      (
+        sum(rate(langgraph_workflow_executions_total{status="error"}[5m])) /
+        sum(rate(langgraph_workflow_executions_total[5m]))
+      ) > 0.1
+    for: 2m
+    labels:
+      severity: warning
+      component: workflow
+    annotations:
+      summary: "工作流执行失败率过高"
+      description: "工作流节点 {{ $labels.node_name }} 失败率 {{ $value | humanizePercentage }} 超过10%"
+
+  # 工作流执行时间过长
+  - alert: SlowWorkflowExecution
+    expr: histogram_quantile(0.95, rate(langgraph_workflow_duration_seconds_bucket[5m])) > 30
+    for: 3m
+    labels:
+      severity: warning
+      component: workflow
+    annotations:
+      summary: "工作流执行时间过长"
+      description: "工作流节点 {{ $labels.node_name }} 95分位执行时间 {{ $value | humanizeDuration }} 超过30秒"
+
+  # 工作流队列积压
+  - alert: WorkflowQueueBacklog
+    expr: langgraph_workflow_queue_size > 10
+    for: 5m
+    labels:
+      severity: warning
+      component: workflow
+    annotations:
+      summary: "工作流队列积压"
+      description: "工作流队列大小 {{ $value }} 持续5分钟超过10个任务"
+
+# ======================
+# 工具调用告警
+# ======================
+- name: feynman_tools_alerts
+  rules:
+  # 工具调用失败率过高
+  - alert: HighToolFailureRate
+    expr: |
+      (
+        sum(rate(agent_tool_calls_total{status="error"}[5m])) by (tool_name) /
+        sum(rate(agent_tool_calls_total[5m])) by (tool_name)
+      ) > 0.2
+    for: 3m
+    labels:
+      severity: warning
+      component: tools
+    annotations:
+      summary: "工具调用失败率过高"
+      description: "工具 {{ $labels.tool_name }} 失败率 {{ $value | humanizePercentage }} 超过20%"
+
+  # 外部API不可用
+  - alert: ExternalAPIDown
+    expr: up{job=~"external-.*"} == 0
+    for: 1m
+    labels:
+      severity: critical
+      component: external_api
+    annotations:
+      summary: "外部API服务不可用"
+      description: "外部API服务 {{ $labels.job }} 连续1分钟不可用"
+
+  # 工具调用延迟过高
+  - alert: HighToolLatency
+    expr: histogram_quantile(0.95, rate(agent_tool_call_duration_seconds_bucket[5m])) > 10
+    for: 5m
+    labels:
+      severity: warning
+      component: tools
+    annotations:
+      summary: "工具调用延迟过高"
+      description: "工具 {{ $labels.tool_name }} 95分位延迟 {{ $value | humanizeDuration }} 超过10秒"
+
+# ======================
+# LLM使用告警
+# ======================
+- name: feynman_llm_alerts
+  rules:
+  # Token使用量过高
+  - alert: HighTokenUsage
+    expr: increase(llm_tokens_used_total[1h]) > 1000000
+    for: 0m
+    labels:
+      severity: warning
+      component: llm
+    annotations:
+      summary: "Token使用量过高"
+      description: "1小时内Token使用量 {{ $value }} 超过100万 (模型: {{ $labels.model }})"
+
+  # 每日成本超预算
+  - alert: DailyCostExceeded
+    expr: |
+      sum(increase(llm_costs_total_usd[24h])) > 100
+    for: 0m
+    labels:
+      severity: critical
+      component: cost
+    annotations:
+      summary: "每日成本预算超支"
+      description: "24小时内LLM成本 ${{ $value }} 超过预算 $100"
+
+  # LLM请求失败率过高
+  - alert: HighLLMFailureRate
+    expr: |
+      (
+        sum(rate(llm_requests_total{status="error"}[5m])) /
+        sum(rate(llm_requests_total[5m]))
+      ) > 0.1
+    for: 2m
+    labels:
+      severity: warning
+      component: llm
+    annotations:
+      summary: "LLM请求失败率过高"
+      description: "LLM请求失败率 {{ $value | humanizePercentage }} 超过10% (模型: {{ $labels.model }})"
+
+  # LLM响应时间过长
+  - alert: SlowLLMResponse
+    expr: histogram_quantile(0.95, rate(llm_request_duration_seconds_bucket[5m])) > 20
+    for: 3m
+    labels:
+      severity: warning
+      component: llm
+    annotations:
+      summary: "LLM响应时间过长"
+      description: "LLM 95分位响应时间 {{ $value | humanizeDuration }} 超过20秒 (模型: {{ $labels.model }})"
+
+# ======================
+# 流式响应告警
+# ======================
+- name: feynman_streaming_alerts
+  rules:
+  # SSE连接异常断开率过高
+  - alert: HighSSEDisconnectRate
+    expr: |
+      (
+        sum(rate(sse_disconnects_total{reason!="completed"}[5m])) /
+        sum(rate(sse_disconnects_total[5m]))
+      ) > 0.3
+    for: 2m
+    labels:
+      severity: warning
+      component: streaming
+    annotations:
+      summary: "SSE连接异常断开率过高"
+      description: "SSE异常断开率 {{ $value | humanizePercentage }} 超过30%"
+
+  # 活跃SSE连接过多
+  - alert: TooManyActiveSSEConnections
+    expr: sse_connections_active > 50
+    for: 5m
+    labels:
+      severity: warning
+      component: streaming
+    annotations:
+      summary: "活跃SSE连接过多"
+      description: "当前活跃SSE连接数 {{ $value }} 超过50个"
+
+# ======================
+# 数据库告警
+# ======================
+- name: feynman_database_alerts
+  rules:
+  # ChromaDB查询延迟过高
+  - alert: HighChromaDBLatency
+    expr: histogram_quantile(0.95, rate(chromadb_query_duration_seconds_bucket[5m])) > 2
+    for: 3m
+    labels:
+      severity: warning
+      component: database
+    annotations:
+      summary: "ChromaDB查询延迟过高"
+      description: "ChromaDB 95分位查询延迟 {{ $value | humanizeDuration }} 超过2秒"
+
+  # 数据库连接过多
+  - alert: TooManyDBConnections
+    expr: database_connections_active > 20
+    for: 5m
+    labels:
+      severity: warning
+      component: database
+    annotations:
+      summary: "数据库连接过多"
+      description: "活跃数据库连接数 {{ $value }} 超过20个"
+
+# ======================
+# 业务指标告警
+# ======================
+- name: feynman_business_alerts
+  rules:
+  # 对话放弃率过高
+  - alert: HighConversationAbandonRate
+    expr: |
+      (
+        sum(rate(conversations_total{status="abandoned"}[1h])) /
+        sum(rate(conversations_total[1h]))
+      ) > 0.3
+    for: 5m
+    labels:
+      severity: warning
+      component: business
+    annotations:
+      summary: "对话放弃率过高"
+      description: "1小时内对话放弃率 {{ $value | humanizePercentage }} 超过30%"
+
+  # 用户满意度过低
+  - alert: LowUserSatisfaction
+    expr: |
+      histogram_quantile(0.5, rate(user_satisfaction_score_bucket[24h])) < 3.0
+    for: 1h
+    labels:
+      severity: warning
+      component: business
+    annotations:
+      summary: "用户满意度过低"
+      description: "24小时内用户满意度中位数 {{ $value }} 低于3.0分"
+
+  # 记忆固化失败率过高
+  - alert: HighMemoryFailureRate
+    expr: |
+      (
+        sum(rate(memory_operations_total{operation="add", status="error"}[5m])) /
+        sum(rate(memory_operations_total{operation="add"}[5m]))
+      ) > 0.1
+    for: 3m
+    labels:
+      severity: warning
+      component: memory
+    annotations:
+      summary: "记忆固化失败率过高"
+      description: "记忆固化失败率 {{ $value | humanizePercentage }} 超过10%"
+
+# ======================
+# 安全告警
+# ======================
+- name: feynman_security_alerts
+  rules:
+  # 异常高频请求
+  - alert: SuspiciousHighRequestRate
+    expr: |
+      sum(rate(fastapi_requests_total[1m])) by (instance) > 1000
+    for: 1m
+    labels:
+      severity: warning
+      component: security
+    annotations:
+      summary: "检测到异常高频请求"
+      description: "实例 {{ $labels.instance }} 每分钟请求数 {{ $value }} 超过1000"
+
+  # 大量4xx错误
+  - alert: HighClientErrorRate
+    expr: |
+      sum(rate(fastapi_requests_total{status_code=~"4.."}[5m])) > 50
+    for: 2m
+    labels:
+      severity: warning
+      component: security
+    annotations:
+      summary: "客户端错误率过高"
+      description: "5分钟内4xx错误数 {{ $value }} 可能表示恶意请求或配置问题"
+
+# ======================
+# 容量规划告警
+# ======================
+- name: feynman_capacity_alerts
+  rules:
+  # 并发对话数接近上限
+  - alert: NearMaxConcurrentConversations
+    expr: sse_connections_active > 40  # 假设最大50个并发
+    for: 10m
+    labels:
+      severity: warning
+      component: capacity
+    annotations:
+      summary: "并发对话数接近上限"
+      description: "当前并发对话数 {{ $value }} 接近50个上限，建议扩容"
+
+  # 每小时Token使用增长过快
+  - alert: RapidTokenGrowth
+    expr: |
+      (
+        rate(llm_tokens_used_total[1h]) - 
+        rate(llm_tokens_used_total[1h] offset 1h)
+      ) > 100000
+    for: 0m
+    labels:
+      severity: info
+      component: capacity
+    annotations:
+      summary: "Token使用增长过快"
+      description: "每小时Token使用量增长 {{ $value }} 超过10万，需关注成本和容量"
+
+# ======================
+# 数据质量告警
+# ======================
+- name: feynman_quality_alerts
+  rules:
+  # 解析失败率过高
+  - alert: HighParsingFailureRate
+    expr: |
+      increase(langgraph_workflow_executions_total{node_name="gap_identifier_react", status="error"}[10m]) > 5
+    for: 0m
+    labels:
+      severity: warning
+      component: quality
+    annotations:
+      summary: "输出解析失败过多"
+      description: "10分钟内gap_identifier_react节点失败 {{ $value }} 次，可能需要优化prompt"
+
+  # 工具调用异常集中爆发
+  - alert: ToolErrorBurst
+    expr: |
+      increase(agent_tool_errors_total[2m]) > 10
+    for: 0m
+    labels:
+      severity: warning
+      component: tools
+    annotations:
+      summary: "工具调用错误集中爆发"
+      description: "2分钟内工具错误数 {{ $value }} 超过10个，可能是外部API问题"
+
+

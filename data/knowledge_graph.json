@@ -1,0 +1,1936 @@
+{
+  "nodes": [
+    {
+      "id": "人工智能",
+      "label": "人工智能",
+      "type": "technology",
+      "properties": {
+        "description": "模拟人类智能的计算机技术"
+      }
+    },
+    {
+      "id": "机器学习",
+      "label": "机器学习",
+      "type": "technology",
+      "properties": {
+        "description": "让计算机自动学习的技术"
+      }
+    },
+    {
+      "id": "深度学习",
+      "label": "深度学习",
+      "type": "technology",
+      "properties": {
+        "description": "基于神经网络的机器学习方法"
+      }
+    },
+    {
+      "id": "神经网络",
+      "label": "神经网络",
+      "type": "algorithm",
+      "properties": {
+        "description": "模拟大脑神经元的计算模型"
+      }
+    },
+    {
+      "id": "自然语言处理",
+      "label": "自然语言处理",
+      "type": "application",
+      "properties": {
+        "description": "让计算机理解人类语言"
+      }
+    },
+    {
+      "id": "生物神经网络的数学抽象模型",
+      "label": "生物神经网络的数学抽象模型",
+      "type": "entity"
+    },
+    {
+      "id": "多层隐藏层",
+      "label": "多层隐藏层",
+      "type": "entity"
+    },
+    {
+      "id": "反向传播算法",
+      "label": "反向传播算法",
+      "type": "entity"
+    },
+    {
+      "id": "激活函数",
+      "label": "激活函数",
+      "type": "entity"
+    },
+    {
+      "id": "relu、sigmoid等",
+      "label": "ReLU、Sigmoid等",
+      "type": "entity"
+    },
+    {
+      "id": "优化器",
+      "label": "优化器",
+      "type": "entity"
+    },
+    {
+      "id": "sgd、adam等",
+      "label": "SGD、Adam等",
+      "type": "entity"
+    },
+    {
+      "id": "损失函数",
+      "label": "损失函数",
+      "type": "entity"
+    },
+    {
+      "id": "计算机视觉",
+      "label": "计算机视觉",
+      "type": "entity"
+    },
+    {
+      "id": "语音识别",
+      "label": "语音识别",
+      "type": "entity"
+    },
+    {
+      "id": "大规模标注数据",
+      "label": "大规模标注数据",
+      "type": "entity"
+    },
+    {
+      "id": "gpu等并行计算硬件",
+      "label": "GPU等并行计算硬件",
+      "type": "entity"
+    },
+    {
+      "id": "正则化技术防止过拟合",
+      "label": "正则化技术防止过拟合",
+      "type": "entity"
+    },
+    {
+      "id": "生物神经网络",
+      "label": "生物神经网络",
+      "type": "entity"
+    },
+    {
+      "id": "神经元、突触",
+      "label": "神经元、突触",
+      "type": "entity"
+    },
+    {
+      "id": "人工神经网络",
+      "label": "人工神经网络",
+      "type": "entity"
+    },
+    {
+      "id": "数学模型、权重矩阵",
+      "label": "数学模型、权重矩阵",
+      "type": "entity"
+    },
+    {
+      "id": "多层神经网络",
+      "label": "多层神经网络",
+      "type": "entity"
+    },
+    {
+      "id": "突触可塑性",
+      "label": "突触可塑性",
+      "type": "entity"
+    },
+    {
+      "id": "反向传播、梯度下降",
+      "label": "反向传播、梯度下降",
+      "type": "entity"
+    },
+    {
+      "id": "conversation"
+    },
+    {
+      "id": "人类大脑",
+      "label": "人类大脑",
+      "type": "entity"
+    },
+    {
+      "id": "神经元结构",
+      "label": "神经元结构",
+      "type": "entity"
+    },
+    {
+      "id": "信息处理机制",
+      "label": "信息处理机制",
+      "type": "entity"
+    },
+    {
+      "id": "学习过程",
+      "label": "学习过程",
+      "type": "entity"
+    },
+    {
+      "id": "认知功能",
+      "label": "认知功能",
+      "type": "entity"
+    },
+    {
+      "id": "人脑",
+      "label": "人脑",
+      "type": "entity"
+    },
+    {
+      "id": "860亿个神经元",
+      "label": "860亿个神经元",
+      "type": "entity"
+    },
+    {
+      "id": "100万亿个突触连接",
+      "label": "100万亿个突触连接",
+      "type": "entity"
+    },
+    {
+      "id": "小于人脑",
+      "label": "小于人脑",
+      "type": "entity"
+    },
+    {
+      "id": "人工网络",
+      "label": "人工网络",
+      "type": "entity"
+    },
+    {
+      "id": "简化模型",
+      "label": "简化模型",
+      "type": "entity"
+    },
+    {
+      "id": "人脑神经元",
+      "label": "人脑神经元",
+      "type": "entity"
+    },
+    {
+      "id": "动态可塑性",
+      "label": "动态可塑性",
+      "type": "entity"
+    },
+    {
+      "id": "相对静态",
+      "label": "相对静态",
+      "type": "entity"
+    },
+    {
+      "id": "多层次信息处理",
+      "label": "多层次信息处理",
+      "type": "entity"
+    },
+    {
+      "id": "情绪与潜意识",
+      "label": "情绪与潜意识",
+      "type": "entity"
+    },
+    {
+      "id": "直觉判断能力",
+      "label": "直觉判断能力",
+      "type": "entity"
+    },
+    {
+      "id": "神经可塑性",
+      "label": "神经可塑性",
+      "type": "entity"
+    },
+    {
+      "id": "数据驱动的统计学习",
+      "label": "数据驱动的统计学习",
+      "type": "entity"
+    },
+    {
+      "id": "真正的思考能力",
+      "label": "真正的思考能力",
+      "type": "entity"
+    },
+    {
+      "id": "自我意识",
+      "label": "自我意识",
+      "type": "entity"
+    },
+    {
+      "id": "相对僵化",
+      "label": "相对僵化",
+      "type": "entity"
+    },
+    {
+      "id": "数学模型",
+      "label": "数学模型",
+      "type": "entity"
+    },
+    {
+      "id": "生物系统",
+      "label": "生物系统",
+      "type": "entity"
+    },
+    {
+      "id": "主观体验",
+      "label": "主观体验",
+      "type": "entity"
+    },
+    {
+      "id": "模式匹配",
+      "label": "模式匹配",
+      "type": "entity"
+    },
+    {
+      "id": "情感和动机",
+      "label": "情感和动机",
+      "type": "entity"
+    },
+    {
+      "id": "内在驱动力",
+      "label": "内在驱动力",
+      "type": "entity"
+    },
+    {
+      "id": "麦卡洛克和皮茨",
+      "label": "麦卡洛克和皮茨",
+      "type": "entity"
+    },
+    {
+      "id": "神经元数学模型",
+      "label": "神经元数学模型",
+      "type": "entity"
+    },
+    {
+      "id": "深度学习的灵感来源",
+      "label": "深度学习的灵感来源",
+      "type": "entity"
+    },
+    {
+      "id": "图像识别",
+      "label": "图像识别",
+      "type": "entity"
+    },
+    {
+      "id": "需要真正理解的任务",
+      "label": "需要真正理解的任务",
+      "type": "entity"
+    },
+    {
+      "id": "需要推理的任务",
+      "label": "需要推理的任务",
+      "type": "entity"
+    },
+    {
+      "id": "需要创造力的任务",
+      "label": "需要创造力的任务",
+      "type": "entity"
+    },
+    {
+      "id": "人类神经网络",
+      "label": "人类神经网络",
+      "type": "entity"
+    },
+    {
+      "id": "多层非线性变换",
+      "label": "多层非线性变换",
+      "type": "entity"
+    },
+    {
+      "id": "人工神经元",
+      "label": "人工神经元",
+      "type": "entity"
+    },
+    {
+      "id": "真实神经元",
+      "label": "真实神经元",
+      "type": "entity"
+    },
+    {
+      "id": "反向传播",
+      "label": "反向传播",
+      "type": "entity"
+    },
+    {
+      "id": "优化算法",
+      "label": "优化算法",
+      "type": "entity"
+    },
+    {
+      "id": "生物神经元",
+      "label": "生物神经元",
+      "type": "entity"
+    },
+    {
+      "id": "geoffrey_hinton",
+      "label": "Geoffrey Hinton",
+      "type": "entity"
+    },
+    {
+      "id": "relu激活函数",
+      "label": "ReLU激活函数",
+      "type": "entity"
+    },
+    {
+      "id": "dropout",
+      "label": "Dropout",
+      "type": "entity"
+    },
+    {
+      "id": "批量归一化",
+      "label": "批量归一化",
+      "type": "entity"
+    },
+    {
+      "id": "多层非线性变换学习数据的层次化表示",
+      "label": "多层非线性变换学习数据的层次化表示",
+      "type": "entity"
+    },
+    {
+      "id": "反向传播、激活函数、优化算法",
+      "label": "反向传播、激活函数、优化算法",
+      "type": "entity"
+    },
+    {
+      "id": "网络搜索、网站过滤、广告推送、图像识别、语言翻译",
+      "label": "网络搜索、网站过滤、广告推送、图像识别、语言翻译",
+      "type": "entity"
+    },
+    {
+      "id": "geoffrey_hinton等人的贡献",
+      "label": "Geoffrey Hinton等人的贡献",
+      "type": "entity"
+    },
+    {
+      "id": "relu激活函数、dropout、批量归一化",
+      "label": "ReLU激活函数、Dropout、批量归一化",
+      "type": "entity"
+    },
+    {
+      "id": "多层神经网络的特定实现",
+      "label": "多层神经网络的特定实现",
+      "type": "entity"
+    },
+    {
+      "id": "多层结构",
+      "label": "多层结构",
+      "type": "entity"
+    },
+    {
+      "id": "非线性激活函数",
+      "label": "非线性激活函数",
+      "type": "entity"
+    },
+    {
+      "id": "特征自动学习",
+      "label": "特征自动学习",
+      "type": "entity"
+    },
+    {
+      "id": "推荐系统",
+      "label": "推荐系统",
+      "type": "entity"
+    },
+    {
+      "id": "数据需求大",
+      "label": "数据需求大",
+      "type": "entity"
+    },
+    {
+      "id": "计算资源需求高",
+      "label": "计算资源需求高",
+      "type": "entity"
+    },
+    {
+      "id": "可解释性差",
+      "label": "可解释性差",
+      "type": "entity"
+    },
+    {
+      "id": "过拟合风险",
+      "label": "过拟合风险",
+      "type": "entity"
+    },
+    {
+      "id": "人脑神经元的运作机制存在本质区别",
+      "label": "人脑神经元的运作机制存在本质区别",
+      "type": "entity"
+    },
+    {
+      "id": "数学函数拟合",
+      "label": "数学函数拟合",
+      "type": "entity"
+    },
+    {
+      "id": "人脑结构",
+      "label": "人脑结构",
+      "type": "entity"
+    },
+    {
+      "id": "人类学习机制存在根本差异",
+      "label": "人类学习机制存在根本差异",
+      "type": "entity"
+    }
+  ],
+  "edges": [
+    {
+      "source": "机器学习",
+      "target": "人工智能",
+      "key": "ml_to_ai",
+      "relationship": "属于",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:19:18.405038"
+    },
+    {
+      "source": "深度学习",
+      "target": "机器学习",
+      "key": "dl_to_ml",
+      "relationship": "属于",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:19:18.405058"
+    },
+    {
+      "source": "深度学习",
+      "target": "神经网络",
+      "key": "dl_to_nn",
+      "relationship": "使用",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:19:18.405064"
+    },
+    {
+      "source": "conversation",
+      "target": "多层神经网络的特定实现",
+      "key": "7fcebaa9a589",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667290"
+    },
+    {
+      "source": "conversation",
+      "target": "多层结构",
+      "key": "64d81477674c",
+      "relationship": "包含",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667301"
+    },
+    {
+      "source": "conversation",
+      "target": "非线性激活函数",
+      "key": "6f5254f67064",
+      "relationship": "包含",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667304"
+    },
+    {
+      "source": "conversation",
+      "target": "反向传播算法",
+      "key": "d5bb0aeaf721",
+      "relationship": "使用",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667306"
+    },
+    {
+      "source": "conversation",
+      "target": "特征自动学习",
+      "key": "14b00ae82bf1",
+      "relationship": "实现",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667308"
+    },
+    {
+      "source": "conversation",
+      "target": "推荐系统",
+      "key": "9e1cd5d5c50e",
+      "relationship": "应用于",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667315"
+    },
+    {
+      "source": "conversation",
+      "target": "数据需求大",
+      "key": "e2ea17b60834",
+      "relationship": "面临",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667320"
+    },
+    {
+      "source": "conversation",
+      "target": "计算资源需求高",
+      "key": "58f431dc8281",
+      "relationship": "面临",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667322"
+    },
+    {
+      "source": "conversation",
+      "target": "可解释性差",
+      "key": "391fa6cb98bf",
+      "relationship": "面临",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667324"
+    },
+    {
+      "source": "conversation",
+      "target": "过拟合风险",
+      "key": "a22e00ee9e4a",
+      "relationship": "面临",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667326"
+    },
+    {
+      "source": "conversation",
+      "target": "人脑神经元的运作机制存在本质区别",
+      "key": "102269378b07",
+      "relationship": "与",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667328"
+    },
+    {
+      "source": "conversation",
+      "target": "数学函数拟合",
+      "key": "a68934fe81db",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:52:31.667329"
+    },
+    {
+      "source": "conversation",
+      "target": "人脑结构",
+      "key": "a92291483b48",
+      "relationship": "受启发于",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:53:38.719320"
+    },
+    {
+      "source": "conversation",
+      "target": "人类学习机制存在根本差异",
+      "key": "35e89b51b906",
+      "relationship": "与",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:53:38.719344"
+    },
+    {
+      "source": "自然语言处理",
+      "target": "人工智能",
+      "key": "nlp_to_ai",
+      "relationship": "属于",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:19:18.405068"
+    },
+    {
+      "source": "conversation",
+      "target": "人类神经网络",
+      "key": "c8751a38e37f",
+      "relationship": "模仿",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:46:08.668824"
+    },
+    {
+      "source": "conversation",
+      "target": "人类神经网络",
+      "key": "6cf8a144a4dc",
+      "relationship": "复杂性",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:46:08.668858"
+    },
+    {
+      "source": "conversation",
+      "target": "多层神经网络",
+      "key": "c13fde4fa554",
+      "relationship": "基于",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668842"
+    },
+    {
+      "source": "conversation",
+      "target": "多层神经网络",
+      "key": "2774b377addd",
+      "relationship": "基础",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137763"
+    },
+    {
+      "source": "conversation",
+      "target": "多层非线性变换",
+      "key": "16669add3496",
+      "relationship": "实现",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668846"
+    },
+    {
+      "source": "conversation",
+      "target": "反向传播",
+      "key": "bc339f4b7909",
+      "relationship": "涉及",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668851"
+    },
+    {
+      "source": "conversation",
+      "target": "激活函数",
+      "key": "8ec338fe115a",
+      "relationship": "涉及",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668854"
+    },
+    {
+      "source": "conversation",
+      "target": "激活函数",
+      "key": "bad32809a34e",
+      "relationship": "依赖",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137745"
+    },
+    {
+      "source": "conversation",
+      "target": "优化算法",
+      "key": "426e9f2ea003",
+      "relationship": "涉及",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668856"
+    },
+    {
+      "source": "conversation",
+      "target": "图像识别",
+      "key": "a00916f54820",
+      "relationship": "应用于",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668860"
+    },
+    {
+      "source": "conversation",
+      "target": "图像识别",
+      "key": "debb504661ed",
+      "relationship": "成功",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879416"
+    },
+    {
+      "source": "conversation",
+      "target": "geoffrey_hinton",
+      "key": "97ad5cfc30a7",
+      "relationship": "发展",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:46:08.668867"
+    },
+    {
+      "source": "conversation",
+      "target": "relu激活函数",
+      "key": "4a306872663d",
+      "relationship": "突破",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668869"
+    },
+    {
+      "source": "conversation",
+      "target": "dropout",
+      "key": "a1d3ccc1b9fe",
+      "relationship": "突破",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668871"
+    },
+    {
+      "source": "conversation",
+      "target": "批量归一化",
+      "key": "8686396baa9e",
+      "relationship": "突破",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668873"
+    },
+    {
+      "source": "conversation",
+      "target": "多层非线性变换学习数据的层次化表示",
+      "key": "b2969cefa9f1",
+      "relationship": "实现",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:48:23.558127"
+    },
+    {
+      "source": "conversation",
+      "target": "反向传播、激活函数、优化算法",
+      "key": "1d4a86d29979",
+      "relationship": "涉及",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:48:23.558135"
+    },
+    {
+      "source": "conversation",
+      "target": "网络搜索、网站过滤、广告推送、图像识别、语言翻译",
+      "key": "f30b585299b2",
+      "relationship": "应用于",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:48:23.558139"
+    },
+    {
+      "source": "conversation",
+      "target": "geoffrey_hinton等人的贡献",
+      "key": "abcd552dec7b",
+      "relationship": "发展",
+      "weight": 0.85,
+      "timestamp": "2025-09-05T22:48:23.558140"
+    },
+    {
+      "source": "conversation",
+      "target": "relu激活函数、dropout、批量归一化",
+      "key": "46a96d422f7b",
+      "relationship": "突破",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:48:23.558142"
+    },
+    {
+      "source": "conversation",
+      "target": "人类大脑",
+      "key": "0bdd7b7839a9",
+      "relationship": "模仿",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879321"
+    },
+    {
+      "source": "conversation",
+      "target": "神经元结构",
+      "key": "a1c78f71b7bc",
+      "relationship": "模仿",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:39:54.879338"
+    },
+    {
+      "source": "conversation",
+      "target": "信息处理机制",
+      "key": "427069fb223e",
+      "relationship": "模仿",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:39:54.879341"
+    },
+    {
+      "source": "conversation",
+      "target": "学习过程",
+      "key": "40d71f3f8659",
+      "relationship": "模仿",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:39:54.879344"
+    },
+    {
+      "source": "conversation",
+      "target": "认知功能",
+      "key": "b13a829c1967",
+      "relationship": "模仿",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:39:54.879346"
+    },
+    {
+      "source": "conversation",
+      "target": "小于人脑",
+      "key": "d2f70b97f503",
+      "relationship": "规模",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879364"
+    },
+    {
+      "source": "conversation",
+      "target": "数据驱动的统计学习",
+      "key": "1d0d7fae8e00",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879390"
+    },
+    {
+      "source": "conversation",
+      "target": "真正的思考能力",
+      "key": "e4aa7069e8b5",
+      "relationship": "缺乏",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879392"
+    },
+    {
+      "source": "conversation",
+      "target": "自我意识",
+      "key": "02d8dfc207a0",
+      "relationship": "不具备",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879394"
+    },
+    {
+      "source": "conversation",
+      "target": "相对僵化",
+      "key": "6e1ec99ca664",
+      "relationship": "学习能力",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879396"
+    },
+    {
+      "source": "conversation",
+      "target": "数学模型",
+      "key": "5ebe7be6322d",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879399"
+    },
+    {
+      "source": "conversation",
+      "target": "模式匹配",
+      "key": "f95194a5d9d7",
+      "relationship": "只有",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879405"
+    },
+    {
+      "source": "conversation",
+      "target": "内在驱动力",
+      "key": "676ee74fb70f",
+      "relationship": "没有",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879410"
+    },
+    {
+      "source": "conversation",
+      "target": "语音识别",
+      "key": "26afe2376924",
+      "relationship": "成功",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879418"
+    },
+    {
+      "source": "conversation",
+      "target": "语音识别",
+      "key": "77763582b1a7",
+      "relationship": "应用于",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137756"
+    },
+    {
+      "source": "conversation",
+      "target": "自然语言处理",
+      "key": "f78cc43c78f4",
+      "relationship": "成功",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879420"
+    },
+    {
+      "source": "conversation",
+      "target": "自然语言处理",
+      "key": "3925931f0a9c",
+      "relationship": "应用于",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137755"
+    },
+    {
+      "source": "conversation",
+      "target": "需要真正理解的任务",
+      "key": "400437dae973",
+      "relationship": "失败",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879442"
+    },
+    {
+      "source": "conversation",
+      "target": "需要推理的任务",
+      "key": "e8a8ce971fde",
+      "relationship": "失败",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879444"
+    },
+    {
+      "source": "conversation",
+      "target": "需要创造力的任务",
+      "key": "8024575c9297",
+      "relationship": "失败",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879446"
+    },
+    {
+      "source": "conversation",
+      "target": "生物神经网络的数学抽象模型",
+      "key": "3f20715520b1",
+      "relationship": "模仿",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137734"
+    },
+    {
+      "source": "conversation",
+      "target": "多层隐藏层",
+      "key": "8ad9889ef427",
+      "relationship": "包含",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137742"
+    },
+    {
+      "source": "conversation",
+      "target": "反向传播算法",
+      "key": "529d1abd173e",
+      "relationship": "依赖",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137744"
+    },
+    {
+      "source": "conversation",
+      "target": "优化器",
+      "key": "a70a91174a1c",
+      "relationship": "依赖",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137748"
+    },
+    {
+      "source": "conversation",
+      "target": "损失函数",
+      "key": "20f3f5b3e4a0",
+      "relationship": "依赖",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137753"
+    },
+    {
+      "source": "conversation",
+      "target": "计算机视觉",
+      "key": "b10faff1d8d9",
+      "relationship": "应用于",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137754"
+    },
+    {
+      "source": "conversation",
+      "target": "大规模标注数据",
+      "key": "d2abff366cd7",
+      "relationship": "需要",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137758"
+    },
+    {
+      "source": "conversation",
+      "target": "gpu等并行计算硬件",
+      "key": "b661300df5b3",
+      "relationship": "需要",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137759"
+    },
+    {
+      "source": "conversation",
+      "target": "正则化技术防止过拟合",
+      "key": "010e782d0228",
+      "relationship": "需要",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137760"
+    },
+    {
+      "source": "conversation",
+      "target": "relu、sigmoid等",
+      "key": "7149069ee6d6",
+      "relationship": "包括",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137747"
+    },
+    {
+      "source": "conversation",
+      "target": "sgd、adam等",
+      "key": "b27a9b9923fc",
+      "relationship": "包括",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137749"
+    },
+    {
+      "source": "conversation",
+      "target": "神经元、突触",
+      "key": "73fbb0f7a214",
+      "relationship": "基础",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137761"
+    },
+    {
+      "source": "conversation",
+      "target": "突触可塑性",
+      "key": "464cc8f48242",
+      "relationship": "学习机制",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137765"
+    },
+    {
+      "source": "conversation",
+      "target": "数学模型、权重矩阵",
+      "key": "b07f4c0fc522",
+      "relationship": "基础",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137762"
+    },
+    {
+      "source": "conversation",
+      "target": "反向传播、梯度下降",
+      "key": "a42325be505c",
+      "relationship": "学习机制",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137766"
+    },
+    {
+      "source": "conversation",
+      "target": "860亿个神经元",
+      "key": "aa6b2e9fa757",
+      "relationship": "包含",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879360"
+    },
+    {
+      "source": "conversation",
+      "target": "100万亿个突触连接",
+      "key": "abf4967287e2",
+      "relationship": "包含",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879362"
+    },
+    {
+      "source": "conversation",
+      "target": "多层次信息处理",
+      "key": "70a34ee4954b",
+      "relationship": "具有",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879373"
+    },
+    {
+      "source": "conversation",
+      "target": "情绪与潜意识",
+      "key": "8903c5616173",
+      "relationship": "参与",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879375"
+    },
+    {
+      "source": "conversation",
+      "target": "直觉判断能力",
+      "key": "90765f486a91",
+      "relationship": "具有",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879377"
+    },
+    {
+      "source": "conversation",
+      "target": "神经可塑性",
+      "key": "a36366850387",
+      "relationship": "具有",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879379"
+    },
+    {
+      "source": "conversation",
+      "target": "生物系统",
+      "key": "53358e671dde",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879401"
+    },
+    {
+      "source": "conversation",
+      "target": "主观体验",
+      "key": "f3d15e388b1f",
+      "relationship": "具有",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879403"
+    },
+    {
+      "source": "conversation",
+      "target": "情感和动机",
+      "key": "196fed2bda07",
+      "relationship": "具有",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879408"
+    },
+    {
+      "source": "conversation",
+      "target": "简化模型",
+      "key": "947e2979340e",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879366"
+    },
+    {
+      "source": "conversation",
+      "target": "相对静态",
+      "key": "b7af87484e62",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879370"
+    },
+    {
+      "source": "conversation",
+      "target": "动态可塑性",
+      "key": "22851eeb00f5",
+      "relationship": "具有",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879368"
+    },
+    {
+      "source": "conversation",
+      "target": "神经元数学模型",
+      "key": "50d123bc4472",
+      "relationship": "提出",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879412"
+    },
+    {
+      "source": "conversation",
+      "target": "深度学习的灵感来源",
+      "key": "cac176d3bcaa",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:39:54.879414"
+    },
+    {
+      "source": "conversation",
+      "target": "真实神经元",
+      "key": "57fd57fb2b0e",
+      "relationship": "相似于",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:46:08.668848"
+    }
+  ],
+  "triples": {
+    "3f20715520b1": {
+      "id": "3f20715520b1",
+      "subject": "深度学习",
+      "predicate": "模仿",
+      "object": "生物神经网络的数学抽象模型",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137734"
+    },
+    "8ad9889ef427": {
+      "id": "8ad9889ef427",
+      "subject": "深度学习",
+      "predicate": "包含",
+      "object": "多层隐藏层",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137742"
+    },
+    "529d1abd173e": {
+      "id": "529d1abd173e",
+      "subject": "深度学习",
+      "predicate": "依赖",
+      "object": "反向传播算法",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137744"
+    },
+    "bad32809a34e": {
+      "id": "bad32809a34e",
+      "subject": "深度学习",
+      "predicate": "依赖",
+      "object": "激活函数",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137745"
+    },
+    "7149069ee6d6": {
+      "id": "7149069ee6d6",
+      "subject": "激活函数",
+      "predicate": "包括",
+      "object": "ReLU、Sigmoid等",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137747"
+    },
+    "a70a91174a1c": {
+      "id": "a70a91174a1c",
+      "subject": "深度学习",
+      "predicate": "依赖",
+      "object": "优化器",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137748"
+    },
+    "b27a9b9923fc": {
+      "id": "b27a9b9923fc",
+      "subject": "优化器",
+      "predicate": "包括",
+      "object": "SGD、Adam等",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137749"
+    },
+    "20f3f5b3e4a0": {
+      "id": "20f3f5b3e4a0",
+      "subject": "深度学习",
+      "predicate": "依赖",
+      "object": "损失函数",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137753"
+    },
+    "b10faff1d8d9": {
+      "id": "b10faff1d8d9",
+      "subject": "深度学习",
+      "predicate": "应用于",
+      "object": "计算机视觉",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137754"
+    },
+    "3925931f0a9c": {
+      "id": "3925931f0a9c",
+      "subject": "深度学习",
+      "predicate": "应用于",
+      "object": "自然语言处理",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137755"
+    },
+    "77763582b1a7": {
+      "id": "77763582b1a7",
+      "subject": "深度学习",
+      "predicate": "应用于",
+      "object": "语音识别",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137756"
+    },
+    "d2abff366cd7": {
+      "id": "d2abff366cd7",
+      "subject": "深度学习",
+      "predicate": "需要",
+      "object": "大规模标注数据",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137758"
+    },
+    "b661300df5b3": {
+      "id": "b661300df5b3",
+      "subject": "深度学习",
+      "predicate": "需要",
+      "object": "GPU等并行计算硬件",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137759"
+    },
+    "010e782d0228": {
+      "id": "010e782d0228",
+      "subject": "深度学习",
+      "predicate": "需要",
+      "object": "正则化技术防止过拟合",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137760"
+    },
+    "73fbb0f7a214": {
+      "id": "73fbb0f7a214",
+      "subject": "生物神经网络",
+      "predicate": "基础",
+      "object": "神经元、突触",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137761"
+    },
+    "b07f4c0fc522": {
+      "id": "b07f4c0fc522",
+      "subject": "人工神经网络",
+      "predicate": "基础",
+      "object": "数学模型、权重矩阵",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137762"
+    },
+    "2774b377addd": {
+      "id": "2774b377addd",
+      "subject": "深度学习",
+      "predicate": "基础",
+      "object": "多层神经网络",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137763"
+    },
+    "464cc8f48242": {
+      "id": "464cc8f48242",
+      "subject": "生物神经网络",
+      "predicate": "学习机制",
+      "object": "突触可塑性",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137765"
+    },
+    "a42325be505c": {
+      "id": "a42325be505c",
+      "subject": "人工神经网络",
+      "predicate": "学习机制",
+      "object": "反向传播、梯度下降",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:30:51.137766"
+    },
+    "0bdd7b7839a9": {
+      "id": "0bdd7b7839a9",
+      "subject": "深度学习",
+      "predicate": "模仿",
+      "object": "人类大脑",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879321"
+    },
+    "a1c78f71b7bc": {
+      "id": "a1c78f71b7bc",
+      "subject": "深度学习",
+      "predicate": "模仿",
+      "object": "神经元结构",
+      "confidence": 0.8,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879338"
+    },
+    "427069fb223e": {
+      "id": "427069fb223e",
+      "subject": "深度学习",
+      "predicate": "模仿",
+      "object": "信息处理机制",
+      "confidence": 0.8,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879341"
+    },
+    "40d71f3f8659": {
+      "id": "40d71f3f8659",
+      "subject": "深度学习",
+      "predicate": "模仿",
+      "object": "学习过程",
+      "confidence": 0.8,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879344"
+    },
+    "b13a829c1967": {
+      "id": "b13a829c1967",
+      "subject": "深度学习",
+      "predicate": "模仿",
+      "object": "认知功能",
+      "confidence": 0.8,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879346"
+    },
+    "aa6b2e9fa757": {
+      "id": "aa6b2e9fa757",
+      "subject": "人脑",
+      "predicate": "包含",
+      "object": "860亿个神经元",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879360"
+    },
+    "abf4967287e2": {
+      "id": "abf4967287e2",
+      "subject": "人脑",
+      "predicate": "包含",
+      "object": "100万亿个突触连接",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879362"
+    },
+    "d2f70b97f503": {
+      "id": "d2f70b97f503",
+      "subject": "深度学习",
+      "predicate": "规模",
+      "object": "小于人脑",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879364"
+    },
+    "947e2979340e": {
+      "id": "947e2979340e",
+      "subject": "人工网络",
+      "predicate": "是",
+      "object": "简化模型",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879366"
+    },
+    "22851eeb00f5": {
+      "id": "22851eeb00f5",
+      "subject": "人脑神经元",
+      "predicate": "具有",
+      "object": "动态可塑性",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879368"
+    },
+    "b7af87484e62": {
+      "id": "b7af87484e62",
+      "subject": "人工网络",
+      "predicate": "是",
+      "object": "相对静态",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879370"
+    },
+    "70a34ee4954b": {
+      "id": "70a34ee4954b",
+      "subject": "人脑",
+      "predicate": "具有",
+      "object": "多层次信息处理",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879373"
+    },
+    "8903c5616173": {
+      "id": "8903c5616173",
+      "subject": "人脑",
+      "predicate": "参与",
+      "object": "情绪与潜意识",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879375"
+    },
+    "90765f486a91": {
+      "id": "90765f486a91",
+      "subject": "人脑",
+      "predicate": "具有",
+      "object": "直觉判断能力",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879377"
+    },
+    "a36366850387": {
+      "id": "a36366850387",
+      "subject": "人脑",
+      "predicate": "具有",
+      "object": "神经可塑性",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879379"
+    },
+    "1d0d7fae8e00": {
+      "id": "1d0d7fae8e00",
+      "subject": "深度学习",
+      "predicate": "是",
+      "object": "数据驱动的统计学习",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879390"
+    },
+    "e4aa7069e8b5": {
+      "id": "e4aa7069e8b5",
+      "subject": "深度学习",
+      "predicate": "缺乏",
+      "object": "真正的思考能力",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879392"
+    },
+    "02d8dfc207a0": {
+      "id": "02d8dfc207a0",
+      "subject": "深度学习",
+      "predicate": "不具备",
+      "object": "自我意识",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879394"
+    },
+    "6e1ec99ca664": {
+      "id": "6e1ec99ca664",
+      "subject": "深度学习",
+      "predicate": "学习能力",
+      "object": "相对僵化",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879396"
+    },
+    "5ebe7be6322d": {
+      "id": "5ebe7be6322d",
+      "subject": "深度学习",
+      "predicate": "是",
+      "object": "数学模型",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879399"
+    },
+    "53358e671dde": {
+      "id": "53358e671dde",
+      "subject": "人脑",
+      "predicate": "是",
+      "object": "生物系统",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879401"
+    },
+    "f3d15e388b1f": {
+      "id": "f3d15e388b1f",
+      "subject": "人脑",
+      "predicate": "具有",
+      "object": "主观体验",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879403"
+    },
+    "f95194a5d9d7": {
+      "id": "f95194a5d9d7",
+      "subject": "深度学习",
+      "predicate": "只有",
+      "object": "模式匹配",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879405"
+    },
+    "196fed2bda07": {
+      "id": "196fed2bda07",
+      "subject": "人脑",
+      "predicate": "具有",
+      "object": "情感和动机",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879408"
+    },
+    "676ee74fb70f": {
+      "id": "676ee74fb70f",
+      "subject": "深度学习",
+      "predicate": "没有",
+      "object": "内在驱动力",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879410"
+    },
+    "50d123bc4472": {
+      "id": "50d123bc4472",
+      "subject": "麦卡洛克和皮茨",
+      "predicate": "提出",
+      "object": "神经元数学模型",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879412"
+    },
+    "cac176d3bcaa": {
+      "id": "cac176d3bcaa",
+      "subject": "神经元数学模型",
+      "predicate": "是",
+      "object": "深度学习的灵感来源",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879414"
+    },
+    "debb504661ed": {
+      "id": "debb504661ed",
+      "subject": "深度学习",
+      "predicate": "成功",
+      "object": "图像识别",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879416"
+    },
+    "26afe2376924": {
+      "id": "26afe2376924",
+      "subject": "深度学习",
+      "predicate": "成功",
+      "object": "语音识别",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879418"
+    },
+    "f78cc43c78f4": {
+      "id": "f78cc43c78f4",
+      "subject": "深度学习",
+      "predicate": "成功",
+      "object": "自然语言处理",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879420"
+    },
+    "400437dae973": {
+      "id": "400437dae973",
+      "subject": "深度学习",
+      "predicate": "失败",
+      "object": "需要真正理解的任务",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879442"
+    },
+    "e8a8ce971fde": {
+      "id": "e8a8ce971fde",
+      "subject": "深度学习",
+      "predicate": "失败",
+      "object": "需要推理的任务",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879444"
+    },
+    "8024575c9297": {
+      "id": "8024575c9297",
+      "subject": "深度学习",
+      "predicate": "失败",
+      "object": "需要创造力的任务",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:39:54.879446"
+    },
+    "c8751a38e37f": {
+      "id": "c8751a38e37f",
+      "subject": "深度学习",
+      "predicate": "模仿",
+      "object": "人类神经网络",
+      "confidence": 0.8,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668824"
+    },
+    "c13fde4fa554": {
+      "id": "c13fde4fa554",
+      "subject": "深度学习",
+      "predicate": "基于",
+      "object": "多层神经网络",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668842"
+    },
+    "16669add3496": {
+      "id": "16669add3496",
+      "subject": "深度学习",
+      "predicate": "实现",
+      "object": "多层非线性变换",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668846"
+    },
+    "57fd57fb2b0e": {
+      "id": "57fd57fb2b0e",
+      "subject": "人工神经元",
+      "predicate": "相似于",
+      "object": "真实神经元",
+      "confidence": 0.8,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668848"
+    },
+    "bc339f4b7909": {
+      "id": "bc339f4b7909",
+      "subject": "深度学习",
+      "predicate": "涉及",
+      "object": "反向传播",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668851"
+    },
+    "8ec338fe115a": {
+      "id": "8ec338fe115a",
+      "subject": "深度学习",
+      "predicate": "涉及",
+      "object": "激活函数",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668854"
+    },
+    "426e9f2ea003": {
+      "id": "426e9f2ea003",
+      "subject": "深度学习",
+      "predicate": "涉及",
+      "object": "优化算法",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668856"
+    },
+    "6cf8a144a4dc": {
+      "id": "6cf8a144a4dc",
+      "subject": "生物神经元",
+      "predicate": "复杂性",
+      "object": "人类神经网络",
+      "confidence": 0.8,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668858"
+    },
+    "a00916f54820": {
+      "id": "a00916f54820",
+      "subject": "深度学习",
+      "predicate": "应用于",
+      "object": "图像识别",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668860"
+    },
+    "97ad5cfc30a7": {
+      "id": "97ad5cfc30a7",
+      "subject": "深度学习",
+      "predicate": "发展",
+      "object": "Geoffrey Hinton",
+      "confidence": 0.8,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668867"
+    },
+    "4a306872663d": {
+      "id": "4a306872663d",
+      "subject": "深度学习",
+      "predicate": "突破",
+      "object": "ReLU激活函数",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668869"
+    },
+    "a1d3ccc1b9fe": {
+      "id": "a1d3ccc1b9fe",
+      "subject": "深度学习",
+      "predicate": "突破",
+      "object": "Dropout",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668871"
+    },
+    "8686396baa9e": {
+      "id": "8686396baa9e",
+      "subject": "深度学习",
+      "predicate": "突破",
+      "object": "批量归一化",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:46:08.668873"
+    },
+    "b2969cefa9f1": {
+      "id": "b2969cefa9f1",
+      "subject": "深度学习",
+      "predicate": "实现",
+      "object": "多层非线性变换学习数据的层次化表示",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:48:23.558127"
+    },
+    "1d4a86d29979": {
+      "id": "1d4a86d29979",
+      "subject": "深度学习",
+      "predicate": "涉及",
+      "object": "反向传播、激活函数、优化算法",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:48:23.558135"
+    },
+    "f30b585299b2": {
+      "id": "f30b585299b2",
+      "subject": "深度学习",
+      "predicate": "应用于",
+      "object": "网络搜索、网站过滤、广告推送、图像识别、语言翻译",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:48:23.558139"
+    },
+    "abcd552dec7b": {
+      "id": "abcd552dec7b",
+      "subject": "深度学习",
+      "predicate": "发展",
+      "object": "Geoffrey Hinton等人的贡献",
+      "confidence": 0.85,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:48:23.558140"
+    },
+    "46a96d422f7b": {
+      "id": "46a96d422f7b",
+      "subject": "深度学习",
+      "predicate": "突破",
+      "object": "ReLU激活函数、Dropout、批量归一化",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:48:23.558142"
+    },
+    "7fcebaa9a589": {
+      "id": "7fcebaa9a589",
+      "subject": "深度学习",
+      "predicate": "是",
+      "object": "多层神经网络的特定实现",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667290"
+    },
+    "64d81477674c": {
+      "id": "64d81477674c",
+      "subject": "深度学习",
+      "predicate": "包含",
+      "object": "多层结构",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667301"
+    },
+    "6f5254f67064": {
+      "id": "6f5254f67064",
+      "subject": "深度学习",
+      "predicate": "包含",
+      "object": "非线性激活函数",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667304"
+    },
+    "d5bb0aeaf721": {
+      "id": "d5bb0aeaf721",
+      "subject": "深度学习",
+      "predicate": "使用",
+      "object": "反向传播算法",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667306"
+    },
+    "14b00ae82bf1": {
+      "id": "14b00ae82bf1",
+      "subject": "深度学习",
+      "predicate": "实现",
+      "object": "特征自动学习",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667308"
+    },
+    "9e1cd5d5c50e": {
+      "id": "9e1cd5d5c50e",
+      "subject": "深度学习",
+      "predicate": "应用于",
+      "object": "推荐系统",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667315"
+    },
+    "e2ea17b60834": {
+      "id": "e2ea17b60834",
+      "subject": "深度学习",
+      "predicate": "面临",
+      "object": "数据需求大",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667320"
+    },
+    "58f431dc8281": {
+      "id": "58f431dc8281",
+      "subject": "深度学习",
+      "predicate": "面临",
+      "object": "计算资源需求高",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667322"
+    },
+    "391fa6cb98bf": {
+      "id": "391fa6cb98bf",
+      "subject": "深度学习",
+      "predicate": "面临",
+      "object": "可解释性差",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667324"
+    },
+    "a22e00ee9e4a": {
+      "id": "a22e00ee9e4a",
+      "subject": "深度学习",
+      "predicate": "面临",
+      "object": "过拟合风险",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667326"
+    },
+    "102269378b07": {
+      "id": "102269378b07",
+      "subject": "深度学习",
+      "predicate": "与",
+      "object": "人脑神经元的运作机制存在本质区别",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667328"
+    },
+    "a68934fe81db": {
+      "id": "a68934fe81db",
+      "subject": "深度学习",
+      "predicate": "是",
+      "object": "数学函数拟合",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:52:31.667329"
+    },
+    "a92291483b48": {
+      "id": "a92291483b48",
+      "subject": "深度学习",
+      "predicate": "受启发于",
+      "object": "人脑结构",
+      "confidence": 0.8,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:53:38.719320"
+    },
+    "35e89b51b906": {
+      "id": "35e89b51b906",
+      "subject": "深度学习",
+      "predicate": "与",
+      "object": "人类学习机制存在根本差异",
+      "confidence": 0.8,
+      "source": "conversation",
+      "timestamp": "2025-09-05T22:53:38.719344"
+    }
+  },
+  "metadata": {
+    "created_at": "2025-09-05T22:53:38.722604",
+    "num_nodes": 90,
+    "num_edges": 88
+  }
+}

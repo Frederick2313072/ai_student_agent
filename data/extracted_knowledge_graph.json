@@ -1,0 +1,111 @@
+{
+  "nodes": [
+    {
+      "id": "python",
+      "label": "Python",
+      "node_type": "programming_language",
+      "properties": {
+        "label": "Python",
+        "type": "programming_language",
+        "properties": {
+          "description": "Python编程语言"
+        }
+      },
+      "degree": 3
+    },
+    {
+      "id": "机器学习",
+      "label": "机器学习",
+      "node_type": "technology",
+      "properties": {
+        "label": "机器学习",
+        "type": "technology",
+        "properties": {
+          "description": "机器学习技术"
+        }
+      },
+      "degree": 2
+    },
+    {
+      "id": "数据科学",
+      "label": "数据科学",
+      "node_type": "field",
+      "properties": {
+        "label": "数据科学",
+        "type": "field",
+        "properties": {
+          "description": "数据科学领域"
+        }
+      },
+      "degree": 2
+    },
+    {
+      "id": "web开发",
+      "label": "Web开发",
+      "node_type": "field",
+      "properties": {
+        "label": "Web开发",
+        "type": "field",
+        "properties": {
+          "description": "Web应用开发"
+        }
+      },
+      "degree": 1
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge_python_ml",
+      "source": "python",
+      "target": "机器学习",
+      "relationship": "用于",
+      "weight": 0.9,
+      "properties": {
+        "relationship": "用于",
+        "weight": 0.9,
+        "timestamp": "2025-09-02T16:15:00Z"
+      }
+    },
+    {
+      "id": "edge_python_ds",
+      "source": "python",
+      "target": "数据科学",
+      "relationship": "应用于",
+      "weight": 0.8,
+      "properties": {
+        "relationship": "应用于",
+        "weight": 0.8,
+        "timestamp": "2025-09-02T16:15:01Z"
+      }
+    },
+    {
+      "id": "edge_python_web",
+      "source": "python",
+      "target": "web开发",
+      "relationship": "支持",
+      "weight": 0.7,
+      "properties": {
+        "relationship": "支持",
+        "weight": 0.7,
+        "timestamp": "2025-09-02T16:15:02Z"
+      }
+    },
+    {
+      "id": "edge_ml_ds",
+      "source": "机器学习",
+      "target": "数据科学",
+      "relationship": "属于",
+      "weight": 0.9,
+      "properties": {
+        "relationship": "属于",
+        "weight": 0.9,
+        "timestamp": "2025-09-02T16:15:03Z"
+      }
+    }
+  ],
+  "metadata": {
+    "total_nodes": 4,
+    "total_edges": 4,
+    "filtered": false
+  }
+}

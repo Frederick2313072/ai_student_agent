@@ -1,0 +1,224 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "费曼学习系统 - 业务指标",
+    "tags": ["feynman", "business", "analytics"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "对话统计",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 8, "x": 0, "y": 0},
+        "targets": [
+          {
+            "expr": "sum(increase(conversations_total[24h]))",
+            "legendFormat": "24小时对话数",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"},
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "对话完成率",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 8, "x": 8, "y": 0},
+        "targets": [
+          {
+            "expr": "sum(increase(conversations_total{status=\"completed\"}[24h])) / sum(increase(conversations_total[24h]))",
+            "legendFormat": "完成率",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "unit": "percentunit",
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": 0},
+                {"color": "yellow", "value": 0.7},
+                {"color": "green", "value": 0.85}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "用户满意度",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 8, "x": 16, "y": 0},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.5, rate(user_satisfaction_score_bucket[24h]))",
+            "legendFormat": "满意度中位数",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "unit": "short",
+            "min": 1,
+            "max": 5,
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": 1},
+                {"color": "yellow", "value": 3},
+                {"color": "green", "value": 4}
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "对话时长分布",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.50, rate(conversation_duration_seconds_bucket[1h]))",
+            "legendFormat": "P50",
+            "refId": "A"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(conversation_duration_seconds_bucket[1h]))",
+            "legendFormat": "P95",
+            "refId": "B"
+          }
+        ],
+        "yAxes": [
+          {"label": "时长(秒)", "min": 0},
+          {"show": false}
+        ]
+      },
+      {
+        "id": 5,
+        "title": "工具使用排行",
+        "type": "bargauge",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+        "targets": [
+          {
+            "expr": "topk(10, sum(increase(agent_tool_calls_total{status=\"success\"}[24h])) by (tool_name))",
+            "legendFormat": "{{ tool_name }}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"},
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "title": "Token使用趋势",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
+        "targets": [
+          {
+            "expr": "sum(rate(llm_tokens_used_total[1h])) by (model, type)",
+            "legendFormat": "{{ model }} - {{ type }}",
+            "refId": "A"
+          }
+        ],
+        "yAxes": [
+          {"label": "Token/小时", "min": 0},
+          {"show": false}
+        ]
+      },
+      {
+        "id": 7,
+        "title": "成本趋势",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
+        "targets": [
+          {
+            "expr": "sum(increase(llm_costs_total_usd[1h])) by (provider)",
+            "legendFormat": "{{ provider }}",
+            "refId": "A"
+          }
+        ],
+        "yAxes": [
+          {"label": "成本(USD)", "min": 0},
+          {"show": false}
+        ]
+      },
+      {
+        "id": 8,
+        "title": "记忆操作状态",
+        "type": "piechart",
+        "gridPos": {"h": 6, "w": 8, "x": 0, "y": 20},
+        "targets": [
+          {
+            "expr": "sum(increase(memory_operations_total[1h])) by (operation, status)",
+            "legendFormat": "{{ operation }}-{{ status }}",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "工作流节点性能",
+        "type": "table",
+        "gridPos": {"h": 6, "w": 8, "x": 8, "y": 20},
+        "targets": [
+          {
+            "expr": "sum(rate(langgraph_workflow_executions_total{status=\"success\"}[1h])) by (node_name)",
+            "legendFormat": "{{ node_name }}",
+            "refId": "A",
+            "format": "table"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(langgraph_workflow_duration_seconds_bucket[1h])) by (node_name)",
+            "legendFormat": "{{ node_name }}",
+            "refId": "B",
+            "format": "table"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {}
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "流式连接状态",
+        "type": "timeseries",
+        "gridPos": {"h": 6, "w": 8, "x": 16, "y": 20},
+        "targets": [
+          {
+            "expr": "sse_connections_active",
+            "legendFormat": "活跃连接",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(sse_messages_total[1m])",
+            "legendFormat": "消息/秒",
+            "refId": "B"
+          }
+        ]
+      }
+    ],
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 27,
+    "version": 1
+  }
+}
+
+

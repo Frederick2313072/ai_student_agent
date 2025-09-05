@@ -1,0 +1,911 @@
+{
+  "nodes": [
+    {
+      "id": "区块链",
+      "label": "区块链",
+      "type": "entity"
+    },
+    {
+      "id": "一种分布式数据库技术",
+      "label": "一种分布式数据库技术",
+      "type": "entity"
+    },
+    {
+      "id": "比特币",
+      "label": "比特币",
+      "type": "entity"
+    },
+    {
+      "id": "第一个成功应用区块链技术的加密货币",
+      "label": "第一个成功应用区块链技术的加密货币",
+      "type": "entity"
+    },
+    {
+      "id": "智能合约",
+      "label": "智能合约",
+      "type": "entity"
+    },
+    {
+      "id": "自动执行的合约",
+      "label": "自动执行的合约",
+      "type": "entity"
+    },
+    {
+      "id": "去中心化金融defi",
+      "label": "去中心化金融DeFi",
+      "type": "entity"
+    },
+    {
+      "id": "区块链的金融服务",
+      "label": "区块链的金融服务",
+      "type": "entity"
+    },
+    {
+      "id": "每个区块",
+      "label": "每个区块",
+      "type": "entity"
+    },
+    {
+      "id": "交易记录和前一个区块的哈希值",
+      "label": "交易记录和前一个区块的哈希值",
+      "type": "entity"
+    },
+    {
+      "id": "深度学习中的形容词深度",
+      "label": "深度学习中的形容词深度",
+      "type": "entity"
+    },
+    {
+      "id": "指在网络中使用多层",
+      "label": "指在网络中使用多层",
+      "type": "entity"
+    },
+    {
+      "id": "深度学习中的形容词深度是指在网络中",
+      "label": "深度学习中的形容词深度是指在网络中",
+      "type": "entity"
+    },
+    {
+      "id": "多层",
+      "label": "多层",
+      "type": "entity"
+    },
+    {
+      "id": "元宇宙",
+      "label": "元宇宙",
+      "type": "entity"
+    },
+    {
+      "id": "虚拟现实和增强现实技术的融合应用",
+      "label": "虚拟现实和增强现实技术的融合应用",
+      "type": "entity"
+    },
+    {
+      "id": "虚拟现实vr",
+      "label": "虚拟现实VR",
+      "type": "entity"
+    },
+    {
+      "id": "沉浸式的三维体验",
+      "label": "沉浸式的三维体验",
+      "type": "entity"
+    },
+    {
+      "id": "区块链技术为元宇宙",
+      "label": "区块链技术为元宇宙",
+      "type": "entity"
+    },
+    {
+      "id": "数字资产确权",
+      "label": "数字资产确权",
+      "type": "entity"
+    },
+    {
+      "id": "python",
+      "label": "Python",
+      "type": "entity"
+    },
+    {
+      "id": "多种编程范型",
+      "label": "多种编程范型",
+      "type": "entity"
+    },
+    {
+      "id": "是一种广泛",
+      "label": "是一种广泛",
+      "type": "entity"
+    },
+    {
+      "id": "的解释型高级和通用的编程语言",
+      "label": "的解释型高级和通用的编程语言",
+      "type": "entity"
+    },
+    {
+      "id": "云计算",
+      "label": "云计算",
+      "type": "entity"
+    },
+    {
+      "id": "通过互联网提供计算资源和服务的技术模式",
+      "label": "通过互联网提供计算资源和服务的技术模式",
+      "type": "entity"
+    },
+    {
+      "id": "servicesaws",
+      "label": "ServicesAWS",
+      "type": "entity"
+    },
+    {
+      "id": "全球最大的云服务提供商",
+      "label": "全球最大的云服务提供商",
+      "type": "entity"
+    },
+    {
+      "id": "platform",
+      "label": "Platform",
+      "type": "entity"
+    },
+    {
+      "id": "aws的主要竞争对手",
+      "label": "AWS的主要竞争对手",
+      "type": "entity"
+    },
+    {
+      "id": "kubernetes",
+      "label": "Kubernetes",
+      "type": "entity"
+    },
+    {
+      "id": "容器编排的事实标准",
+      "label": "容器编排的事实标准",
+      "type": "entity"
+    },
+    {
+      "id": "云计算服务模型",
+      "label": "云计算服务模型",
+      "type": "entity"
+    },
+    {
+      "id": "基础设施即服务iaas平台即服务paas和软件即服务saas",
+      "label": "基础设施即服务IaaS平台即服务PaaS和软件即服务SaaS",
+      "type": "entity"
+    },
+    {
+      "id": "云计算是通过互联网",
+      "label": "云计算是通过互联网",
+      "type": "entity"
+    },
+    {
+      "id": "计算资源和服务的技术模式",
+      "label": "计算资源和服务的技术模式",
+      "type": "entity"
+    },
+    {
+      "id": "ai",
+      "label": "AI",
+      "type": "entity"
+    },
+    {
+      "id": "计算机科学的一个分支",
+      "label": "计算机科学的一个分支",
+      "type": "entity"
+    },
+    {
+      "id": "机器学习",
+      "label": "机器学习",
+      "type": "entity"
+    },
+    {
+      "id": "人工智能的核心技术",
+      "label": "人工智能的核心技术",
+      "type": "entity"
+    },
+    {
+      "id": "深度学习",
+      "label": "深度学习",
+      "type": "entity"
+    },
+    {
+      "id": "机器学习的一个子集",
+      "label": "机器学习的一个子集",
+      "type": "entity"
+    },
+    {
+      "id": "人工智能",
+      "label": "人工智能",
+      "type": "entity"
+    },
+    {
+      "id": "多个子领域",
+      "label": "多个子领域",
+      "type": "entity"
+    },
+    {
+      "id": "旨在",
+      "label": "旨在",
+      "type": "entity"
+    },
+    {
+      "id": "能够执行通常需要人类智能的任务的系统",
+      "label": "能够执行通常需要人类智能的任务的系统",
+      "type": "entity"
+    },
+    {
+      "id": "gpt4",
+      "label": "GPT4",
+      "type": "entity"
+    },
+    {
+      "id": "openai最新的多模态大模型",
+      "label": "OpenAI最新的多模态大模型",
+      "type": "entity"
+    },
+    {
+      "id": "chatgpt",
+      "label": "ChatGPT",
+      "type": "entity"
+    },
+    {
+      "id": "transformer架构的大语言模型技术",
+      "label": "Transformer架构的大语言模型技术",
+      "type": "entity"
+    },
+    {
+      "id": "网络安全",
+      "label": "网络安全",
+      "type": "entity"
+    },
+    {
+      "id": "保护计算机系统网络和数据免受攻击的实践",
+      "label": "保护计算机系统网络和数据免受攻击的实践",
+      "type": "entity"
+    },
+    {
+      "id": "防火墙",
+      "label": "防火墙",
+      "type": "entity"
+    },
+    {
+      "id": "网络安全的第一道防线",
+      "label": "网络安全的第一道防线",
+      "type": "entity"
+    },
+    {
+      "id": "恶意软件",
+      "label": "恶意软件",
+      "type": "entity"
+    },
+    {
+      "id": "病毒蠕虫特洛伊木马和勒索软件",
+      "label": "病毒蠕虫特洛伊木马和勒索软件",
+      "type": "entity"
+    },
+    {
+      "id": "机器学习理论主要",
+      "label": "机器学习理论主要",
+      "type": "entity"
+    },
+    {
+      "id": "设计和分析一些让计算机可以自动学习的算法",
+      "label": "设计和分析一些让计算机可以自动学习的算法",
+      "type": "entity"
+    },
+    {
+      "id": "机器学习算法",
+      "label": "机器学习算法",
+      "type": "entity"
+    },
+    {
+      "id": "一类从数据中自动分析获得规律",
+      "label": "一类从数据中自动分析获得规律",
+      "type": "entity"
+    },
+    {
+      "id": "所以部分的机器学习研究",
+      "label": "所以部分的机器学习研究",
+      "type": "entity"
+    },
+    {
+      "id": "容易处理的近似算法",
+      "label": "容易处理的近似算法",
+      "type": "entity"
+    },
+    {
+      "id": "很多推论问题",
+      "label": "很多推论问题",
+      "type": "entity"
+    },
+    {
+      "id": "非程序化決策",
+      "label": "非程序化決策",
+      "type": "entity"
+    }
+  ],
+  "edges": [
+    {
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "target": "一种分布式数据库技术",
+      "key": "55c202604765",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:39.138341"
+    },
+    {
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "target": "第一个成功应用区块链技术的加密货币",
+      "key": "e072d05ee3e0",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:39.138425"
+    },
+    {
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "target": "自动执行的合约",
+      "key": "4fb0cd3d18ef",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:39.138450"
+    },
+    {
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "target": "区块链的金融服务",
+      "key": "a5b7febd2f6d",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:39.138464"
+    },
+    {
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "target": "区块链的金融服务",
+      "key": "9044c9a39267",
+      "relationship": "基于",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:39.140190"
+    },
+    {
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "target": "交易记录和前一个区块的哈希值",
+      "key": "39d138381839",
+      "relationship": "包含",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:39.138626"
+    },
+    {
+      "source": "data/test_corpus/010_深度学习.txt",
+      "target": "指在网络中使用多层",
+      "key": "e5a2c8b48737",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:40.148597"
+    },
+    {
+      "source": "data/test_corpus/010_深度学习.txt",
+      "target": "多层",
+      "key": "fa91962708a6",
+      "relationship": "使用",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:40.149391"
+    },
+    {
+      "source": "data/test_corpus/006_元宇宙技术发展.txt",
+      "target": "虚拟现实和增强现实技术的融合应用",
+      "key": "e19de79a0b5a",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:41.153609"
+    },
+    {
+      "source": "data/test_corpus/006_元宇宙技术发展.txt",
+      "target": "沉浸式的三维体验",
+      "key": "a7b0e67e58fa",
+      "relationship": "提供",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:41.154262"
+    },
+    {
+      "source": "data/test_corpus/006_元宇宙技术发展.txt",
+      "target": "数字资产确权",
+      "key": "5d673c3edd9b",
+      "relationship": "提供",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:41.154380"
+    },
+    {
+      "source": "data/test_corpus/012_Python.txt",
+      "target": "多种编程范型",
+      "key": "097ce9e74a86",
+      "relationship": "支持",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:42.162913"
+    },
+    {
+      "source": "data/test_corpus/012_Python.txt",
+      "target": "的解释型高级和通用的编程语言",
+      "key": "b3ddcdcb7fdb",
+      "relationship": "使用",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:42.163159"
+    },
+    {
+      "source": "data/test_corpus/002_云计算.txt",
+      "target": "通过互联网提供计算资源和服务的技术模式",
+      "key": "165b5b305973",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:43.168182"
+    },
+    {
+      "source": "data/test_corpus/002_云计算.txt",
+      "target": "全球最大的云服务提供商",
+      "key": "14f60a4b02f8",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:43.168314"
+    },
+    {
+      "source": "data/test_corpus/002_云计算.txt",
+      "target": "aws的主要竞争对手",
+      "key": "010c2992aff9",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:43.168336"
+    },
+    {
+      "source": "data/test_corpus/002_云计算.txt",
+      "target": "容器编排的事实标准",
+      "key": "890bc555ed00",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:43.168354"
+    },
+    {
+      "source": "data/test_corpus/002_云计算.txt",
+      "target": "基础设施即服务iaas平台即服务paas和软件即服务saas",
+      "key": "13862054feff",
+      "relationship": "包含",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:43.168483"
+    },
+    {
+      "source": "data/test_corpus/002_云计算.txt",
+      "target": "计算资源和服务的技术模式",
+      "key": "7daf1c276800",
+      "relationship": "提供",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:43.169106"
+    },
+    {
+      "source": "data/test_corpus/000_人工智能.txt",
+      "target": "计算机科学的一个分支",
+      "key": "298e71bbcc0e",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:44.176722"
+    },
+    {
+      "source": "data/test_corpus/000_人工智能.txt",
+      "target": "人工智能的核心技术",
+      "key": "8c95dcc1b1ff",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:44.176793"
+    },
+    {
+      "source": "data/test_corpus/000_人工智能.txt",
+      "target": "机器学习的一个子集",
+      "key": "fa9d47fc8046",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:44.176814"
+    },
+    {
+      "source": "data/test_corpus/000_人工智能.txt",
+      "target": "多个子领域",
+      "key": "c23c02bc1b77",
+      "relationship": "包含",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:44.176961"
+    },
+    {
+      "source": "data/test_corpus/000_人工智能.txt",
+      "target": "能够执行通常需要人类智能的任务的系统",
+      "key": "69845a15bc31",
+      "relationship": "开发",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:44.177892"
+    },
+    {
+      "source": "data/test_corpus/005_ChatGPT推动AI革命.txt",
+      "target": "openai最新的多模态大模型",
+      "key": "980a4491cc62",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:45.184651"
+    },
+    {
+      "source": "data/test_corpus/005_ChatGPT推动AI革命.txt",
+      "target": "transformer架构的大语言模型技术",
+      "key": "57efe6848a10",
+      "relationship": "基于",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:45.185127"
+    },
+    {
+      "source": "data/test_corpus/004_网络安全.txt",
+      "target": "保护计算机系统网络和数据免受攻击的实践",
+      "key": "9eb44bedfba2",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:46.191946"
+    },
+    {
+      "source": "data/test_corpus/004_网络安全.txt",
+      "target": "网络安全的第一道防线",
+      "key": "414b5fbaaf9d",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:46.192056"
+    },
+    {
+      "source": "data/test_corpus/004_网络安全.txt",
+      "target": "病毒蠕虫特洛伊木马和勒索软件",
+      "key": "451712f1b04b",
+      "relationship": "包含",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:46.192306"
+    },
+    {
+      "source": "data/test_corpus/009_机器学习.txt",
+      "target": "设计和分析一些让计算机可以自动学习的算法",
+      "key": "5bc07e6100fc",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:48.232141"
+    },
+    {
+      "source": "data/test_corpus/009_机器学习.txt",
+      "target": "一类从数据中自动分析获得规律",
+      "key": "527f4638fd17",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:48.232232"
+    },
+    {
+      "source": "data/test_corpus/009_机器学习.txt",
+      "target": "容易处理的近似算法",
+      "key": "f10931a385c7",
+      "relationship": "是",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:48.232352"
+    },
+    {
+      "source": "data/test_corpus/009_机器学习.txt",
+      "target": "容易处理的近似算法",
+      "key": "5da79af234a7",
+      "relationship": "开发",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:48.233844"
+    },
+    {
+      "source": "data/test_corpus/009_机器学习.txt",
+      "target": "非程序化決策",
+      "key": "3a34d67e853d",
+      "relationship": "属于",
+      "weight": 0.75,
+      "timestamp": "2025-08-23T03:29:48.234119"
+    }
+  ],
+  "triples": {
+    "55c202604765": {
+      "id": "55c202604765",
+      "subject": "区块链",
+      "predicate": "是",
+      "object": "一种分布式数据库技术",
+      "confidence": 0.75,
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "timestamp": "2025-08-23T03:29:39.138341"
+    },
+    "e072d05ee3e0": {
+      "id": "e072d05ee3e0",
+      "subject": "比特币",
+      "predicate": "是",
+      "object": "第一个成功应用区块链技术的加密货币",
+      "confidence": 0.75,
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "timestamp": "2025-08-23T03:29:39.138425"
+    },
+    "4fb0cd3d18ef": {
+      "id": "4fb0cd3d18ef",
+      "subject": "智能合约",
+      "predicate": "是",
+      "object": "自动执行的合约",
+      "confidence": 0.75,
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "timestamp": "2025-08-23T03:29:39.138450"
+    },
+    "a5b7febd2f6d": {
+      "id": "a5b7febd2f6d",
+      "subject": "去中心化金融DeFi",
+      "predicate": "是",
+      "object": "区块链的金融服务",
+      "confidence": 0.75,
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "timestamp": "2025-08-23T03:29:39.138464"
+    },
+    "39d138381839": {
+      "id": "39d138381839",
+      "subject": "每个区块",
+      "predicate": "包含",
+      "object": "交易记录和前一个区块的哈希值",
+      "confidence": 0.75,
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "timestamp": "2025-08-23T03:29:39.138626"
+    },
+    "9044c9a39267": {
+      "id": "9044c9a39267",
+      "subject": "去中心化金融DeFi",
+      "predicate": "基于",
+      "object": "区块链的金融服务",
+      "confidence": 0.75,
+      "source": "data/test_corpus/001_区块链技术.txt",
+      "timestamp": "2025-08-23T03:29:39.140190"
+    },
+    "e5a2c8b48737": {
+      "id": "e5a2c8b48737",
+      "subject": "深度学习中的形容词深度",
+      "predicate": "是",
+      "object": "指在网络中使用多层",
+      "confidence": 0.75,
+      "source": "data/test_corpus/010_深度学习.txt",
+      "timestamp": "2025-08-23T03:29:40.148597"
+    },
+    "fa91962708a6": {
+      "id": "fa91962708a6",
+      "subject": "深度学习中的形容词深度是指在网络中",
+      "predicate": "使用",
+      "object": "多层",
+      "confidence": 0.75,
+      "source": "data/test_corpus/010_深度学习.txt",
+      "timestamp": "2025-08-23T03:29:40.149391"
+    },
+    "e19de79a0b5a": {
+      "id": "e19de79a0b5a",
+      "subject": "元宇宙",
+      "predicate": "是",
+      "object": "虚拟现实和增强现实技术的融合应用",
+      "confidence": 0.75,
+      "source": "data/test_corpus/006_元宇宙技术发展.txt",
+      "timestamp": "2025-08-23T03:29:41.153609"
+    },
+    "a7b0e67e58fa": {
+      "id": "a7b0e67e58fa",
+      "subject": "虚拟现实VR",
+      "predicate": "提供",
+      "object": "沉浸式的三维体验",
+      "confidence": 0.75,
+      "source": "data/test_corpus/006_元宇宙技术发展.txt",
+      "timestamp": "2025-08-23T03:29:41.154262"
+    },
+    "5d673c3edd9b": {
+      "id": "5d673c3edd9b",
+      "subject": "区块链技术为元宇宙",
+      "predicate": "提供",
+      "object": "数字资产确权",
+      "confidence": 0.75,
+      "source": "data/test_corpus/006_元宇宙技术发展.txt",
+      "timestamp": "2025-08-23T03:29:41.154380"
+    },
+    "097ce9e74a86": {
+      "id": "097ce9e74a86",
+      "subject": "Python",
+      "predicate": "支持",
+      "object": "多种编程范型",
+      "confidence": 0.75,
+      "source": "data/test_corpus/012_Python.txt",
+      "timestamp": "2025-08-23T03:29:42.162913"
+    },
+    "b3ddcdcb7fdb": {
+      "id": "b3ddcdcb7fdb",
+      "subject": "是一种广泛",
+      "predicate": "使用",
+      "object": "的解释型高级和通用的编程语言",
+      "confidence": 0.75,
+      "source": "data/test_corpus/012_Python.txt",
+      "timestamp": "2025-08-23T03:29:42.163159"
+    },
+    "165b5b305973": {
+      "id": "165b5b305973",
+      "subject": "云计算",
+      "predicate": "是",
+      "object": "通过互联网提供计算资源和服务的技术模式",
+      "confidence": 0.75,
+      "source": "data/test_corpus/002_云计算.txt",
+      "timestamp": "2025-08-23T03:29:43.168182"
+    },
+    "14f60a4b02f8": {
+      "id": "14f60a4b02f8",
+      "subject": "ServicesAWS",
+      "predicate": "是",
+      "object": "全球最大的云服务提供商",
+      "confidence": 0.75,
+      "source": "data/test_corpus/002_云计算.txt",
+      "timestamp": "2025-08-23T03:29:43.168314"
+    },
+    "010c2992aff9": {
+      "id": "010c2992aff9",
+      "subject": "Platform",
+      "predicate": "是",
+      "object": "AWS的主要竞争对手",
+      "confidence": 0.75,
+      "source": "data/test_corpus/002_云计算.txt",
+      "timestamp": "2025-08-23T03:29:43.168336"
+    },
+    "890bc555ed00": {
+      "id": "890bc555ed00",
+      "subject": "Kubernetes",
+      "predicate": "是",
+      "object": "容器编排的事实标准",
+      "confidence": 0.75,
+      "source": "data/test_corpus/002_云计算.txt",
+      "timestamp": "2025-08-23T03:29:43.168354"
+    },
+    "13862054feff": {
+      "id": "13862054feff",
+      "subject": "云计算服务模型",
+      "predicate": "包含",
+      "object": "基础设施即服务IaaS平台即服务PaaS和软件即服务SaaS",
+      "confidence": 0.75,
+      "source": "data/test_corpus/002_云计算.txt",
+      "timestamp": "2025-08-23T03:29:43.168483"
+    },
+    "7daf1c276800": {
+      "id": "7daf1c276800",
+      "subject": "云计算是通过互联网",
+      "predicate": "提供",
+      "object": "计算资源和服务的技术模式",
+      "confidence": 0.75,
+      "source": "data/test_corpus/002_云计算.txt",
+      "timestamp": "2025-08-23T03:29:43.169106"
+    },
+    "298e71bbcc0e": {
+      "id": "298e71bbcc0e",
+      "subject": "AI",
+      "predicate": "是",
+      "object": "计算机科学的一个分支",
+      "confidence": 0.75,
+      "source": "data/test_corpus/000_人工智能.txt",
+      "timestamp": "2025-08-23T03:29:44.176722"
+    },
+    "8c95dcc1b1ff": {
+      "id": "8c95dcc1b1ff",
+      "subject": "机器学习",
+      "predicate": "是",
+      "object": "人工智能的核心技术",
+      "confidence": 0.75,
+      "source": "data/test_corpus/000_人工智能.txt",
+      "timestamp": "2025-08-23T03:29:44.176793"
+    },
+    "fa9d47fc8046": {
+      "id": "fa9d47fc8046",
+      "subject": "深度学习",
+      "predicate": "是",
+      "object": "机器学习的一个子集",
+      "confidence": 0.75,
+      "source": "data/test_corpus/000_人工智能.txt",
+      "timestamp": "2025-08-23T03:29:44.176814"
+    },
+    "c23c02bc1b77": {
+      "id": "c23c02bc1b77",
+      "subject": "人工智能",
+      "predicate": "包含",
+      "object": "多个子领域",
+      "confidence": 0.75,
+      "source": "data/test_corpus/000_人工智能.txt",
+      "timestamp": "2025-08-23T03:29:44.176961"
+    },
+    "69845a15bc31": {
+      "id": "69845a15bc31",
+      "subject": "旨在",
+      "predicate": "开发",
+      "object": "能够执行通常需要人类智能的任务的系统",
+      "confidence": 0.75,
+      "source": "data/test_corpus/000_人工智能.txt",
+      "timestamp": "2025-08-23T03:29:44.177892"
+    },
+    "980a4491cc62": {
+      "id": "980a4491cc62",
+      "subject": "GPT4",
+      "predicate": "是",
+      "object": "OpenAI最新的多模态大模型",
+      "confidence": 0.75,
+      "source": "data/test_corpus/005_ChatGPT推动AI革命.txt",
+      "timestamp": "2025-08-23T03:29:45.184651"
+    },
+    "57efe6848a10": {
+      "id": "57efe6848a10",
+      "subject": "ChatGPT",
+      "predicate": "基于",
+      "object": "Transformer架构的大语言模型技术",
+      "confidence": 0.75,
+      "source": "data/test_corpus/005_ChatGPT推动AI革命.txt",
+      "timestamp": "2025-08-23T03:29:45.185127"
+    },
+    "9eb44bedfba2": {
+      "id": "9eb44bedfba2",
+      "subject": "网络安全",
+      "predicate": "是",
+      "object": "保护计算机系统网络和数据免受攻击的实践",
+      "confidence": 0.75,
+      "source": "data/test_corpus/004_网络安全.txt",
+      "timestamp": "2025-08-23T03:29:46.191946"
+    },
+    "414b5fbaaf9d": {
+      "id": "414b5fbaaf9d",
+      "subject": "防火墙",
+      "predicate": "是",
+      "object": "网络安全的第一道防线",
+      "confidence": 0.75,
+      "source": "data/test_corpus/004_网络安全.txt",
+      "timestamp": "2025-08-23T03:29:46.192056"
+    },
+    "451712f1b04b": {
+      "id": "451712f1b04b",
+      "subject": "恶意软件",
+      "predicate": "包含",
+      "object": "病毒蠕虫特洛伊木马和勒索软件",
+      "confidence": 0.75,
+      "source": "data/test_corpus/004_网络安全.txt",
+      "timestamp": "2025-08-23T03:29:46.192306"
+    },
+    "5bc07e6100fc": {
+      "id": "5bc07e6100fc",
+      "subject": "机器学习理论主要",
+      "predicate": "是",
+      "object": "设计和分析一些让计算机可以自动学习的算法",
+      "confidence": 0.75,
+      "source": "data/test_corpus/009_机器学习.txt",
+      "timestamp": "2025-08-23T03:29:48.232141"
+    },
+    "527f4638fd17": {
+      "id": "527f4638fd17",
+      "subject": "机器学习算法",
+      "predicate": "是",
+      "object": "一类从数据中自动分析获得规律",
+      "confidence": 0.75,
+      "source": "data/test_corpus/009_机器学习.txt",
+      "timestamp": "2025-08-23T03:29:48.232232"
+    },
+    "f10931a385c7": {
+      "id": "f10931a385c7",
+      "subject": "所以部分的机器学习研究",
+      "predicate": "是",
+      "object": "容易处理的近似算法",
+      "confidence": 0.75,
+      "source": "data/test_corpus/009_机器学习.txt",
+      "timestamp": "2025-08-23T03:29:48.232352"
+    },
+    "5da79af234a7": {
+      "id": "5da79af234a7",
+      "subject": "所以部分的机器学习研究",
+      "predicate": "开发",
+      "object": "容易处理的近似算法",
+      "confidence": 0.75,
+      "source": "data/test_corpus/009_机器学习.txt",
+      "timestamp": "2025-08-23T03:29:48.233844"
+    },
+    "3a34d67e853d": {
+      "id": "3a34d67e853d",
+      "subject": "很多推论问题",
+      "predicate": "属于",
+      "object": "非程序化決策",
+      "confidence": 0.75,
+      "source": "data/test_corpus/009_机器学习.txt",
+      "timestamp": "2025-08-23T03:29:48.234119"
+    }
+  },
+  "metadata": {
+    "created_at": "2025-08-23T03:29:48.235541",
+    "num_nodes": 64,
+    "num_edges": 34
+  }
+}
