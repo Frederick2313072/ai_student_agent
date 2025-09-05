@@ -1,0 +1,107 @@
+# Blackbox Exporter配置 - 外部服务健康检查
+
+modules:
+  # HTTP 2xx检查
+  http_2xx:
+    prober: http
+    timeout: 5s
+    http:
+      valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+      valid_status_codes: [200, 201, 202, 204]
+      method: GET
+      headers:
+        User-Agent: "Blackbox-Exporter/Feynman-Monitor"
+      no_follow_redirects: false
+      fail_if_ssl: false
+      fail_if_not_ssl: false
+      preferred_ip_protocol: "ip4"
+
+  # HTTP POST检查 (API端点)
+  http_post_2xx:
+    prober: http
+    timeout: 10s
+    http:
+      valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+      valid_status_codes: [200, 201, 202]
+      method: POST
+      headers:
+        Content-Type: "application/json"
+        User-Agent: "Blackbox-Exporter/Feynman-Monitor"
+      body: '{"test": true}'
+
+  # HTTPS检查
+  http_2xx_https:
+    prober: http
+    timeout: 5s
+    http:
+      valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+      valid_status_codes: [200, 201, 202, 204]
+      method: GET
+      headers:
+        User-Agent: "Blackbox-Exporter/Feynman-Monitor"
+      no_follow_redirects: false
+      fail_if_ssl: false
+      fail_if_not_ssl: true
+      preferred_ip_protocol: "ip4"
+
+  # TCP连接检查
+  tcp_connect:
+    prober: tcp
+    timeout: 5s
+
+  # DNS检查
+  dns:
+    prober: dns
+    timeout: 5s
+    dns:
+      query_name: "example.com"
+      query_type: "A"
+
+  # ICMP检查
+  icmp:
+    prober: icmp
+    timeout: 5s
+    icmp:
+      preferred_ip_protocol: "ip4"
+
+  # 自定义OpenAI API检查
+  openai_api:
+    prober: http
+    timeout: 15s
+    http:
+      valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+      valid_status_codes: [200, 401]  # 401也算正常，表示API可用但认证失败
+      method: GET
+      headers:
+        User-Agent: "Blackbox-Exporter/Feynman-Monitor"
+      no_follow_redirects: false
+
+  # 自定义智谱AI API检查
+  zhipu_api:
+    prober: http
+    timeout: 15s
+    http:
+      valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+      valid_status_codes: [200, 401, 403]
+      method: GET
+      headers:
+        User-Agent: "Blackbox-Exporter/Feynman-Monitor"
+
+  # 数据库连接检查
+  postgres_tcp:
+    prober: tcp
+    timeout: 5s
+    tcp:
+      query_response:
+        - expect: "^\\x00"  # PostgreSQL握手响应
+
+  # Redis连接检查
+  redis_tcp:
+    prober: tcp
+    timeout: 5s
+    tcp:
+      query_response:
+        - send: "PING\r\n"
+        - expect: "PONG"
+
+

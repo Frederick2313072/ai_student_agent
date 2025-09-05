@@ -1,0 +1,175 @@
+# AlertManager配置 - 告警路由和通知设置
+
+global:
+  # SMTP配置 (邮件通知)
+  smtp_smarthost: 'localhost:587'
+  smtp_from: 'alerts@feynman-system.com'
+  smtp_auth_username: 'alerts@feynman-system.com'
+  smtp_auth_password: 'your-email-password'
+
+# 抑制重复告警
+inhibit_rules:
+  # API服务下线时，抑制API相关的其他告警
+  - source_matchers:
+      - alertname="APIServiceDown"
+    target_matchers:
+      - component="api"
+    equal: ['instance']
+
+  # 系统资源严重不足时，抑制性能相关告警
+  - source_matchers:
+      - alertname=~"HighCPUUsage|HighMemoryUsage"
+      - severity="critical"
+    target_matchers:
+      - severity="warning"
+    equal: ['instance']
+
+# 告警路由配置
+route:
+  # 默认接收器
+  receiver: 'default-notifications'
+  
+  # 分组配置
+  group_by: ['alertname', 'component']
+  group_wait: 30s        # 等待同组其他告警
+  group_interval: 5m     # 发送新告警前的间隔
+  repeat_interval: 12h   # 重复发送间隔
+  
+  # 路由规则
+  routes:
+    # 严重告警立即通知
+    - matchers:
+        - severity="critical"
+      receiver: 'critical-notifications'
+      group_wait: 10s
+      repeat_interval: 5m
+
+    # API相关告警
+    - matchers:
+        - component="api"
+      receiver: 'api-team-notifications'
+      group_by: ['alertname', 'endpoint']
+
+    # LLM成本告警
+    - matchers:
+        - component="cost"
+      receiver: 'cost-notifications'
+      group_wait: 0s  # 立即发送成本告警
+
+    # 业务指标告警
+    - matchers:
+        - component="business"
+      receiver: 'business-notifications'
+      repeat_interval: 24h  # 业务告警每天最多发送一次
+
+    # 开发环境告警 (降低优先级)
+    - matchers:
+        - environment="development"
+      receiver: 'dev-notifications'
+      repeat_interval: 1h
+
+# 接收器配置
+receivers:
+  # 默认通知
+  - name: 'default-notifications'
+    webhook_configs:
+      - url: 'http://localhost:8000/webhooks/alerts'
+        send_resolved: true
+        http_config:
+          basic_auth:
+            username: 'alertmanager'
+            password: 'webhook-secret'
+
+  # 严重告警通知
+  - name: 'critical-notifications'
+    # 邮件通知
+    email_configs:
+      - to: 'admin@feynman-system.com'
+        subject: '🚨 [CRITICAL] 费曼学习系统严重告警'
+        body: |
+          告警名称: {{ .GroupLabels.alertname }}
+          组件: {{ .GroupLabels.component }}
+          
+          {{ range .Alerts }}
+          告警: {{ .Annotations.summary }}
+          详情: {{ .Annotations.description }}
+          时间: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ end }}
+          
+          查看详情: {{ .ExternalURL }}
+        html: |
+          <h2>🚨 费曼学习系统严重告警</h2>
+          <p><strong>告警名称:</strong> {{ .GroupLabels.alertname }}</p>
+          <p><strong>组件:</strong> {{ .GroupLabels.component }}</p>
+          
+          {{ range .Alerts }}
+          <div style="background: #f8d7da; padding: 10px; margin: 10px 0; border-radius: 5px;">
+            <h3>{{ .Annotations.summary }}</h3>
+            <p>{{ .Annotations.description }}</p>
+            <p><strong>开始时间:</strong> {{ .StartsAt.Format "2006-01-02 15:04:05" }}</p>
+          </div>
+          {{ end }}
+    
+    # 企业微信通知 (可选)
+    webhook_configs:
+      - url: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=YOUR_WECHAT_WEBHOOK_KEY'
+        send_resolved: true
+        http_config:
+          headers:
+            Content-Type: application/json
+        title: '费曼学习系统严重告警'
+        text: |
+          **告警**: {{ .GroupLabels.alertname }}
+          **组件**: {{ .GroupLabels.component }}
+          {{ range .Alerts }}
+          **详情**: {{ .Annotations.description }}
+          {{ end }}
+
+  # API团队通知
+  - name: 'api-team-notifications'
+    slack_configs:
+      - api_url: 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK'
+        channel: '#api-alerts'
+        title: 'API告警 - {{ .GroupLabels.alertname }}'
+        text: |
+          {{ range .Alerts }}
+          📊 **端点**: {{ .Labels.endpoint }}
+          ⚠️ **问题**: {{ .Annotations.summary }}
+          📝 **详情**: {{ .Annotations.description }}
+          🕐 **时间**: {{ .StartsAt.Format "15:04:05" }}
+          {{ end }}
+
+  # 成本通知
+  - name: 'cost-notifications'
+    email_configs:
+      - to: 'finance@feynman-system.com,admin@feynman-system.com'
+        subject: '💰 费曼学习系统成本告警'
+        body: |
+          检测到成本异常:
+          
+          {{ range .Alerts }}
+          告警: {{ .Annotations.summary }}
+          详情: {{ .Annotations.description }}
+          当前成本: {{ .Labels.cost_usd }}
+          预算: {{ .Labels.budget_usd }}
+          {{ end }}
+          
+          请立即检查系统使用情况和成本控制设置。
+
+  # 业务通知
+  - name: 'business-notifications'
+    webhook_configs:
+      - url: 'http://localhost:8000/webhooks/business-alerts'
+        send_resolved: true
+
+  # 开发环境通知
+  - name: 'dev-notifications'
+    webhook_configs:
+      - url: 'http://localhost:8000/webhooks/dev-alerts'
+        send_resolved: true
+
+# 模板配置
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+

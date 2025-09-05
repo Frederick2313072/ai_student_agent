@@ -1,0 +1,12 @@
+标题: 云计算
+来源: tech_articles
+URL: 
+==================================================
+
+云计算是通过互联网提供计算资源和服务的技术模式。
+        云计算服务模型包括基础设施即服务（IaaS）、平台即服务（PaaS）和软件即服务（SaaS）。
+        Amazon Web Services（AWS）是全球最大的云服务提供商。
+        Microsoft Azure和Google Cloud Platform是AWS的主要竞争对手。
+        容器化技术如Docker改变了应用程序的部署方式。
+        Kubernetes是容器编排的事实标准。
+        微服务架构将应用拆分为多个小型服务。

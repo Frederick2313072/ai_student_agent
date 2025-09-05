@@ -1,0 +1,167 @@
+{
+  "nodes": [
+    {
+      "id": "python",
+      "label": "Python",
+      "type": "entity"
+    },
+    {
+      "id": "编程语言",
+      "label": "编程语言",
+      "type": "entity"
+    },
+    {
+      "id": "面向对象编程",
+      "label": "面向对象编程",
+      "type": "entity"
+    },
+    {
+      "id": "数据科学",
+      "label": "数据科学",
+      "type": "entity"
+    },
+    {
+      "id": "numpy",
+      "label": "NumPy",
+      "type": "entity"
+    },
+    {
+      "id": "数组计算",
+      "label": "数组计算",
+      "type": "entity"
+    },
+    {
+      "id": "pandas",
+      "label": "Pandas",
+      "type": "entity"
+    }
+  ],
+  "edges": [
+    {
+      "source": null,
+      "target": "编程语言",
+      "key": "e1a5ea5afcb2",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-08-23T02:27:31.867348"
+    },
+    {
+      "source": null,
+      "target": "面向对象编程",
+      "key": "71deea5d3fee",
+      "relationship": "支持",
+      "weight": 0.8,
+      "timestamp": "2025-08-23T02:27:31.867356"
+    },
+    {
+      "source": null,
+      "target": "数据科学",
+      "key": "a3e4f872b4c4",
+      "relationship": "用于",
+      "weight": 0.9,
+      "timestamp": "2025-08-23T02:27:31.867357"
+    },
+    {
+      "source": null,
+      "target": "pandas",
+      "key": "e32d5a4aaf77",
+      "relationship": "使用",
+      "weight": 0.8,
+      "timestamp": "2025-08-23T02:27:31.867362"
+    },
+    {
+      "source": null,
+      "target": "python",
+      "key": "0d7853f6f199",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-08-23T02:27:31.867358"
+    },
+    {
+      "source": null,
+      "target": "数组计算",
+      "key": "b3a35d9c767d",
+      "relationship": "提供",
+      "weight": 0.8,
+      "timestamp": "2025-08-23T02:27:31.867359"
+    },
+    {
+      "source": null,
+      "target": "numpy",
+      "key": "d3552182aace",
+      "relationship": "基于",
+      "weight": 0.9,
+      "timestamp": "2025-08-23T02:27:31.867361"
+    }
+  ],
+  "triples": {
+    "e1a5ea5afcb2": {
+      "id": "e1a5ea5afcb2",
+      "subject": "Python",
+      "predicate": "是",
+      "object": "编程语言",
+      "confidence": 0.9,
+      "source": null,
+      "timestamp": "2025-08-23T02:27:31.867348"
+    },
+    "71deea5d3fee": {
+      "id": "71deea5d3fee",
+      "subject": "Python",
+      "predicate": "支持",
+      "object": "面向对象编程",
+      "confidence": 0.8,
+      "source": null,
+      "timestamp": "2025-08-23T02:27:31.867356"
+    },
+    "a3e4f872b4c4": {
+      "id": "a3e4f872b4c4",
+      "subject": "Python",
+      "predicate": "用于",
+      "object": "数据科学",
+      "confidence": 0.9,
+      "source": null,
+      "timestamp": "2025-08-23T02:27:31.867357"
+    },
+    "0d7853f6f199": {
+      "id": "0d7853f6f199",
+      "subject": "NumPy",
+      "predicate": "是",
+      "object": "Python",
+      "confidence": 0.9,
+      "source": null,
+      "timestamp": "2025-08-23T02:27:31.867358"
+    },
+    "b3a35d9c767d": {
+      "id": "b3a35d9c767d",
+      "subject": "NumPy",
+      "predicate": "提供",
+      "object": "数组计算",
+      "confidence": 0.8,
+      "source": null,
+      "timestamp": "2025-08-23T02:27:31.867359"
+    },
+    "d3552182aace": {
+      "id": "d3552182aace",
+      "subject": "Pandas",
+      "predicate": "基于",
+      "object": "NumPy",
+      "confidence": 0.9,
+      "source": null,
+      "timestamp": "2025-08-23T02:27:31.867361"
+    },
+    "e32d5a4aaf77": {
+      "id": "e32d5a4aaf77",
+      "subject": "数据科学",
+      "predicate": "使用",
+      "object": "Pandas",
+      "confidence": 0.8,
+      "source": null,
+      "timestamp": "2025-08-23T02:27:31.867362"
+    }
+  },
+  "metadata": {
+    "created_at": "2025-08-23T02:27:31.867771",
+    "num_nodes": 7,
+    "num_edges": 7
+  }
+}
