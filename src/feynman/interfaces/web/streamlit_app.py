@@ -89,7 +89,7 @@ def render_main_ui():
 
     with st.sidebar:
         st.header("⚙️ 会话控制")
-        if st.button("开始新会话", use_container_width=True):
+        if st.button("开始新会话", width='stretch'):
             st.session_state.session_id = None
             st.session_state.short_term_memory = []
             st.session_state.current_topic = ""
