@@ -1,0 +1,24 @@
+# Vercel优化的最小依赖列表
+# 移除了ChromaDB、复杂AI工具等大型依赖
+
+# Web框架 (必需)
+fastapi==0.104.1
+uvicorn==0.24.0
+python-dotenv==1.0.0
+pydantic==2.5.0
+
+# CORS支持
+python-multipart==0.0.6
+
+# 基础工具
+requests==2.31.0
+httpx==0.25.0
+
+# 如果需要基础AI功能，可以包含轻量级版本
+# openai==1.3.0  # 如果需要OpenAI API调用
+
+# 注意：以下依赖在Vercel环境中可能过大或不兼容
+# chromadb  # 太大，需要持久化存储
+# langchain  # 依赖太多
+# streamlit  # 需要长连接，不适合Serverless
+# unstructured[all-docs]  # 包含大量二进制依赖

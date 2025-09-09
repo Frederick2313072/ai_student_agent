@@ -12,6 +12,7 @@ from typing import Dict, Any, List, Optional
 import tempfile
 import os
 from datetime import datetime
+import pandas as pd
 
 try:
     import networkx as nx
@@ -25,18 +26,7 @@ try:
 except ImportError:
     GRAPHVIZ_AVAILABLE = False
 
-try:
-    from pyvis.network import Network
-    PYVIS_AVAILABLE = True
-except ImportError:
-    PYVIS_AVAILABLE = False
-
-try:
-    import plotly.graph_objects as go
-    import plotly.express as px
-    PLOTLY_AVAILABLE = True
-except ImportError:
-    PLOTLY_AVAILABLE = False
+# 已删除Pyvis和Plotly导入，仅保留Graphviz作为可视化引擎
 
 logger = logging.getLogger(__name__)
 
@@ -78,17 +68,17 @@ class KnowledgeGraphUI:
                 
                 if build_source == "文本输入":
                     build_text = st.text_area("输入文本", height=100)
-                    if st.button("从文本构建", use_container_width=True):
+                    if st.button("从文本构建", width='stretch'):
                         if build_text.strip():
                             self._build_from_text(build_text)
                 
                 elif build_source == "当前对话":
-                    if st.button("从当前对话构建", use_container_width=True):
+                    if st.button("从当前对话构建", width='stretch'):
                         self._build_from_conversation()
                 
                 elif build_source == "上传文件":
                     uploaded_file = st.file_uploader("选择文件", type=['txt', 'md', 'pdf'])
-                    if uploaded_file and st.button("从文件构建", use_container_width=True):
+                    if uploaded_file and st.button("从文件构建", width='stretch'):
                         self._build_from_file(uploaded_file)
             
             return kg_enabled, viz_type, {
@@ -135,29 +125,13 @@ class KnowledgeGraphUI:
             
             st.subheader(f"网络图 ({len(nodes)} 个节点, {len(edges)} 条边)")
             
-            # 选择可视化引擎
-            available_engines = []
-            if GRAPHVIZ_AVAILABLE:
-                available_engines.append("Graphviz")
-            if PYVIS_AVAILABLE:
-                available_engines.append("Pyvis")
-            if PLOTLY_AVAILABLE:
-                available_engines.append("Plotly")
-            
-            if not available_engines:
-                st.error("缺少可视化依赖包，请安装 graphviz, pyvis 或 plotly")
+            # 使用Graphviz可视化引擎
+            if not GRAPHVIZ_AVAILABLE:
+                st.error("缺少Graphviz依赖包，请安装: `uv add graphviz` 和 `brew install graphviz`")
                 return
             
-            viz_engine = st.selectbox("可视化引擎", available_engines)
-            
-            if viz_engine == "Graphviz" and GRAPHVIZ_AVAILABLE:
-                self._render_graphviz_graph(nodes, edges, options)
-            elif viz_engine == "Pyvis" and PYVIS_AVAILABLE:
-                self._render_pyvis_graph(nodes, edges, options)
-            elif viz_engine == "Plotly" and PLOTLY_AVAILABLE:
-                self._render_plotly_graph(nodes, edges, options)
-            else:
-                st.error(f"可视化引擎 {viz_engine} 不可用")
+            # 直接使用Graphviz渲染
+            self._render_graphviz_graph(nodes, edges, options)
             
             # 显示图统计
             self._render_graph_stats(graph_data)
@@ -165,96 +139,6 @@ class KnowledgeGraphUI:
         except Exception as e:
             st.error(f"渲染网络图失败: {e}")
             logger.error(f"网络图渲染错误: {e}")
-    
-    def _render_pyvis_graph(self, nodes: List[Dict], edges: List[Dict], options: Dict[str, Any]):
-        """使用Pyvis渲染交互式网络图"""
-        try:
-            # 创建Pyvis网络
-            net = Network(
-                height="600px",
-                width="100%",
-                bgcolor="#ffffff",
-                font_color="black",
-                directed=True
-            )
-            
-            # 添加节点
-            for node in nodes:
-                size = self._calculate_node_size(node, options.get("node_size_metric", "度数"))
-                color = self._get_node_color(node)
-                
-                # 确保中文标签正确编码
-                node_label = str(node["label"]).strip()
-                node_title = f"类型: {node.get('type', 'entity')}\n度数: {node.get('degree', 0)}"
-                
-                net.add_node(
-                    node["id"],
-                    label=node_label,
-                    size=size,
-                    color=color,
-                    title=node_title
-                )
-            
-            # 添加边
-            for edge in edges:
-                # 确保中文关系标签正确编码
-                edge_label = str(edge["relationship"]).strip()
-                edge_title = f"关系: {edge['relationship']}\n权重: {edge.get('weight', 1):.2f}"
-                
-                net.add_edge(
-                    edge["source"],
-                    edge["target"],
-                    label=edge_label,
-                    width=max(1, edge.get("weight", 1) * 3),
-                    title=edge_title
-                )
-            
-            # 设置物理布局
-            layout_type = options.get("layout_type", "力导向")
-            if layout_type == "力导向":
-                net.set_options("""
-                var options = {
-                  "physics": {
-                    "enabled": true,
-                    "stabilization": {"iterations": 100}
-                  }
-                }
-                """)
-            elif layout_type == "层次":
-                net.set_options("""
-                var options = {
-                  "layout": {"hierarchical": {"enabled": true, "direction": "UD"}},
-                  "physics": {"enabled": false}
-                }
-                """)
-            
-            # 生成HTML并显示
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.html', delete=False, encoding='utf-8') as f:
-                temp_file_path = f.name
-            
-            # 保存图形到临时文件
-            net.save_graph(temp_file_path)
-            
-            # 读取HTML内容
-            try:
-                with open(temp_file_path, 'r', encoding='utf-8') as f:
-                    html_content = f.read()
-                
-                st.components.v1.html(html_content, height=600)
-                
-            except Exception as read_error:
-                st.error(f"读取HTML文件失败: {read_error}")
-                logger.error(f"HTML文件读取错误: {read_error}")
-            finally:
-                # 清理临时文件
-                try:
-                    os.unlink(temp_file_path)
-                except Exception:
-                    pass  # 忽略删除失败
-            
-        except Exception as e:
-            st.error(f"Pyvis渲染失败: {e}")
-            logger.error(f"Pyvis渲染错误: {e}")
     
     def _render_graphviz_graph(self, nodes: List[Dict], edges: List[Dict], options: Dict[str, Any]):
         """使用Graphviz渲染有向图"""
@@ -334,10 +218,10 @@ class KnowledgeGraphUI:
             # 渲染图形
             if output_format == "SVG":
                 svg_data = dot.pipe(format='svg', encoding='utf-8')
-                st.image(svg_data, use_column_width=True)
+                st.image(svg_data, width='stretch')
             elif output_format == "PNG":
                 png_data = dot.pipe(format='png')
-                st.image(png_data, use_column_width=True)
+                st.image(png_data, width='stretch')
             elif output_format == "PDF":
                 pdf_data = dot.pipe(format='pdf')
                 st.download_button(
@@ -348,7 +232,7 @@ class KnowledgeGraphUI:
                 )
                 # 同时显示SVG预览
                 svg_data = dot.pipe(format='svg', encoding='utf-8')
-                st.image(svg_data, use_column_width=True)
+                st.image(svg_data, width='stretch')
             
             # 显示DOT源码
             with st.expander("查看Graphviz DOT源码"):
@@ -366,131 +250,6 @@ class KnowledgeGraphUI:
             # 提供troubleshooting信息
             st.info("💡 如果出现渲染错误，请确保系统已安装Graphviz软件：\n- macOS: `brew install graphviz`\n- Ubuntu: `sudo apt-get install graphviz`\n- Windows: 从 https://graphviz.org/download/ 下载安装")
 
-    def _render_plotly_graph(self, nodes: List[Dict], edges: List[Dict], options: Dict[str, Any]):
-        """使用Plotly渲染网络图"""
-        try:
-            # 创建NetworkX图用于布局计算
-            if not NETWORKX_AVAILABLE:
-                st.error("NetworkX未安装，无法使用Plotly网络图")
-                return
-                
-            G = nx.Graph()
-            
-            # 添加节点和边
-            for node in nodes:
-                G.add_node(node["id"], **node)
-            
-            for edge in edges:
-                G.add_edge(edge["source"], edge["target"], **edge)
-            
-            # 计算布局
-            layout_type = options.get("layout_type", "力导向")
-            if layout_type == "力导向":
-                pos = nx.spring_layout(G, k=3, iterations=50)
-            elif layout_type == "圆形":
-                pos = nx.circular_layout(G)
-            else:  # 层次
-                pos = nx.kamada_kawai_layout(G)
-            
-            # 准备边的轨迹
-            edge_x = []
-            edge_y = []
-            edge_info = []
-            
-            for edge in edges:
-                source_id = edge["source"]
-                target_id = edge["target"]
-                
-                if source_id in pos and target_id in pos:
-                    x0, y0 = pos[source_id]
-                    x1, y1 = pos[target_id]
-                    
-                    edge_x.extend([x0, x1, None])
-                    edge_y.extend([y0, y1, None])
-                    edge_info.append(edge["relationship"])
-            
-            # 创建边轨迹
-            edge_trace = go.Scatter(
-                x=edge_x, y=edge_y,
-                line=dict(width=1, color='#888'),
-                hoverinfo='none',
-                mode='lines'
-            )
-            
-            # 准备节点数据
-            node_x = []
-            node_y = []
-            node_text = []
-            node_size = []
-            node_color = []
-            node_info = []
-            
-            for node in nodes:
-                if node["id"] in pos:
-                    x, y = pos[node["id"]]
-                    node_x.append(x)
-                    node_y.append(y)
-                    node_text.append(node["label"])
-                    
-                    size = self._calculate_node_size(node, options.get("node_size_metric", "度数"))
-                    node_size.append(size)
-                    
-                    # 节点颜色按类型
-                    if node.get("type") == "concept":
-                        node_color.append("lightblue")
-                    elif node.get("type") == "person":
-                        node_color.append("lightgreen")
-                    else:
-                        node_color.append("lightcoral")
-                    
-                    node_info.append(f"实体: {node['label']}<br>类型: {node.get('type', 'entity')}<br>度数: {node.get('degree', 0)}")
-            
-            # 创建节点轨迹
-            node_trace = go.Scatter(
-                x=node_x, y=node_y,
-                mode='markers+text',
-                hoverinfo='text',
-                text=node_text,
-                textposition="middle center",
-                hovertext=node_info,
-                marker=dict(
-                    size=node_size,
-                    color=node_color,
-                    line=dict(width=2, color='black')
-                )
-            )
-            
-            # 创建图形
-            fig = go.Figure(
-                data=[edge_trace, node_trace],
-                layout=go.Layout(
-                    title=f"知识图谱网络图 - {layout_type}布局",
-                    titlefont_size=16,
-                    showlegend=False,
-                    hovermode='closest',
-                    margin=dict(b=20,l=5,r=5,t=40),
-                    annotations=[
-                        dict(
-                            text="点击节点查看详情",
-                            showarrow=False,
-                            xref="paper", yref="paper",
-                            x=0.005, y=-0.002,
-                            xanchor='left', yanchor='bottom',
-                            font=dict(color="#888")
-                        )
-                    ],
-                    xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                    yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
-                )
-            )
-            
-            # 显示图形
-            st.plotly_chart(fig, use_container_width=True)
-            
-        except Exception as e:
-            st.error(f"Plotly渲染失败: {e}")
-            logger.error(f"Plotly渲染错误: {e}")
-    
     def _render_statistics_charts(self):
         """渲染统计图表"""
         try:
@@ -518,32 +277,26 @@ class KnowledgeGraphUI:
             if relationships:
                 st.subheader("关系类型分布")
                 
-                rel_names = list(relationships.keys())
-                rel_counts = list(relationships.values())
-                
-                fig_pie = px.pie(
-                    values=rel_counts,
-                    names=rel_names,
-                    title="关系类型分布"
-                )
-                st.plotly_chart(fig_pie, use_container_width=True)
+                # 使用Streamlit原生条形图
+                rel_df = pd.DataFrame({
+                    '关系类型': list(relationships.keys()),
+                    '数量': list(relationships.values())
+                })
+                st.bar_chart(rel_df.set_index('关系类型'))
             
             # 重要实体排名
             top_entities = stats.get("top_entities", [])
             if top_entities:
                 st.subheader("重要实体排名（按度数）")
                 
-                entity_names = [e["entity"] for e in top_entities[:10]]
-                entity_degrees = [e["degree"] for e in top_entities[:10]]
+                # 使用Streamlit表格和条形图
+                entity_df = pd.DataFrame(top_entities[:10])
+                entity_df.index = entity_df.index + 1
+                st.dataframe(entity_df)
                 
-                fig_bar = px.bar(
-                    x=entity_degrees,
-                    y=entity_names,
-                    orientation='h',
-                    title="实体重要性排名",
-                    labels={'x': '度数', 'y': '实体'}
-                )
-                st.plotly_chart(fig_bar, use_container_width=True)
+                # 简单条形图
+                chart_df = entity_df.set_index('entity')['degree']
+                st.bar_chart(chart_df)
             
         except Exception as e:
             st.error(f"渲染统计图表失败: {e}")
@@ -594,7 +347,7 @@ class KnowledgeGraphUI:
             if subgraph_data and subgraph_data.get("nodes"):
                 st.subheader(f"实体 '{entity_id}' 的子图")
                 
-                # 使用简化的Plotly显示
+                # 使用简化的实体列表显示
                 nodes = subgraph_data["nodes"]
                 edges = subgraph_data["edges"]
                 
@@ -611,8 +364,23 @@ class KnowledgeGraphUI:
                     st.error("NetworkX未安装，无法计算图布局")
                     return
                 
-                # 绘制子图
-                self._render_plotly_subgraph(nodes, edges, pos, entity_id)
+                # 绘制子图（使用Graphviz）
+                st.info("🎯 子图可视化功能已简化，请使用主图查看相关实体")
+                
+                # 显示相关实体列表
+                st.write(f"**实体 '{entity_id}' 的相关实体:**")
+                related_entities = set()
+                for edge in edges:
+                    if edge["source"] == entity_id:
+                        related_entities.add(edge["target"])
+                    elif edge["target"] == entity_id:
+                        related_entities.add(edge["source"])
+                
+                for entity in sorted(related_entities):
+                    st.write(f"• {entity}")
+                    
+                if not related_entities:
+                    st.write("暂无相关实体")
             else:
                 st.warning(f"实体 '{entity_id}' 没有相关的子图数据")
                 
@@ -650,58 +418,6 @@ class KnowledgeGraphUI:
                 
         except Exception as e:
             st.error(f"显示上下文失败: {e}")
-    
-    def _render_plotly_subgraph(self, nodes: List[Dict], edges: List[Dict], pos: Dict, center_entity: str):
-        """使用Plotly渲染子图"""
-        # 边轨迹
-        edge_x, edge_y = [], []
-        for edge in edges:
-            if edge["source"] in pos and edge["target"] in pos:
-                x0, y0 = pos[edge["source"]]
-                x1, y1 = pos[edge["target"]]
-                edge_x.extend([x0, x1, None])
-                edge_y.extend([y0, y1, None])
-        
-        edge_trace = go.Scatter(
-            x=edge_x, y=edge_y,
-            line=dict(width=2, color='#888'),
-            hoverinfo='none',
-            mode='lines'
-        )
-        
-        # 节点轨迹
-        node_x = [pos[node["id"]][0] for node in nodes if node["id"] in pos]
-        node_y = [pos[node["id"]][1] for node in nodes if node["id"] in pos]
-        node_text = [node["label"] for node in nodes if node["id"] in pos]
-        node_colors = ["red" if node["id"] == center_entity else "lightblue" for node in nodes if node["id"] in pos]
-        
-        node_trace = go.Scatter(
-            x=node_x, y=node_y,
-            mode='markers+text',
-            hoverinfo='text',
-            text=node_text,
-            textposition="middle center",
-            hovertext=[f"实体: {node['label']}" for node in nodes if node["id"] in pos],
-            marker=dict(
-                size=20,
-                color=node_colors,
-                line=dict(width=2, color='black')
-            )
-        )
-        
-        fig = go.Figure(
-            data=[edge_trace, node_trace],
-            layout=go.Layout(
-                title=f"实体 '{center_entity}' 的子图",
-                showlegend=False,
-                hovermode='closest',
-                margin=dict(b=20,l=5,r=5,t=40),
-                xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
-            )
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
     
     def _render_graph_stats(self, graph_data: Dict[str, Any]):
         """渲染图统计信息"""

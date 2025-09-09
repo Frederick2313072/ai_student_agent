@@ -462,6 +462,186 @@
       "id": "人类学习机制存在根本差异",
       "label": "人类学习机制存在根本差异",
       "type": "entity"
+    },
+    {
+      "id": "机器学习的一个子领域",
+      "label": "机器学习的一个子领域",
+      "type": "entity"
+    },
+    {
+      "id": "具有多个隐藏层的神经网络",
+      "label": "具有多个隐藏层的神经网络",
+      "type": "entity"
+    },
+    {
+      "id": "通过多层神经网络自动学习数据的层次化特征表示",
+      "label": "通过多层神经网络自动学习数据的层次化特征表示",
+      "type": "entity"
+    },
+    {
+      "id": "多层网络结构",
+      "label": "多层网络结构",
+      "type": "entity"
+    },
+    {
+      "id": "输入层、多个隐藏层、输出层",
+      "label": "输入层、多个隐藏层、输出层",
+      "type": "entity"
+    },
+    {
+      "id": "梯度下降",
+      "label": "梯度下降",
+      "type": "entity"
+    },
+    {
+      "id": "参数调整机制",
+      "label": "参数调整机制",
+      "type": "entity"
+    },
+    {
+      "id": "非结构化数据",
+      "label": "非结构化数据",
+      "type": "entity"
+    },
+    {
+      "id": "图像、音频、文本",
+      "label": "图像、音频、文本",
+      "type": "entity"
+    },
+    {
+      "id": "复杂模式和抽象特征",
+      "label": "复杂模式和抽象特征",
+      "type": "entity"
+    },
+    {
+      "id": "大量数据进行训练",
+      "label": "大量数据进行训练",
+      "type": "entity"
+    },
+    {
+      "id": "端到端学习能力",
+      "label": "端到端学习能力",
+      "type": "entity"
+    },
+    {
+      "id": "普通神经网络",
+      "label": "普通神经网络",
+      "type": "entity"
+    },
+    {
+      "id": "1-2个隐藏层",
+      "label": "1-2个隐藏层",
+      "type": "entity"
+    },
+    {
+      "id": "深度神经网络",
+      "label": "深度神经网络",
+      "type": "entity"
+    },
+    {
+      "id": "多个隐藏层",
+      "label": "多个隐藏层",
+      "type": "entity"
+    },
+    {
+      "id": "深度",
+      "label": "深度",
+      "type": "entity"
+    },
+    {
+      "id": "网络深度（层数多）",
+      "label": "网络深度（层数多）",
+      "type": "entity"
+    },
+    {
+      "id": "监督学习、无监督学习、强化学习",
+      "label": "监督学习、无监督学习、强化学习",
+      "type": "entity"
+    },
+    {
+      "id": "数据预处理和增强",
+      "label": "数据预处理和增强",
+      "type": "entity"
+    },
+    {
+      "id": "模型评估和验证",
+      "label": "模型评估和验证",
+      "type": "entity"
+    },
+    {
+      "id": "机器学习的子集",
+      "label": "机器学习的子集",
+      "type": "entity"
+    },
+    {
+      "id": "多层神经网络架构",
+      "label": "多层神经网络架构",
+      "type": "entity"
+    },
+    {
+      "id": "多层技术概念、数学原理、工程实现和实际应用",
+      "label": "多层技术概念、数学原理、工程实现和实际应用",
+      "type": "entity"
+    },
+    {
+      "id": "自动特征提取能力",
+      "label": "自动特征提取能力",
+      "type": "entity"
+    },
+    {
+      "id": "端到端学习",
+      "label": "端到端学习",
+      "type": "entity"
+    },
+    {
+      "id": "图像识别和计算机视觉",
+      "label": "图像识别和计算机视觉",
+      "type": "entity"
+    },
+    {
+      "id": "自动驾驶",
+      "label": "自动驾驶",
+      "type": "entity"
+    },
+    {
+      "id": "hinton",
+      "label": "Hinton",
+      "type": "entity"
+    },
+    {
+      "id": "alexnet",
+      "label": "AlexNet",
+      "type": "entity"
+    },
+    {
+      "id": "2012年imagenet竞赛中取得突破",
+      "label": "2012年ImageNet竞赛中取得突破",
+      "type": "entity"
+    },
+    {
+      "id": "数据需求量大",
+      "label": "数据需求量大",
+      "type": "entity"
+    },
+    {
+      "id": "计算资源要求高",
+      "label": "计算资源要求高",
+      "type": "entity"
+    },
+    {
+      "id": "生物神经网络的极简抽象",
+      "label": "生物神经网络的极简抽象",
+      "type": "entity"
+    },
+    {
+      "id": "真正的生物机制",
+      "label": "真正的生物机制",
+      "type": "entity"
+    },
+    {
+      "id": "三次浪潮",
+      "label": "三次浪潮",
+      "type": "entity"
     }
   ],
   "edges": [
@@ -488,6 +668,318 @@
       "relationship": "使用",
       "weight": 0.8,
       "timestamp": "2025-09-05T22:19:18.405064"
+    },
+    {
+      "source": "conversation",
+      "target": "监督学习、无监督学习、强化学习",
+      "key": "89e95e42d8fd",
+      "relationship": "训练机制",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:40:53.303439"
+    },
+    {
+      "source": "conversation",
+      "target": "机器学习的子集",
+      "key": "753fc2e376cc",
+      "relationship": "是",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:45:02.299864"
+    },
+    {
+      "source": "conversation",
+      "target": "多层神经网络架构",
+      "key": "16a825e4fde0",
+      "relationship": "基于",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:45:02.299948"
+    },
+    {
+      "source": "conversation",
+      "target": "多层技术概念、数学原理、工程实现和实际应用",
+      "key": "0f1b35ec7bef",
+      "relationship": "包含",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:45:02.299953"
+    },
+    {
+      "source": "conversation",
+      "target": "自动特征提取能力",
+      "key": "fbea9ef6c820",
+      "relationship": "具有",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:45:02.299957"
+    },
+    {
+      "source": "conversation",
+      "target": "非线性激活函数",
+      "key": "7bc923121be9",
+      "relationship": "使用",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:45:02.299961"
+    },
+    {
+      "source": "conversation",
+      "target": "端到端学习",
+      "key": "ea9f10fcc687",
+      "relationship": "实现",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:45:02.299969"
+    },
+    {
+      "source": "conversation",
+      "target": "图像识别和计算机视觉",
+      "key": "245b2a85a007",
+      "relationship": "应用于",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:45:02.299973"
+    },
+    {
+      "source": "conversation",
+      "target": "自动驾驶",
+      "key": "184cdb70e733",
+      "relationship": "应用于",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:45:02.299990"
+    },
+    {
+      "source": "conversation",
+      "target": "数据需求量大",
+      "key": "190faa5c6a13",
+      "relationship": "面临",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:45:02.300001"
+    },
+    {
+      "source": "conversation",
+      "target": "计算资源要求高",
+      "key": "10d9ab07f0d9",
+      "relationship": "面临",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:45:02.300005"
+    },
+    {
+      "source": "conversation",
+      "target": "三次浪潮",
+      "key": "6e7149eff399",
+      "relationship": "经历",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:45:02.940689"
+    },
+    {
+      "source": "自然语言处理",
+      "target": "人工智能",
+      "key": "nlp_to_ai",
+      "relationship": "属于",
+      "weight": 0.8,
+      "timestamp": "2025-09-05T22:19:18.405068"
+    },
+    {
+      "source": "conversation",
+      "target": "生物神经网络的极简抽象",
+      "key": "fb62847817df",
+      "relationship": "是",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:45:02.300017"
+    },
+    {
+      "source": "conversation",
+      "target": "真正的生物机制",
+      "key": "33efdc5ece9e",
+      "relationship": "缺乏",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:45:02.300022"
+    },
+    {
+      "source": "conversation",
+      "target": "数据预处理和增强",
+      "key": "731cfead322b",
+      "relationship": "需要",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:38:24.602504"
+    },
+    {
+      "source": "conversation",
+      "target": "数据预处理和增强",
+      "key": "3d4e7789f1bf",
+      "relationship": "涉及",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545471"
+    },
+    {
+      "source": "conversation",
+      "target": "模型评估和验证",
+      "key": "045e0ebfa9be",
+      "relationship": "需要",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:38:24.602506"
+    },
+    {
+      "source": "conversation",
+      "target": "模型评估和验证",
+      "key": "2a737209bf87",
+      "relationship": "涉及",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545472"
+    },
+    {
+      "source": "conversation",
+      "target": "机器学习的一个子领域",
+      "key": "3854a4bbf7b1",
+      "relationship": "属于",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:36:02.897267"
+    },
+    {
+      "source": "conversation",
+      "target": "机器学习的一个子领域",
+      "key": "fab81f817bd9",
+      "relationship": "是",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:31:36.545431"
+    },
+    {
+      "source": "conversation",
+      "target": "具有多个隐藏层的神经网络",
+      "key": "b8a13586bce7",
+      "relationship": "核心是",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:36:02.897280"
+    },
+    {
+      "source": "conversation",
+      "target": "具有多个隐藏层的神经网络",
+      "key": "c6310e506f3b",
+      "relationship": "核心",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:31:36.545439"
+    },
+    {
+      "source": "conversation",
+      "target": "通过多层神经网络自动学习数据的层次化特征表示",
+      "key": "c7a02fc50e11",
+      "relationship": "本质是",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:36:02.897284"
+    },
+    {
+      "source": "conversation",
+      "target": "通过多层神经网络自动学习数据的层次化特征表示",
+      "key": "9f596c42de0b",
+      "relationship": "本质",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:31:36.545441"
+    },
+    {
+      "source": "conversation",
+      "target": "多层网络结构",
+      "key": "06857c1c20b8",
+      "relationship": "包含",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545442"
+    },
+    {
+      "source": "conversation",
+      "target": "激活函数",
+      "key": "ffdd5876d5c3",
+      "relationship": "使用",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545445"
+    },
+    {
+      "source": "conversation",
+      "target": "激活函数",
+      "key": "8ec338fe115a",
+      "relationship": "涉及",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668854"
+    },
+    {
+      "source": "conversation",
+      "target": "激活函数",
+      "key": "bad32809a34e",
+      "relationship": "依赖",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137745"
+    },
+    {
+      "source": "conversation",
+      "target": "损失函数",
+      "key": "98eeec5cd779",
+      "relationship": "使用",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545446"
+    },
+    {
+      "source": "conversation",
+      "target": "损失函数",
+      "key": "20f3f5b3e4a0",
+      "relationship": "依赖",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137753"
+    },
+    {
+      "source": "conversation",
+      "target": "优化算法",
+      "key": "84aaad7a6486",
+      "relationship": "使用",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545447"
+    },
+    {
+      "source": "conversation",
+      "target": "优化算法",
+      "key": "426e9f2ea003",
+      "relationship": "涉及",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:46:08.668856"
+    },
+    {
+      "source": "conversation",
+      "target": "参数调整机制",
+      "key": "9991ef01a914",
+      "relationship": "需要",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545462"
+    },
+    {
+      "source": "conversation",
+      "target": "非结构化数据",
+      "key": "4b41c246617b",
+      "relationship": "擅长处理",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545463"
+    },
+    {
+      "source": "conversation",
+      "target": "复杂模式和抽象特征",
+      "key": "8281643e8ccc",
+      "relationship": "能够学习",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545464"
+    },
+    {
+      "source": "conversation",
+      "target": "大量数据进行训练",
+      "key": "47d6b26c1d4a",
+      "relationship": "需要",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545465"
+    },
+    {
+      "source": "conversation",
+      "target": "端到端学习能力",
+      "key": "df916eabfc0f",
+      "relationship": "具有",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545466"
+    },
+    {
+      "source": "conversation",
+      "target": "监督学习、无监督学习、强化学习",
+      "key": "fa48f2a9d2e4",
+      "relationship": "使用",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545470"
     },
     {
       "source": "conversation",
@@ -520,6 +1012,14 @@
       "relationship": "使用",
       "weight": 0.9,
       "timestamp": "2025-09-05T22:52:31.667306"
+    },
+    {
+      "source": "conversation",
+      "target": "反向传播算法",
+      "key": "529d1abd173e",
+      "relationship": "依赖",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T22:30:51.137744"
     },
     {
       "source": "conversation",
@@ -602,14 +1102,6 @@
       "timestamp": "2025-09-05T22:53:38.719344"
     },
     {
-      "source": "自然语言处理",
-      "target": "人工智能",
-      "key": "nlp_to_ai",
-      "relationship": "属于",
-      "weight": 0.8,
-      "timestamp": "2025-09-05T22:19:18.405068"
-    },
-    {
       "source": "conversation",
       "target": "人类神经网络",
       "key": "c8751a38e37f",
@@ -656,30 +1148,6 @@
       "relationship": "涉及",
       "weight": 0.9,
       "timestamp": "2025-09-05T22:46:08.668851"
-    },
-    {
-      "source": "conversation",
-      "target": "激活函数",
-      "key": "8ec338fe115a",
-      "relationship": "涉及",
-      "weight": 0.9,
-      "timestamp": "2025-09-05T22:46:08.668854"
-    },
-    {
-      "source": "conversation",
-      "target": "激活函数",
-      "key": "bad32809a34e",
-      "relationship": "依赖",
-      "weight": 0.9,
-      "timestamp": "2025-09-05T22:30:51.137745"
-    },
-    {
-      "source": "conversation",
-      "target": "优化算法",
-      "key": "426e9f2ea003",
-      "relationship": "涉及",
-      "weight": 0.9,
-      "timestamp": "2025-09-05T22:46:08.668856"
     },
     {
       "source": "conversation",
@@ -947,27 +1415,11 @@
     },
     {
       "source": "conversation",
-      "target": "反向传播算法",
-      "key": "529d1abd173e",
-      "relationship": "依赖",
-      "weight": 0.9,
-      "timestamp": "2025-09-05T22:30:51.137744"
-    },
-    {
-      "source": "conversation",
       "target": "优化器",
       "key": "a70a91174a1c",
       "relationship": "依赖",
       "weight": 0.9,
       "timestamp": "2025-09-05T22:30:51.137748"
-    },
-    {
-      "source": "conversation",
-      "target": "损失函数",
-      "key": "20f3f5b3e4a0",
-      "relationship": "依赖",
-      "weight": 0.9,
-      "timestamp": "2025-09-05T22:30:51.137753"
     },
     {
       "source": "conversation",
@@ -1168,6 +1620,70 @@
       "relationship": "相似于",
       "weight": 0.8,
       "timestamp": "2025-09-05T22:46:08.668848"
+    },
+    {
+      "source": "conversation",
+      "target": "梯度下降",
+      "key": "2b4fd36b81e9",
+      "relationship": "例如",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545460"
+    },
+    {
+      "source": "conversation",
+      "target": "输入层、多个隐藏层、输出层",
+      "key": "dd1ff4a0c3a4",
+      "relationship": "包含",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545443"
+    },
+    {
+      "source": "conversation",
+      "target": "图像、音频、文本",
+      "key": "3a618d40e844",
+      "relationship": "例如",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545464"
+    },
+    {
+      "source": "conversation",
+      "target": "1-2个隐藏层",
+      "key": "f21c20ea0403",
+      "relationship": "包含",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545467"
+    },
+    {
+      "source": "conversation",
+      "target": "多个隐藏层",
+      "key": "b26968edc34a",
+      "relationship": "包含",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545468"
+    },
+    {
+      "source": "conversation",
+      "target": "网络深度（层数多）",
+      "key": "15f7d2bc2cfd",
+      "relationship": "指",
+      "weight": 0.9,
+      "timestamp": "2025-09-05T23:31:36.545469"
+    },
+    {
+      "source": "conversation",
+      "target": "深度学习",
+      "key": "2a1b3b25a3e7",
+      "relationship": "被称为",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:45:02.299993"
+    },
+    {
+      "source": "conversation",
+      "target": "2012年imagenet竞赛中取得突破",
+      "key": "9835b541a759",
+      "relationship": "在",
+      "weight": 0.95,
+      "timestamp": "2025-09-05T23:45:02.299997"
     }
   ],
   "triples": {
@@ -1926,11 +2442,389 @@
       "confidence": 0.8,
       "source": "conversation",
       "timestamp": "2025-09-05T22:53:38.719344"
+    },
+    "fab81f817bd9": {
+      "id": "fab81f817bd9",
+      "subject": "深度学习",
+      "predicate": "是",
+      "object": "机器学习的一个子领域",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545431"
+    },
+    "c6310e506f3b": {
+      "id": "c6310e506f3b",
+      "subject": "深度学习",
+      "predicate": "核心",
+      "object": "具有多个隐藏层的神经网络",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545439"
+    },
+    "9f596c42de0b": {
+      "id": "9f596c42de0b",
+      "subject": "深度学习",
+      "predicate": "本质",
+      "object": "通过多层神经网络自动学习数据的层次化特征表示",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545441"
+    },
+    "06857c1c20b8": {
+      "id": "06857c1c20b8",
+      "subject": "深度学习",
+      "predicate": "包含",
+      "object": "多层网络结构",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545442"
+    },
+    "dd1ff4a0c3a4": {
+      "id": "dd1ff4a0c3a4",
+      "subject": "多层网络结构",
+      "predicate": "包含",
+      "object": "输入层、多个隐藏层、输出层",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545443"
+    },
+    "ffdd5876d5c3": {
+      "id": "ffdd5876d5c3",
+      "subject": "深度学习",
+      "predicate": "使用",
+      "object": "激活函数",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545445"
+    },
+    "98eeec5cd779": {
+      "id": "98eeec5cd779",
+      "subject": "深度学习",
+      "predicate": "使用",
+      "object": "损失函数",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545446"
+    },
+    "84aaad7a6486": {
+      "id": "84aaad7a6486",
+      "subject": "深度学习",
+      "predicate": "使用",
+      "object": "优化算法",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545447"
+    },
+    "2b4fd36b81e9": {
+      "id": "2b4fd36b81e9",
+      "subject": "优化算法",
+      "predicate": "例如",
+      "object": "梯度下降",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545460"
+    },
+    "9991ef01a914": {
+      "id": "9991ef01a914",
+      "subject": "深度学习",
+      "predicate": "需要",
+      "object": "参数调整机制",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545462"
+    },
+    "4b41c246617b": {
+      "id": "4b41c246617b",
+      "subject": "深度学习",
+      "predicate": "擅长处理",
+      "object": "非结构化数据",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545463"
+    },
+    "3a618d40e844": {
+      "id": "3a618d40e844",
+      "subject": "非结构化数据",
+      "predicate": "例如",
+      "object": "图像、音频、文本",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545464"
+    },
+    "8281643e8ccc": {
+      "id": "8281643e8ccc",
+      "subject": "深度学习",
+      "predicate": "能够学习",
+      "object": "复杂模式和抽象特征",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545464"
+    },
+    "47d6b26c1d4a": {
+      "id": "47d6b26c1d4a",
+      "subject": "深度学习",
+      "predicate": "需要",
+      "object": "大量数据进行训练",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545465"
+    },
+    "df916eabfc0f": {
+      "id": "df916eabfc0f",
+      "subject": "深度学习",
+      "predicate": "具有",
+      "object": "端到端学习能力",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545466"
+    },
+    "f21c20ea0403": {
+      "id": "f21c20ea0403",
+      "subject": "普通神经网络",
+      "predicate": "包含",
+      "object": "1-2个隐藏层",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545467"
+    },
+    "b26968edc34a": {
+      "id": "b26968edc34a",
+      "subject": "深度神经网络",
+      "predicate": "包含",
+      "object": "多个隐藏层",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545468"
+    },
+    "15f7d2bc2cfd": {
+      "id": "15f7d2bc2cfd",
+      "subject": "深度",
+      "predicate": "指",
+      "object": "网络深度（层数多）",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545469"
+    },
+    "fa48f2a9d2e4": {
+      "id": "fa48f2a9d2e4",
+      "subject": "深度学习",
+      "predicate": "使用",
+      "object": "监督学习、无监督学习、强化学习",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545470"
+    },
+    "3d4e7789f1bf": {
+      "id": "3d4e7789f1bf",
+      "subject": "深度学习",
+      "predicate": "涉及",
+      "object": "数据预处理和增强",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545471"
+    },
+    "2a737209bf87": {
+      "id": "2a737209bf87",
+      "subject": "深度学习",
+      "predicate": "涉及",
+      "object": "模型评估和验证",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:31:36.545472"
+    },
+    "3854a4bbf7b1": {
+      "id": "3854a4bbf7b1",
+      "subject": "深度学习",
+      "predicate": "属于",
+      "object": "机器学习的一个子领域",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:36:02.897267"
+    },
+    "b8a13586bce7": {
+      "id": "b8a13586bce7",
+      "subject": "深度学习",
+      "predicate": "核心是",
+      "object": "具有多个隐藏层的神经网络",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:36:02.897280"
+    },
+    "c7a02fc50e11": {
+      "id": "c7a02fc50e11",
+      "subject": "深度学习",
+      "predicate": "本质是",
+      "object": "通过多层神经网络自动学习数据的层次化特征表示",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:36:02.897284"
+    },
+    "731cfead322b": {
+      "id": "731cfead322b",
+      "subject": "深度学习",
+      "predicate": "需要",
+      "object": "数据预处理和增强",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:38:24.602504"
+    },
+    "045e0ebfa9be": {
+      "id": "045e0ebfa9be",
+      "subject": "深度学习",
+      "predicate": "需要",
+      "object": "模型评估和验证",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:38:24.602506"
+    },
+    "89e95e42d8fd": {
+      "id": "89e95e42d8fd",
+      "subject": "深度学习",
+      "predicate": "训练机制",
+      "object": "监督学习、无监督学习、强化学习",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:40:53.303439"
+    },
+    "753fc2e376cc": {
+      "id": "753fc2e376cc",
+      "subject": "深度学习",
+      "predicate": "是",
+      "object": "机器学习的子集",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.299864"
+    },
+    "16a825e4fde0": {
+      "id": "16a825e4fde0",
+      "subject": "深度学习",
+      "predicate": "基于",
+      "object": "多层神经网络架构",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.299948"
+    },
+    "0f1b35ec7bef": {
+      "id": "0f1b35ec7bef",
+      "subject": "深度学习",
+      "predicate": "包含",
+      "object": "多层技术概念、数学原理、工程实现和实际应用",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.299953"
+    },
+    "fbea9ef6c820": {
+      "id": "fbea9ef6c820",
+      "subject": "深度学习",
+      "predicate": "具有",
+      "object": "自动特征提取能力",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.299957"
+    },
+    "7bc923121be9": {
+      "id": "7bc923121be9",
+      "subject": "深度学习",
+      "predicate": "使用",
+      "object": "非线性激活函数",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.299961"
+    },
+    "ea9f10fcc687": {
+      "id": "ea9f10fcc687",
+      "subject": "深度学习",
+      "predicate": "实现",
+      "object": "端到端学习",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.299969"
+    },
+    "245b2a85a007": {
+      "id": "245b2a85a007",
+      "subject": "深度学习",
+      "predicate": "应用于",
+      "object": "图像识别和计算机视觉",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.299973"
+    },
+    "184cdb70e733": {
+      "id": "184cdb70e733",
+      "subject": "深度学习",
+      "predicate": "应用于",
+      "object": "自动驾驶",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.299990"
+    },
+    "2a1b3b25a3e7": {
+      "id": "2a1b3b25a3e7",
+      "subject": "Hinton",
+      "predicate": "被称为",
+      "object": "深度学习",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.299993"
+    },
+    "9835b541a759": {
+      "id": "9835b541a759",
+      "subject": "AlexNet",
+      "predicate": "在",
+      "object": "2012年ImageNet竞赛中取得突破",
+      "confidence": 0.95,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.299997"
+    },
+    "190faa5c6a13": {
+      "id": "190faa5c6a13",
+      "subject": "深度学习",
+      "predicate": "面临",
+      "object": "数据需求量大",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.300001"
+    },
+    "10d9ab07f0d9": {
+      "id": "10d9ab07f0d9",
+      "subject": "深度学习",
+      "predicate": "面临",
+      "object": "计算资源要求高",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.300005"
+    },
+    "fb62847817df": {
+      "id": "fb62847817df",
+      "subject": "人工神经网络",
+      "predicate": "是",
+      "object": "生物神经网络的极简抽象",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.300017"
+    },
+    "33efdc5ece9e": {
+      "id": "33efdc5ece9e",
+      "subject": "人工神经网络",
+      "predicate": "缺乏",
+      "object": "真正的生物机制",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.300022"
+    },
+    "6e7149eff399": {
+      "id": "6e7149eff399",
+      "subject": "深度学习",
+      "predicate": "经历",
+      "object": "三次浪潮",
+      "confidence": 0.9,
+      "source": "conversation",
+      "timestamp": "2025-09-05T23:45:02.940689"
     }
   },
   "metadata": {
-    "created_at": "2025-09-05T22:53:38.722604",
-    "num_nodes": 90,
-    "num_edges": 88
+    "created_at": "2025-09-05T23:46:01.558074",
+    "num_nodes": 126,
+    "num_edges": 130
   }
 }
