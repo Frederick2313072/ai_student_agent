@@ -14,9 +14,11 @@
 ### 1. 项目文件检查
 确保你的项目根目录包含以下文件：
 - ✅ `vercel.json` - Vercel配置文件
-- ✅ `api/main.py` - 简化的FastAPI应用
-- ✅ `requirements-vercel.txt` - 优化的依赖列表
+- ✅ `api/index.py` - 简化的FastAPI应用（Vercel入口文件）
+- ✅ `requirements.txt` - 最小化依赖列表（仅FastAPI和Pydantic）
 - ✅ `environments/vercel.env` - 环境变量模板
+
+**重要更新**：已修复404错误，现在使用标准的Vercel文件结构。
 
 ### 2. 环境变量准备
 准备以下环境变量（稍后在Vercel控制台设置）：
@@ -47,7 +49,7 @@ SIMPLIFIED_MODE=true
 3. **Root Directory**: 保持默认 `./`
 4. **Build Command**: 留空（Vercel会自动检测）
 5. **Output Directory**: 留空
-6. **Install Command**: 使用 `pip install -r requirements-vercel.txt`
+6. **Install Command**: 使用 `pip install -r requirements.txt`
 
 ### 第4步: 设置环境变量
 在 "Environment Variables" 部分添加：
@@ -65,19 +67,41 @@ SIMPLIFIED_MODE=true
 2. 等待构建完成（通常需要2-5分钟）
 3. 部署成功后会获得一个 `.vercel.app` 域名
 
-### 第6步: 验证部署
+### 第6步: 重新部署（修复404错误）
+由于之前的404错误，你需要重新部署：
+
+1. **推送修复到GitHub**:
+   ```bash
+   git add .
+   git commit -m "修复Vercel部署404错误 - 更新为index.py入口"
+   git push origin master
+   ```
+
+2. **触发重新部署**:
+   - Vercel会自动检测到代码变更并重新部署
+   - 或在Vercel控制台点击 "Redeploy" 按钮
+
+### 第7步: 验证部署
 访问你的部署地址，检查以下端点：
-- `https://你的项目.vercel.app/` - 主页
+- `https://你的项目.vercel.app/` - 主页（应该显示API信息）
 - `https://你的项目.vercel.app/docs` - API文档
 - `https://你的项目.vercel.app/health` - 健康检查
+- `https://你的项目.vercel.app/api/v1/status` - API状态
 
 ## 🔧 故障排除
 
 ### 常见问题
 
-1. **构建超时**
+1. **404 NOT_FOUND 错误** ✅ 已修复
+   - 原因：文件路径配置错误或入口文件不正确
+   - 解决方案：
+     - 使用 `api/index.py` 而不是 `api/main.py`
+     - 简化依赖到最小集合（仅FastAPI + Pydantic）
+     - 更新 `vercel.json` 配置指向正确的入口文件
+
+2. **构建超时**
    - 原因：依赖包太大
-   - 解决：使用 `requirements-vercel.txt` 而不是完整的 `requirements.txt`
+   - 解决：使用最小化的 `requirements.txt`
 
 2. **函数超时**
    - 原因：AI处理时间过长

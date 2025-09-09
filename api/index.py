@@ -2,26 +2,12 @@
 Vercel兼容的FastAPI应用入口
 简化版本，移除了复杂的依赖和长期运行的服务
 """
-import sys
 import os
-from pathlib import Path
-
-# 添加src目录到Python路径
-project_root = Path(__file__).parent.parent
-src_path = project_root / "src"
-sys.path.insert(0, str(src_path))
-
-# 设置环境变量文件路径
-env_file = project_root / "environments" / "test.env"
-if env_file.exists():
-    from dotenv import load_dotenv
-    load_dotenv(env_file)
-
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional, Dict, Any
-import json
+from typing import List, Optional, Dict
+import datetime
 
 # 创建简化的FastAPI应用
 app = FastAPI(
@@ -58,6 +44,8 @@ def read_root():
         "message": "费曼学生Agent API - Vercel版本",
         "version": "3.2-vercel",
         "docs": "/docs",
+        "status": "running",
+        "timestamp": datetime.datetime.now().isoformat(),
         "limitations": [
             "简化版本，适用于Vercel Serverless环境",
             "不包含ChromaDB和复杂的AI工具链",
@@ -70,7 +58,8 @@ def health_check():
     return {
         "status": "healthy",
         "platform": "vercel",
-        "timestamp": "2024-01-01T00:00:00Z"
+        "timestamp": datetime.datetime.now().isoformat(),
+        "environment": os.getenv("VERCEL_ENV", "development")
     }
 
 @app.post("/api/v1/chat", response_model=ChatResponse)
@@ -80,15 +69,21 @@ async def chat_endpoint(request: ChatRequest):
     在Vercel环境中，复杂的AI处理应该移到其他服务
     """
     try:
-        # 这里应该调用你的AI服务API
-        # 由于Vercel的限制，建议将AI处理部署到其他平台
-        response_text = f"感谢你教授关于'{request.topic}'的知识。由于这是Vercel简化版本，实际的AI处理功能需要部署到支持长时间运行的平台上。"
+        # 模拟AI响应
+        response_text = f"""感谢你教授关于'{request.topic}'的知识！
+
+作为AI学生，我对你的讲解很感兴趣。你提到：
+{request.explanation[:200]}{'...' if len(request.explanation) > 200 else ''}
+
+由于这是Vercel简化版本，完整的AI分析功能需要部署到支持长时间运行的平台上。
+
+如需完整功能，请访问完整版本的部署。"""
         
         return ChatResponse(
             response=response_text,
-            session_id=request.session_id or "vercel-session",
+            session_id=request.session_id or f"vercel-{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}",
             success=True,
-            message="这是简化版本的响应"
+            message="Vercel简化版本响应"
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"处理请求时出错: {str(e)}")
@@ -101,12 +96,34 @@ async def chat_stream_endpoint(request: ChatRequest):
     """
     return {
         "message": "流式响应在Vercel环境中支持有限",
-        "recommendation": "建议使用Railway或Render部署完整功能"
+        "recommendation": "建议使用Railway或Render部署完整功能",
+        "fallback_response": f"关于'{request.topic}'的学习内容已收到，完整的流式响应功能请使用完整版部署。"
+    }
+
+@app.get("/api/v1/status")
+def get_status():
+    """获取API状态信息"""
+    return {
+        "api_version": "3.2-vercel",
+        "status": "operational",
+        "features": {
+            "basic_chat": True,
+            "streaming": False,
+            "ai_processing": False,
+            "memory": False,
+            "knowledge_graph": False
+        },
+        "deployment": {
+            "platform": "vercel",
+            "region": os.getenv("VERCEL_REGION", "unknown"),
+            "env": os.getenv("VERCEL_ENV", "development")
+        }
     }
 
 # Vercel要求的处理函数
-def handler(request):
-    return app(request)
+def handler(event, context):
+    """Vercel serverless函数处理器"""
+    return app
 
 # 兼容性导出
 if __name__ == "__main__":
