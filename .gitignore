@@ -191,10 +191,16 @@ api.log
 chroma_db/
 chromadb/
 
-# Environment files
+# Environment files (包含敏感信息，不应提交)
 .env*
 !.env.example
-test.env
+!.env.template
+test.env*
+environments/*.env
+!environments/*.env.example
+!environments/*.env.template
+environments/test.env.backup
+environments/test.env.local
 
 # Temporary files
 temp/
