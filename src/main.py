@@ -5,7 +5,9 @@ AI学生费曼学习系统 - 主启动文件
 from dotenv import load_dotenv
 
 # 在所有其他导入之前加载环境变量，确保配置在模块初始化时可用
-load_dotenv('environments/test.env')
+# 优先级: .env > environments/test.env (向后兼容)
+load_dotenv('.env')  # 首先尝试加载根目录的 .env
+load_dotenv('environments/test.env')  # 向后兼容，作为备用配置
 
 import os
 import uuid

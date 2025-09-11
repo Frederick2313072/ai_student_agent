@@ -20,8 +20,8 @@ def main():
     parser = argparse.ArgumentParser(description="费曼学习系统配置验证工具")
     parser.add_argument(
         "--env-file", 
-        default="environments/test.env",
-        help="环境变量文件路径 (默认: environments/test.env)"
+        default=".env",
+        help="环境变量文件路径 (默认: .env)"
     )
     parser.add_argument(
         "--show-guide",

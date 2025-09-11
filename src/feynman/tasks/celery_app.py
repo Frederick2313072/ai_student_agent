@@ -13,13 +13,14 @@ import os
 from celery import Celery
 from dotenv import load_dotenv
 
-# 加载环境变量
+# 加载环境变量 - 优先根目录 .env，兼容旧路径
+load_dotenv(".env")
 load_dotenv("environments/test.env")
 
 # 获取Redis连接URL - 优先使用环境变量中的Redis Cloud配置
 redis_url = os.getenv("REDIS_URL")
 if not redis_url:
-    raise ValueError("REDIS_URL环境变量未设置，请检查environments/test.env配置文件")
+    raise ValueError("REDIS_URL环境变量未设置，请检查.env或environments/test.env配置文件")
 
 print(f"🔗 Celery使用Redis: {redis_url[:20]}...{redis_url[-20:]}")
 

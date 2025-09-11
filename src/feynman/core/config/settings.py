@@ -127,7 +127,7 @@ class FeynmanSettings(BaseSettings):
         return v
     
     class Config:
-        env_file = "environments/test.env"
+        env_file = [".env", "environments/test.env"]  # 优先级: .env > environments/test.env
         case_sensitive = False
         extra = "ignore"  # 忽略额外的环境变量，专注于核心配置
 

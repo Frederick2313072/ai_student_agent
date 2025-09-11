@@ -92,7 +92,7 @@ graph TD
   pip install -r requirements.txt
   ```
 
-### 2. 配置环境变量 (P2优化 ✨)
+### 2. 配置环境变量 ✨
 
 #### 快速配置 (推荐)
 ```bash
@@ -108,8 +108,11 @@ make config-check
 
 #### 手动配置
 ```bash
-# 编辑环境配置文件
-nano environments/test.env
+# 复制配置模板
+cp env_template .env
+
+# 编辑配置文件
+nano .env
 
 # 或创建特定环境配置
 make config-dev    # 开发环境
@@ -125,20 +128,15 @@ curl http://localhost:8000/config/validation
 # 命令行验证
 python scripts/config_validator.py --show-guide
 ```
-- 确保以下关键配置项已设置：
+- 在根目录的 `.env` 文件中设置关键配置项：
   ```dotenv
   # OpenAI API (必需)
-  OPENAI_API_KEY="sk-your-openai-api-key-here"
-  OPENAI_MODEL="gpt-4o"
+  OPENAI_API_KEY=your-openai-api-key-here
+  OPENAI_MODEL=gpt-4o
   OPENAI_TEMPERATURE=0.7
 
-  # LangChain/LangSmith (可选, 用于调试)
-  LANGCHAIN_TRACING_V2="true"
-  LANGCHAIN_API_KEY="..."
-
   # 工具API (可选, 但强烈推荐)
-  TAVILY_API_KEY="..."   # 用于网络搜索
-  SERPAPI_API_KEY="..."    # 用于图像搜索
+  TAVILY_API_KEY=your-tavily-api-key-here   # 用于网络搜索
 
   # 开发配置
   DEBUG=true

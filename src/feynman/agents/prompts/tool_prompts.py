@@ -288,7 +288,7 @@ tool_configuration_tips = {
 {required_vars}
 
 配置步骤：
-1. 在 environments/test.env 文件中添加相应的API密钥
+1. 在 .env 文件中添加相应的API密钥
 2. 重启应用以加载新配置
 3. 运行测试验证配置是否正确
 

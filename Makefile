@@ -60,13 +60,13 @@ config-setup: ## 交互式配置设置
 	uv run python scripts/setup_env.py --interactive
 
 config-minimal: ## 创建最小配置模板
-	uv run python scripts/setup_env.py --type minimal --output environments/minimal.env
+	uv run python scripts/setup_env.py --type minimal --output .env
 
 config-dev: ## 创建开发环境配置
-	uv run python scripts/setup_env.py --type development --output environments/development.env
+	uv run python scripts/setup_env.py --type development --output .env
 
 config-prod: ## 创建生产环境配置
-	uv run python scripts/setup_env.py --type production --output environments/production.env
+	uv run python scripts/setup_env.py --type production --output .env
 
 # === 测试和质量 ===
 
@@ -119,7 +119,7 @@ docker-build: ## 构建Docker镜像
 	docker build -f deployment/docker/Dockerfile -t feynman-learning-system:latest .
 
 docker-run: ## 运行Docker容器
-	docker run -p 8000:8000 --env-file environments/production.env feynman-learning-system:latest
+	docker run -p 8000:8000 --env-file .env feynman-learning-system:latest
 
 # === 快速开始 ===
 
@@ -127,6 +127,6 @@ quickstart: ## 快速开始（新用户推荐）
 	@echo "🚀 费曼学习系统快速开始..."
 	uv sync
 	@echo "📝 创建开发配置..."
-	uv run python scripts/setup_env.py --type development --output environments/local.env
-	@echo "✅ 配置已创建！请编辑 environments/local.env 填写API密钥"
+	cp env_template .env
+	@echo "✅ 配置已创建！请编辑 .env 填写API密钥"
 	@echo "然后运行: make run

@@ -1,0 +1,144 @@
+# 🎓 费曼学习系统 - 优化版 .gitignore
+# ================================================
+
+# === Python 相关 ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# === 虚拟环境 ===
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# === IDE 和编辑器 ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# === 操作系统 ===
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.tmp
+
+# === 测试和覆盖率 ===
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# === 日志文件 ===
+*.log
+logs/*.log
+storage/logs/*.log
+
+# === 数据库文件 ===
+*.db
+*.sqlite
+*.sqlite3
+storage/chroma/
+chroma_db/
+
+# === 配置文件 (包含敏感信息) ===
+.env
+.env.*
+!.env.example
+!env_template
+environments/*.env
+!environments/*.env.template
+!environments/README.md
+
+# === 临时文件和缓存 ===
+storage/temp/
+.tmp/
+*.tmp
+*.cache
+
+# === Node.js (前端项目) ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# === Docker ===
+.dockerignore
+
+# === 监控和追踪 ===
+.langfuse/
+.prometheus/
+
+# === 大模型和向量数据 ===
+*.bin
+*.safetensors
+embeddings/
+models/
+
+# === 文档生成 ===
+docs/_build/
+site/
+
+# === 部署相关 ===
+.vercel
+.next/
+out/
+
+# === 特定于项目的忽略 ===
+test_conversations/private/
+data/private/
+examples/private/
+cost_tracking.json
+
+# === 开发工具 ===
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# === JetBrains IDE ===
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# === 备份文件 ===
+*.bak
+*.backup
+*.old
