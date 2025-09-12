@@ -14,6 +14,10 @@ class ChatResponse(BaseModel):
     questions: List[str]
     session_id: str
     short_term_memory: List[Dict[str, str]]
+    learning_insights: List[str] = Field(default_factory=list, description="学习洞察")
+    execution_time: float = Field(default=0.0, description="执行时间(秒)")
+    success: bool = Field(default=True, description="处理是否成功")
+    learning_report: Dict = Field(default_factory=dict, description="学习报告")
 
 
 class MemorizeRequest(BaseModel):

@@ -19,23 +19,22 @@ class LongTermMemoryManager:
         """初始化长期记忆管理器，并根据环境变量动态选择嵌入模型。"""
 
 
-        zhipu_api_key = os.getenv("ZHIPU_API_KEY", "").strip()
         openai_api_key = os.getenv("OPENAI_API_KEY", "").strip()
+        zhipu_api_key = os.getenv("ZHIPU_API_KEY", "").strip()
 
-        if zhipu_api_key:
-            # 使用智谱AI的嵌入模型
+        # 优先使用OpenAI的嵌入模型
+        if openai_api_key:
+            # 使用OpenAI的嵌入模型
+            self._embeddings = OpenAIEmbeddings(
+                api_key=openai_api_key,
+                model=os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
+            )
+        elif zhipu_api_key:
+            # 备选：使用智谱AI的嵌入模型
             self._embeddings = ZhipuAIEmbeddings(
                 api_key=zhipu_api_key,
                 model=os.getenv("ZHIPU_EMBEDDING_MODEL", "embedding-2") # 默认使用 embedding-2
             )
-        elif openai_api_key:
-            # 使用OpenAI的嵌入模型
-            base_url = os.getenv("OPENAI_BASE_URL", "").strip()
-            model_name = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
-            if base_url:
-                self._embeddings = OpenAIEmbeddings(model=model_name, base_url=base_url)
-            else:
-                self._embeddings = OpenAIEmbeddings(model=model_name)
         else:
 
             self._embeddings = None

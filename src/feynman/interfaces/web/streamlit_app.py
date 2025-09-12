@@ -45,7 +45,12 @@ def stream_chat_api(topic: str, explanation: str, session_id: str, memory: List[
                             content_json = decoded_line[len('data: '):]
                             content = json.loads(content_json)
                             if content != "[END_OF_STREAM]":
-                                yield content
+                                # 确保返回字符串而不是字典
+                                if isinstance(content, dict):
+                                    # 如果是字典，提取消息内容
+                                    yield content.get('content', str(content))
+                                else:
+                                    yield str(content)
                         except json.JSONDecodeError:
                             # 忽略无法解析的行
                             continue

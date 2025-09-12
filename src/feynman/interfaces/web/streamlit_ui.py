@@ -39,8 +39,8 @@ def init_session_state():
         if key not in st.session_state:
             st.session_state[key] = default_value
 
-    # 从持久化存储恢复状态（如果存在）
-    load_persistent_state()
+    # 禁用自动恢复状态 - 每次启动都是新会话
+    # load_persistent_state()
 
 def save_persistent_state():
     """保存关键状态到持久化存储"""
@@ -77,51 +77,9 @@ def save_persistent_state():
         st.warning(f"保存状态失败: {e}")
 
 def load_persistent_state():
-    """从持久化存储加载状态"""
-    try:
-        import json
-        import os
-        from datetime import datetime, timedelta
-
-        # 首先尝试从session_state加载（浏览器级别缓存）
-        if "_persistent_data" in st.session_state:
-            persistent_data = st.session_state["_persistent_data"]
-            # 检查数据是否过期（可选，24小时过期）
-            if "saved_at" in persistent_data:
-                try:
-                    saved_time = datetime.fromisoformat(persistent_data["saved_at"])
-                    if datetime.now() - saved_time < timedelta(hours=24):
-                        # 恢复状态
-                        for key, value in persistent_data.items():
-                            if key in st.session_state and key not in ["_persistent_data", "saved_at"]:
-                                st.session_state[key] = value
-                        return
-                except (ValueError, TypeError):
-                    pass
-
-        # 如果session_state中没有有效数据，尝试从文件加载
-        try:
-            cache_file = os.path.join(os.getcwd(), "data", "streamlit_cache", "session_cache.json")
-            if os.path.exists(cache_file):
-                with open(cache_file, 'r', encoding='utf-8') as f:
-                    persistent_data = json.load(f)
-
-                # 检查数据是否过期
-                if "saved_at" in persistent_data:
-                    saved_time = datetime.fromisoformat(persistent_data["saved_at"])
-                    if datetime.now() - saved_time < timedelta(hours=24):
-                        # 恢复状态到session_state
-                        for key, value in persistent_data.items():
-                            if key in st.session_state and key not in ["_persistent_data", "saved_at"]:
-                                st.session_state[key] = value
-                        st.session_state["_persistent_data"] = persistent_data
-                        return
-        except Exception:
-            # 如果文件加载失败，继续执行
-            pass
-
-    except Exception as e:
-        st.warning(f"加载状态失败: {e}")
+    """从持久化存储加载状态 - 已禁用，保持新会话"""
+    # 完全禁用持久化加载逻辑，确保每次启动都是全新会话
+    return
 
 def update_last_activity():
     """更新最后活动时间"""
@@ -151,7 +109,12 @@ def stream_chat_api(topic: str, explanation: str, session_id: str, memory: List[
                             content_json = decoded_line[len('data: '):]
                             content = json.loads(content_json)
                             if content != "[END_OF_STREAM]":
-                                yield content
+                                # 确保返回字符串而不是字典
+                                if isinstance(content, dict):
+                                    # 如果是字典，提取消息内容
+                                    yield content.get('content', str(content))
+                                else:
+                                    yield str(content)
                         except json.JSONDecodeError:
                             # 忽略无法解析的行
                             continue
@@ -216,12 +179,13 @@ def render_chat_interface():
             st.session_state.teaching_input = ""
             st.session_state.chat_history = []
             st.session_state.last_activity = None
-
-            # 保存重置状态
-            save_persistent_state()
+            
+            # 清除持久化数据
+            if "_persistent_data" in st.session_state:
+                del st.session_state["_persistent_data"]
 
             st.success("新会话已开始！")
-            st.info("页面将自动刷新以应用更改...")
+            st.rerun()  # 立即刷新页面
 
         st.markdown("---")
         st.header("💡 当前状态")

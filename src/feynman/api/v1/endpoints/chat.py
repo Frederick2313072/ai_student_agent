@@ -6,13 +6,12 @@ import logging
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 
-from feynman.agents.core.agent import build_graph
+from feynman.agents.core import execute_multi_agent_workflow
 from feynman.api.schemas import ChatRequest, ChatResponse, MemorizeRequest
 from feynman.tasks.memory import summarize_conversation_task
 
 
 router = APIRouter()
-langgraph_app = build_graph()
 logger = logging.getLogger(__name__)
 
 
@@ -20,15 +19,18 @@ logger = logging.getLogger(__name__)
 async def chat_with_agent(request: ChatRequest):
     inputs = {
         "topic": request.topic,
-        "user_explanation": request.explanation,
+        "explanation": request.explanation,
+        "session_id": request.session_id,
         "short_term_memory": request.short_term_memory,
     }
-    config = {"configurable": {"thread_id": request.session_id}}
 
     try:
-        result = await langgraph_app.ainvoke(inputs, config)
-        questions = result.get("question_queue", [])
+        # 使用新的多Agent工作流
+        result = await execute_multi_agent_workflow(inputs)
+        
+        questions = result.get("questions", [])
         final_memory = result.get("short_term_memory", [])
+        learning_insights = result.get("learning_insights", [])
 
         # 使用Celery异步任务进行记忆固化
         if final_memory and request.topic:
@@ -42,44 +44,61 @@ async def chat_with_agent(request: ChatRequest):
             questions=questions,
             session_id=request.session_id,
             short_term_memory=final_memory,
+            learning_insights=learning_insights,
+            execution_time=result.get("execution_time", 0),
+            success=result.get("success", True),
+            learning_report=result.get("learning_report", {})
         )
     except Exception as e:
-        logger.error(f"Agent处理请求时出错: {str(e)}")
-        raise HTTPException(status_code=500, detail="Agent在处理时遇到内部错误。")
+        logger.error(f"多Agent系统处理请求时出错: {str(e)}")
+        raise HTTPException(status_code=500, detail="多Agent系统在处理时遇到内部错误。")
 
 
-async def stream_generator(app, inputs: Dict, config: Dict) -> AsyncGenerator[str, None]:
-    full_response = ""
-    async for event in app.astream_events(inputs, config, version="v1"):
-        if event["event"] == "on_chat_model_stream":
-            content = event["data"]["chunk"].content
-            if content:
-                full_response += content
-
-    final_answer = full_response
-    think_end_tag = "</think>"
-    if think_end_tag in full_response:
-        final_answer = full_response.rsplit(think_end_tag, 1)[-1].lstrip()
-
-    words = final_answer.split(" ")
-    for i, word in enumerate(words):
-        token = word + (" " if i < len(words) - 1 else "")
-        yield f"data: {json.dumps(token)}\n\n"
-        await asyncio.sleep(0.05)
-
-    yield f"data: {json.dumps('[END_OF_STREAM]')}\n\n"
+async def stream_multi_agent_workflow(inputs: Dict) -> AsyncGenerator[str, None]:
+    """多Agent工作流的流式处理"""
+    try:
+        # 发送开始信号
+        yield f"data: {json.dumps({'type': 'start', 'message': '启动多Agent工作流'})}\n\n"
+        
+        # 执行工作流（目前是同步的，未来可以改为流式）
+        result = await execute_multi_agent_workflow(inputs)
+        
+        # 流式发送结果
+        if result.get("success", False):
+            # 发送问题
+            questions = result.get("questions", [])
+            for i, question in enumerate(questions):
+                yield f"data: {json.dumps({'type': 'question', 'index': i, 'content': question})}\n\n"
+                await asyncio.sleep(0.1)
+            
+            # 发送洞察
+            insights = result.get("learning_insights", [])
+            for i, insight in enumerate(insights):
+                yield f"data: {json.dumps({'type': 'insight', 'index': i, 'content': insight})}\n\n"
+                await asyncio.sleep(0.1)
+            
+            # 发送最终结果
+            yield f"data: {json.dumps({'type': 'result', 'data': result})}\n\n"
+        else:
+            yield f"data: {json.dumps({'type': 'error', 'message': result.get('error', '处理失败')})}\n\n"
+        
+        # 结束信号
+        yield f"data: {json.dumps({'type': 'end', 'message': '工作流完成'})}\n\n"
+        
+    except Exception as e:
+        yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
 
 
 @router.post("/stream")
 async def chat_with_agent_stream(request: ChatRequest):
     inputs = {
         "topic": request.topic,
-        "user_explanation": request.explanation,
+        "explanation": request.explanation,
+        "session_id": request.session_id,
         "short_term_memory": request.short_term_memory,
     }
-    config = {"configurable": {"thread_id": request.session_id}}
 
-    return StreamingResponse(stream_generator(langgraph_app, inputs, config), media_type="text/event-stream")
+    return StreamingResponse(stream_multi_agent_workflow(inputs), media_type="text/event-stream")
 
 
 @router.post("/memorize", status_code=202)

@@ -9,8 +9,28 @@ from langchain_core.tools import tool
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 
-# 导入统一提示词管理
-from feynman.agents.prompts.prompt_manager import prompt_manager, get_tool_error, get_api_response
+# 内嵌简化的错误消息和响应处理
+def get_tool_error(error_type: str, details: str = "") -> str:
+    """获取工具错误消息"""
+    error_messages = {
+        "network_error": "网络连接失败，请检查网络设置",
+        "api_error": "API调用失败，请稍后重试",
+        "data_error": "数据处理错误，请检查输入格式",
+        "timeout_error": "请求超时，请稍后重试",
+        "auth_error": "认证失败，请检查API密钥",
+        "rate_limit": "请求频率过高，请稍后重试"
+    }
+    base_msg = error_messages.get(error_type, "未知错误")
+    return f"{base_msg}。详细信息：{details}" if details else base_msg
+
+def get_api_response(response_type: str, data: any = None) -> str:
+    """格式化API响应"""
+    if response_type == "success":
+        return f"操作成功完成。{data if data else ''}"
+    elif response_type == "partial":
+        return f"操作部分完成。{data if data else ''}"
+    else:
+        return f"操作完成。{data if data else ''}"
 from langchain_community.tools.tavily_search import TavilySearchResults
 
 # 导入知识图谱服务
@@ -474,11 +494,7 @@ def _create_mermaid_mindmap(topic: str, content: str) -> str:
         # 使用mermaid.ink服务生成图片
         image_url = f"https://mermaid.ink/img/{encoded_diagram}"
         
-        return prompt_manager.get_template("tool", "mindmap_templates")["mermaid_success"].format(
-            mermaid_code=mermaid_code,
-            online_url=mermaid_url,
-            image_url=image_url
-        )
+        return f"思维导图生成成功：\nMermaid代码：\n{mermaid_code}\n在线编辑：{mermaid_url}\n图片链接：{image_url}"
         
     except Exception as e:
         return f"Mermaid思维导图生成失败: {str(e)}"
