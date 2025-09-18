@@ -27,17 +27,17 @@ sleep 3
 
 # 2. 检查端口释放
 echo ""
-echo "2️⃣ 检查端口8000状态..."
-if lsof -i :8000 >/dev/null 2>&1; then
-    echo "   ⚠️  端口8000仍被占用，强制终止..."
-    lsof -t -i :8000 | xargs kill -9 2>/dev/null || true
+echo "2️⃣ 检查端口8005状态..."
+if lsof -i :8005 >/dev/null 2>&1; then
+    echo "   ⚠️  端口8005仍被占用，强制终止..."
+    lsof -t -i :8005 | xargs kill -9 2>/dev/null || true
     sleep 2
 fi
 
-if ! lsof -i :8000 >/dev/null 2>&1; then
-    echo "   ✅ 端口8000已释放"
+if ! lsof -i :8005 >/dev/null 2>&1; then
+    echo "   ✅ 端口8005已释放"
 else
-    echo "   ❌ 端口8000仍被占用"
+    echo "   ❌ 端口8005仍被占用"
 fi
 
 # 3. 启动API服务
@@ -72,7 +72,7 @@ echo "2. 访问前端测试:"
 echo "   uv run streamlit run src/feynman/interfaces/web/streamlit_ui.py"
 echo ""
 echo "3. 验证API端点:"
-echo "   curl -X POST http://127.0.0.1:8000/api/v1/chat/memorize \\"
+echo "   curl -X POST http://127.0.0.1:8005/api/v1/chat/memorize \\"
 echo "     -H 'Content-Type: application/json' \\"
 echo "     -d '{\"topic\":\"测试\",\"conversation_history\":[]}'"
 echo ""

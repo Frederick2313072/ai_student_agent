@@ -1,10 +1,10 @@
 {
-  "session_id": "st-深度学习",
-  "current_topic": "深度学习",
+  "session_id": "st-机器学习",
+  "current_topic": "机器学习",
   "chat_history": [
     {
       "role": "user",
-      "content": "nih"
+      "content": "你好"
     },
     {
       "role": "assistant",
@@ -14,7 +14,7 @@
   "short_term_memory": [
     {
       "role": "user",
-      "content": "nih"
+      "content": "你好"
     },
     {
       "role": "assistant",
@@ -22,6 +22,6 @@
     }
   ],
   "kg_enabled": false,
-  "last_activity": "2025-09-12 14:40:30.110078",
-  "saved_at": "2025-09-12 14:40:30.110152"
+  "last_activity": "2025-09-18 19:21:54.731058",
+  "saved_at": "2025-09-18 19:21:54.731108"
 }

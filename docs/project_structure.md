@@ -203,7 +203,7 @@ python examples/tools/basic_tools_check.py
 cd config && docker-compose -f docker-compose.monitoring.yml up
 
 # 查看API文档
-# 启动应用后访问 http://127.0.0.1:8000/docs
+# 启动应用后访问 http://127.0.0.1:8005/docs
 ```
 
 ## 🎉 **重构成果总结**

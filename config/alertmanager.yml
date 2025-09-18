@@ -73,7 +73,7 @@ receivers:
   # 默认通知
   - name: 'default-notifications'
     webhook_configs:
-      - url: 'http://localhost:8000/webhooks/alerts'
+      - url: 'http://localhost:8005/webhooks/alerts'
         send_resolved: true
         http_config:
           basic_auth:
@@ -159,13 +159,13 @@ receivers:
   # 业务通知
   - name: 'business-notifications'
     webhook_configs:
-      - url: 'http://localhost:8000/webhooks/business-alerts'
+      - url: 'http://localhost:8005/webhooks/business-alerts'
         send_resolved: true
 
   # 开发环境通知
   - name: 'dev-notifications'
     webhook_configs:
-      - url: 'http://localhost:8000/webhooks/dev-alerts'
+      - url: 'http://localhost:8005/webhooks/dev-alerts'
         send_resolved: true
 
 # 模板配置

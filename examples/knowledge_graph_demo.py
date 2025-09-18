@@ -159,7 +159,7 @@ def demo_api_endpoints():
     """演示API端点（需要启动服务）"""
     import requests
     
-    api_base = "http://127.0.0.1:8000"
+    api_base = "http://127.0.0.1:8005"
     
     print("\n🌐 API端点演示")
     print("=" * 50)

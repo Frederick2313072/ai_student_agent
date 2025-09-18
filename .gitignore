@@ -226,3 +226,4 @@ feynman-learning-frontend/.env*
 feynman-learning-frontend/npm-debug.log*
 feynman-learning-frontend/yarn-debug.log*
 feynman-learning-frontend/yarn-error.log*
+logs/

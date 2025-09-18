@@ -73,7 +73,7 @@ DEBUG=true
 # API 服务配置
 # ======================
 API_HOST=0.0.0.0
-API_PORT=8000
+API_PORT=8005
 API_RELOAD=true
 API_WORKERS=1
 

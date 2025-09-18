@@ -111,7 +111,7 @@ if __name__ == "__main__":
     
     # 从环境变量获取配置
     host = os.getenv("API_HOST", "0.0.0.0")
-    port = int(os.getenv("API_PORT", "8000"))
+    port = int(os.getenv("API_PORT", "8005"))
     reload = os.getenv("API_RELOAD", "true").lower() == "true"
     
     print(f"🚀 启动费曼学习系统 API 服务器")

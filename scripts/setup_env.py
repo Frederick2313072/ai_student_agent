@@ -70,7 +70,7 @@ def create_env_template(env_type: str, target_file: str) -> None:
                 "REQUEST_TIMEOUT_SECONDS": "60",
                 "CORS_ORIGINS": '["https://your-domain.com"]',
                 "API_HOST": "0.0.0.0",
-                "API_PORT": "8000"
+                "API_PORT": "8005"
             }
         },
         "full": {

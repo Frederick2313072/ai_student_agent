@@ -64,7 +64,7 @@ make run
 INFO:     Started server process [12345]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     Uvicorn running on http://127.0.0.1:8000
+INFO:     Uvicorn running on http://127.0.0.1:8005
 ```
 
 ## 📤 第二步：测试任务提交和执行
@@ -85,7 +85,7 @@ uv run python scripts/test_celery.py
 ### 方法2：通过 API 端点测试
 ```bash
 # 测试记忆固化 API
-curl -X POST "http://localhost:8000/memorize" \
+curl -X POST "http://localhost:8005/memorize" \
   -H "Content-Type: application/json" \
   -d '{
     "topic": "测试主题",
@@ -108,7 +108,7 @@ curl -X POST "http://localhost:8000/memorize" \
 ### 方法3：查询任务状态
 ```bash
 # 使用上面返回的 task_id
-curl -X GET "http://localhost:8000/task/a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+curl -X GET "http://localhost:8005/task/a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 ```
 
 **预期响应（执行中）：**
@@ -164,7 +164,7 @@ uv run celery -A feynman.tasks.celery_app.celery_app inspect stats
 ```bash
 # 提交多个任务测试并发处理
 for i in {1..10}; do
-  curl -X POST "http://localhost:8000/memorize" \
+  curl -X POST "http://localhost:8005/memorize" \
     -H "Content-Type: application/json" \
     -d "{
       \"topic\": \"压力测试主题$i\",
@@ -222,7 +222,7 @@ echo $REDIS_URL
 **症状：** `Connection timeout`
 **解决：** 检查 API 服务是否运行
 ```bash
-curl -X GET "http://localhost:8000/docs"
+curl -X GET "http://localhost:8005/docs"
 ```
 
 ## ✅ 测试成功标准

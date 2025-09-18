@@ -127,7 +127,7 @@ health_check() {
         "http://localhost:3000/api/health|Grafana"
         "http://localhost:16686/|Jaeger"
         "http://localhost:9093/-/healthy|AlertManager"
-        "http://localhost:8000/health|Feynman API"
+        "http://localhost:8005/health|Feynman API"
     )
     
     for service in "${services[@]}"; do
@@ -149,12 +149,12 @@ show_access_info() {
     echo "📊 Grafana:        http://localhost:3000 (admin/admin)"
     echo "🔗 Jaeger:         http://localhost:16686"
     echo "🚨 AlertManager:   http://localhost:9093"
-    echo "🤖 Feynman API:    http://localhost:8000"
-    echo "📈 API指标:        http://localhost:8000/metrics"
-    echo "❤️  健康检查:      http://localhost:8000/health"
+    echo "🤖 Feynman API:    http://localhost:8005"
+    echo "📈 API指标:        http://localhost:8005/metrics"
+    echo "❤️  健康检查:      http://localhost:8005/health"
     echo ""
-    log_info "监控状态概览:     http://localhost:8000/monitoring/status"
-    log_info "成本统计:         http://localhost:8000/monitoring/costs"
+    log_info "监控状态概览:     http://localhost:8005/monitoring/status"
+    log_info "成本统计:         http://localhost:8005/monitoring/costs"
 }
 
 # 主函数

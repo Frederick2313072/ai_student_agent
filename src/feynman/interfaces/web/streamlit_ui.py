@@ -15,7 +15,10 @@ except ImportError:
     from feynman.interfaces.web.knowledge_graph_ui import kg_ui
 
 # --- 配置 ---
-API_URL = "http://127.0.0.1:8000/api/v1/chat/stream"
+import os
+API_HOST = os.getenv("API_HOST", "127.0.0.1")
+API_PORT = os.getenv("API_PORT", "8005")
+API_URL = f"http://{API_HOST}:{API_PORT}/api/v1/chat/stream"
 st.set_page_config(page_title="🎓 AI学生费曼学习系统", layout="wide")
 
 
@@ -126,7 +129,7 @@ def call_memorize_api(topic: str, memory: List[Dict]):
     """调用后端的记忆API（即发即忘）。"""
     try:
         requests.post(
-            "http://127.0.0.1:8000/api/v1/chat/memorize", 
+            f"http://{API_HOST}:{API_PORT}/api/v1/chat/memorize",
             json={"topic": topic, "conversation_history": memory},
             timeout=5 # 设置一个短超时
         )

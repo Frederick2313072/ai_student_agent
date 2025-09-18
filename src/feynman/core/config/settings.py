@@ -41,7 +41,7 @@ class FeynmanSettings(BaseSettings):
     
     # API服务配置
     api_host: str = "0.0.0.0"
-    api_port: int = 8000
+    api_port: int = 8005
     api_reload: bool = True
     api_workers: int = 1
     

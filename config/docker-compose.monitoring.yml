@@ -10,7 +10,7 @@ services:
       context: ../
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8005:8005"
     environment:
       - MONITORING_ENABLED=true
       - METRICS_ENABLED=true
@@ -28,7 +28,7 @@ services:
       - prometheus
       - jaeger
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health/ready"]
+      test: ["CMD", "curl", "-f", "http://localhost:8005/health/ready"]
       interval: 30s
       timeout: 10s
       retries: 3

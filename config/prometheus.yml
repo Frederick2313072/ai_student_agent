@@ -29,7 +29,7 @@ scrape_configs:
   # 费曼学习系统API
   - job_name: 'feynman-api'
     static_configs:
-      - targets: ['localhost:8000']
+      - targets: ['localhost:8005']
     metrics_path: '/metrics'
     scrape_interval: 5s
     scrape_timeout: 5s

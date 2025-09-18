@@ -123,7 +123,7 @@ make config-minimal # 最小配置
 #### 配置验证
 ```bash
 # API验问检查
-curl http://localhost:8000/config/validation
+curl http://localhost:8005/config/validation
 
 # 命令行验证
 python scripts/config_validator.py --show-guide
@@ -157,16 +157,35 @@ python scripts/config_validator.py --show-guide
   python ingest.py my_document.pdf
   ```
 
-### 4. 启动所有服务
+### 4. 部署到服务器
+
+项目已配置为支持完整服务器部署，包含nginx反向代理和systemd服务管理。
+
+#### 快速部署
+```bash
+# 1. 同步依赖
+uv sync
+
+# 2. 启动所有服务
+sudo ./scripts/development/deploy_feynman_app.sh start
+
+# 3. 部署nginx配置
+sudo ./scripts/development/deploy_feynman_app.sh nginx
+
+# 4. 检查服务状态
+./scripts/development/deploy_feynman_app.sh status
+```
+
+#### 手动启动（开发环境）
 
 你需要打开 **2个** 独立的终端来分别启动所有服务。
 
 - **终端 1: 启动主应用API**
   ```bash
   # 使用 uv
-  uv run uvicorn main:app --reload --port 8000
+  uv run uvicorn main:app --reload --port 8005
   # 使用 pip（需先激活虚拟环境）
-  uvicorn main:app --reload --port 8000
+  uvicorn main:app --reload --port 8005
   ```
 
 - **终端 2: 启动Streamlit Web界面**
@@ -181,12 +200,29 @@ python scripts/config_validator.py --show-guide
 
 ### 5. 开始使用
 
+#### 服务器部署访问
+- **域名访问**: `http://feynmanlearning.wiki`
+- **API文档**: `http://localhost:8005/docs` (服务器内部访问)
+
+#### 开发环境访问
 - 在浏览器中打开Streamlit界面给出的地址 (通常是 `http://localhost:8501`)。
 - 在侧边栏设定一个学习主题，然后在主聊天窗口开始向AI学生传授知识！
 
+#### 服务管理
+```bash
+# 检查服务状态
+./scripts/development/deploy_feynman_app.sh status
+
+# 停止服务
+sudo ./scripts/development/deploy_feynman_app.sh stop
+
+# 重启服务
+sudo ./scripts/development/deploy_feynman_app.sh restart
+```
+
 ## 📖 API 使用
 
-应用后端是一个标准的FastAPI服务。你可以在服务启动后，访问 `http://localhost:8000/docs` 查看并测试API接口。
+应用后端是一个标准的FastAPI服务。你可以在服务启动后，访问 `http://localhost:8005/docs` 查看并测试API接口。
 
 - **核心端点**: 
   - `POST /chat/stream`: (推荐) 与Agent进行流式对话。
@@ -233,7 +269,7 @@ pytest tests/integration/
 ### 常见问题
 
 1. **端口冲突**
-   - 确保端口 8000, 8001, 8501 未被占用
+   - 确保端口 8005,8501 未被占用
    - 可以修改启动命令中的端口号
 
 2. **API密钥问题**
@@ -251,29 +287,65 @@ pytest tests/integration/
 ### 获取帮助
 
 - 查看 `logs/` 目录中的日志文件
-- 检查 FastAPI 自动生成的文档: `http://localhost:8000/docs`
+- 检查 FastAPI 自动生成的文档: `http://localhost:8005/docs`
 - 提交 GitHub Issues 报告问题
 
 ## 📁 项目结构说明
 
 ```
 ai_student_agent/
-├── agent/                 # AI Agent 核心逻辑
-│   ├── agent.py          # LangGraph 工作流定义
-│   ├── tools.py          # 工具集成
-│   └── prompts.py        # 提示词模板
-├── mcp_servers/          # 微服务（可选）
-├── core/                 # 核心组件
-│   ├── memory.py         # 记忆管理
-│   └── monitoring/       # 监控组件
-├── data/                 # 知识库数据
-├── environments/         # 环境配置
-├── logs/                 # 日志文件
-├── tests/                # 测试代码
-├── main.py              # FastAPI 主应用
-├── ui.py                # Streamlit Web 界面
-├── ingest.py            # 数据注入脚本
-└── requirements.txt     # Python 依赖
+├── src/                          # 源码根目录
+│   ├── feynman/                  # 主要应用包
+│   │   ├── agents/               # AI代理核心逻辑
+│   │   │   ├── core/             # 代理核心实现
+│   │   │   ├── parsers/          # 响应解析器
+│   │   │   └── tools/            # 工具集成
+│   │   ├── api/                  # API路由和处理器
+│   │   ├── core/                 # 核心组件
+│   │   │   ├── config/           # 配置管理
+│   │   │   └── graph/            # LangGraph工作流
+│   │   ├── infrastructure/       # 基础设施层
+│   │   ├── interfaces/           # 接口层
+│   │   │   └── web/              # Web接口实现
+│   │   └── tasks/                # 异步任务处理
+│   └── main.py                   # FastAPI应用入口
+├── config/                       # 配置目录
+│   ├── alerting_rules.yml        # Prometheus告警规则
+│   ├── alertmanager.yml          # Alertmanager配置
+│   ├── blackbox.yml              # 黑盒监控配置
+│   ├── docker-compose.monitoring.yml # 监控栈配置
+│   ├── grafana/                  # Grafana仪表板配置
+│   ├── nginx/                    # Nginx反向代理配置
+│   └── prometheus.yml            # Prometheus配置
+├── scripts/                      # 部署和管理脚本
+│   ├── development/              # 开发环境脚本
+│   │   └── deploy_feynman_app.sh # 完整部署脚本
+│   ├── setup/                    # 环境设置脚本
+│   └── monitoring/               # 监控相关脚本
+├── webapp/                       # 前端Web应用
+│   ├── src/                      # 前端源码
+│   ├── package.json              # Node.js依赖
+│   ├── vite.config.ts            # Vite构建配置
+│   └── index.html                # 应用入口
+├── docs/                         # 项目文档
+│   ├── architecture_refactoring_summary.md
+│   ├── multi_agent_system_implementation_summary.md
+│   └── project_structure.md      # 项目结构详细说明
+├── examples/                     # 示例代码和演示
+│   ├── advanced/                 # 高级用法示例
+│   ├── knowledge_graph_demo.py   # 知识图谱演示
+│   └── simple_kg_test.py         # 简单知识图谱测试
+├── storage/                      # 持久化存储
+│   └── logs/                     # 结构化日志存储
+├── chroma_db/                    # ChromaDB向量数据库
+├── data/                         # 知识库数据文件
+├── logs/                         # 应用运行日志
+├── tests/                        # 测试代码
+│   └── integration/              # 集成测试
+├── pyproject.toml                # Python项目配置
+├── uv.lock                       # 依赖版本锁定
+├── env_template                  # 环境变量配置模板
+└── README.md                     # 项目文档
 ```
 
 ## 📋 版本信息
@@ -286,6 +358,11 @@ ai_student_agent/
 - ✅ 长短期记忆管理
 - ✅ 异步 FastAPI 后端
 - ✅ Streamlit Web 界面
+- ✅ **服务器部署支持**
+  - nginx反向代理配置
+  - systemd服务管理
+  - 域名访问支持 (feynmanlearning.wiki)
+  - WebSocket连接优化
 - ✅ 完整的监控与追踪系统
   - OpenTelemetry 分布式追踪
   - Prometheus 指标收集

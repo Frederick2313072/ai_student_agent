@@ -18,7 +18,7 @@ COPY config/ ./config/
 COPY data/ ./data/
 
 # 暴露端口
-EXPOSE 8000
+EXPOSE 8005
 
 # 启动命令
-CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8005"]

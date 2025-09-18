@@ -13,7 +13,7 @@ DEBUG=true
 # API 服务配置
 # ======================
 API_HOST=0.0.0.0
-API_PORT=8000
+API_PORT=8005
 API_RELOAD=true
 API_WORKERS=1
 
@@ -145,7 +145,7 @@ LOG_FILE=storage/logs/feynman.log
 # 前端配置
 # ======================
 FRONTEND_URL=http://localhost:3000
-NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_API_URL=http://localhost:8005
 BACKEND_URL=http://localhost:8001
 BACKEND_TIMEOUT=30
 

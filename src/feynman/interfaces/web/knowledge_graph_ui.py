@@ -34,7 +34,12 @@ logger = logging.getLogger(__name__)
 class KnowledgeGraphUI:
     """知识图谱UI组件"""
     
-    def __init__(self, api_base_url: str = "http://127.0.0.1:8000"):
+    def __init__(self, api_base_url: str = None):
+        if api_base_url is None:
+            import os
+            api_host = os.getenv("API_HOST", "127.0.0.1")
+            api_port = os.getenv("API_PORT", "8005")
+            api_base_url = f"http://{api_host}:{api_port}"
         self.api_base_url = api_base_url
         self.kg_api_url = f"{api_base_url}/api/v1/kg"
         
