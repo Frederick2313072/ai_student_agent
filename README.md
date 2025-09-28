@@ -67,167 +67,54 @@ graph TD
     Memory -- 查询 --> Chroma
 ```
 
-## 🚀 快速开始
+## 🚀 快速开始（开发环境）
 
-### 1. 环境与依赖
-
-- 推荐使用 Python 3.9。
-- 安装依赖有两种方式：
-
-  **方式 A：使用 uv（推荐）**
-  ```bash
-  # 安装 uv（一次性操作）
-  brew install uv  # macOS 用户
-  # 或
-  curl -LsSf https://astral.sh/uv/install.sh | sh
-
-  # 同步依赖并自动创建虚拟环境
-  uv sync
-  ```
-
-  **方式 B：使用 pip**
-  ```bash
-  python -m venv .venv
-  source .venv/bin/activate  # Windows 用户执行 .venv\\Scripts\\activate
-  pip install -r requirements.txt
-  ```
-
-### 2. 配置环境变量 ✨
-
-#### 快速配置 (推荐)
+### 1) 安装依赖
 ```bash
-# 一键设置开发环境
-make quickstart
-
-# 交互式配置向导
-make config-setup
-
-# 验证配置
-make config-check
-```
-
-#### 手动配置
-```bash
-# 复制配置模板
-cp env_template .env
-
-# 编辑配置文件
-nano .env
-
-# 或创建特定环境配置
-make config-dev    # 开发环境
-make config-prod   # 生产环境
-make config-minimal # 最小配置
-```
-
-#### 配置验证
-```bash
-# API验问检查
-curl http://localhost:8005/config/validation
-
-# 命令行验证
-python scripts/config_validator.py --show-guide
-```
-- 在根目录的 `.env` 文件中设置关键配置项：
-  ```dotenv
-  # OpenAI API (必需)
-  OPENAI_API_KEY=your-openai-api-key-here
-  OPENAI_MODEL=gpt-4o
-  OPENAI_TEMPERATURE=0.7
-
-  # 工具API (可选, 但强烈推荐)
-  TAVILY_API_KEY=your-tavily-api-key-here   # 用于网络搜索
-
-  # 开发配置
-  DEBUG=true
-  ENVIRONMENT=development
-  ```
-
-### 3. 构建本地知识库 (可选)
-
-如果你希望Agent能查询你本地的文档（PDF, TXT, DOCX等），请执行此步骤。
-
-- 将你的文档文件放入 `/data` 目录下。
-- 运行数据注入脚本，为每个文件构建知识库：
-  ```bash
-  # 示例: 处理 data/sample_knowledge.txt 文件
-  python ingest.py sample_knowledge.txt
-  
-  # 示例: 处理 data/my_document.pdf 文件
-  python ingest.py my_document.pdf
-  ```
-
-### 4. 部署到服务器
-
-项目已配置为支持完整服务器部署，包含nginx反向代理和systemd服务管理。
-
-#### 快速部署
-```bash
-# 1. 同步依赖
 uv sync
-
-# 2. 启动所有服务
-sudo ./scripts/development/deploy_feynman_app.sh start
-
-# 3. 部署nginx配置
-sudo ./scripts/development/deploy_feynman_app.sh nginx
-
-# 4. 检查服务状态
-./scripts/development/deploy_feynman_app.sh status
 ```
 
-#### 手动启动（开发环境）
-
-你需要打开 **2个** 独立的终端来分别启动所有服务。
-
-- **终端 1: 启动主应用API**
-  ```bash
-  # 使用 uv
-  uv run uvicorn main:app --reload --port 8005
-  # 使用 pip（需先激活虚拟环境）
-  uvicorn main:app --reload --port 8005
-  ```
-
-- **终端 2: 启动Streamlit Web界面**
-  ```bash
-  # 使用 uv
-  uv run streamlit run src/feynman/interfaces/web/streamlit_ui.py --server.port 8501
-  # 使用 pip（需先激活虚拟环境）
-  streamlit run src/feynman/interfaces/web/streamlit_ui.py --server.port 8501
-  ```
-
-> **提示**: 建议使用虚拟环境来管理Python依赖，避免版本冲突。
-
-### 5. 开始使用
-
-#### 服务器部署访问
-- **域名访问**: `http://feynmanlearning.wiki`
-- **API文档**: `http://localhost:8005/docs` (服务器内部访问)
-
-#### 开发环境访问
-- 在浏览器中打开Streamlit界面给出的地址 (通常是 `http://localhost:8501`)。
-- 在侧边栏设定一个学习主题，然后在主聊天窗口开始向AI学生传授知识！
-
-#### 服务管理
+### 2) 配置环境
 ```bash
-# 检查服务状态
-./scripts/development/deploy_feynman_app.sh status
-
-# 停止服务
-sudo ./scripts/development/deploy_feynman_app.sh stop
-
-# 重启服务
-sudo ./scripts/development/deploy_feynman_app.sh restart
+cp env_template .env
+# 打开 .env，至少设置：
+# OPENAI_API_KEY=你的key（或设置 ZHIPU_API_KEY）
+# REDIS_URL=redis://localhost:6379  # 如使用本地Redis
 ```
 
-## 📖 API 使用
+### 3) 启动服务（推荐一键）
+```bash
+./scripts/restart_all.sh start     # 启动后端API + 前端 + Celery + Flower（如可用）
+```
+
+或手动启动（两个终端）：
+```bash
+# 终端1：后端API
+uv run uvicorn main:app --reload --port 8005
+
+# 终端2：前端
+uv run streamlit run src/feynman/interfaces/web/streamlit_ui.py --server.port 8501
+```
+
+### 4) 访问
+- 前端：`http://localhost:8501`
+- API 文档：`http://localhost:8005/docs`
+
+### 5) 重启/停止
+```bash
+./scripts/restart_all.sh           # 重启全部
+./scripts/restart_all.sh stop      # 停止全部
+./scripts/restart_all.sh start     # 启动全部
+```
+
+## 📖 API 使用（核心）
 
 应用后端是一个标准的FastAPI服务。你可以在服务启动后，访问 `http://localhost:8005/docs` 查看并测试API接口。
 
 - **核心端点**: 
-  - `POST /chat/stream`: (推荐) 与Agent进行流式对话。
-  - `POST /memorize`: (内部) 异步固化对话记忆。
-  - `POST /chat`: (旧版) 一次性返回完整响应。
+  - `POST /api/v1/chat/stream`：(推荐) SSE 流式对话
+  - `POST /api/v1/chat`：一次性返回
+  - `POST /api/v1/chat/memorize`：提交记忆固化（自动降级）
 - **请求体 (`/chat/stream`)**:
   ```json
   {
@@ -243,25 +130,9 @@ sudo ./scripts/development/deploy_feynman_app.sh restart
   }
   ```
 
-## 🔧 开发与测试
-
-### 扩展工具
-
-若要添加新工具，请在 `agent/tools.py` 中定义它，然后在 `agent/agent.py` 中将其添加到 `tools` 列表中。
-
-### 运行测试
-
-系统包含单元测试和集成测试：
+## 🔧 开发与测试（简要）
 ```bash
-# 使用 uv
 uv run pytest
-uv run pytest tests/test_api.py
-uv run pytest tests/integration/
-
-# 使用 pip
-pytest
-pytest tests/test_api.py
-pytest tests/integration/
 ```
 
 ## 🛠️ 故障排除

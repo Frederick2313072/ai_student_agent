@@ -1,27 +1,27 @@
 {
-  "session_id": "st-机器学习",
-  "current_topic": "机器学习",
+  "session_id": "st-计算机",
+  "current_topic": "计算机",
   "chat_history": [
     {
       "role": "user",
-      "content": "你好"
+      "content": "计算机是由硬件和软件组成"
     },
     {
       "role": "assistant",
-      "content": "{'type': 'start', 'message': '启动多Agent工作流'}{'type': 'error', 'message': 'Recursion limit of 50 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.\\nFor troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/GRAPH_RECURSION_LIMIT'}{'type': 'end', 'message': '工作流完成'}"
+      "content": "- ```json\n- {"
     }
   ],
   "short_term_memory": [
     {
       "role": "user",
-      "content": "你好"
+      "content": "计算机是由硬件和软件组成"
     },
     {
       "role": "assistant",
-      "content": "{'type': 'start', 'message': '启动多Agent工作流'}{'type': 'error', 'message': 'Recursion limit of 50 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.\\nFor troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/GRAPH_RECURSION_LIMIT'}{'type': 'end', 'message': '工作流完成'}"
+      "content": "- ```json\n- {"
     }
   ],
   "kg_enabled": false,
-  "last_activity": "2025-09-18 19:21:54.731058",
-  "saved_at": "2025-09-18 19:21:54.731108"
+  "last_activity": "2025-09-28 12:33:25.896223",
+  "saved_at": "2025-09-28 12:33:25.896286"
 }

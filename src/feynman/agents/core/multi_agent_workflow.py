@@ -78,6 +78,8 @@ class MultiAgentState(TypedDict):
     active_agents: List[str]
     completed_tasks: List[str]
     error_log: List[Dict[str, Any]]
+    # 控制与容错
+    iteration_count: int  # 工作流路由迭代计数，用于防止无限循环
 
 
 class MultiAgentWorkflow:
@@ -87,6 +89,8 @@ class MultiAgentWorkflow:
         """初始化工作流"""
         self.logger = get_logger("multi_agent_workflow")
         self.registry = get_agent_registry()
+        # 会话级循环计数器，避免状态合并问题导致的无限循环
+        self._session_loop_counts: Dict[str, int] = {}
         
         # 初始化Agent实例
         self.agents = self._initialize_agents()
@@ -175,6 +179,21 @@ class MultiAgentWorkflow:
             add_span_attribute("current_phase", state.get("current_phase", ""))
             
             try:
+                # 基于会话的循环护栏计数（不依赖状态持久化）
+                session_id = state["session_id"]
+                loop_count = self._session_loop_counts.get(session_id, 0) + 1
+                self._session_loop_counts[session_id] = loop_count
+                add_span_event("loop_count", {"count": loop_count})
+                # 超过阈值直接引导到最终化，防止无限循环
+                if loop_count > 10:
+                    state["coordinator_decision"] = {
+                        "strategy": "sequential",
+                        "next_phase": "finalization",
+                        "target_agents": []
+                    }
+                    state["current_phase"] = "finalization"
+                    return state
+
                 # 构建对话上下文
                 context = ConversationContext(
                     session_id=state["session_id"],
@@ -567,11 +586,19 @@ class MultiAgentWorkflow:
         decision = state.get("coordinator_decision", {})
         current_phase = state.get("current_phase", "")
         completed_tasks = state.get("completed_tasks", [])
+        iteration_count = state.get("iteration_count", 0)
         
         # 添加调试日志
         self.logger.info(f"路由决策 - 当前阶段: {current_phase}, 已完成任务: {completed_tasks}")
         self.logger.info(f"协调者决策: {decision}")
         
+        # 递增迭代计数并检查护栏
+        iteration_count += 1
+        state["iteration_count"] = iteration_count
+        if iteration_count > 100:
+            self.logger.warning("达到迭代上限，强制进入最终化以避免循环")
+            return "finalization"
+
         # 检查是否所有必要任务都已完成
         required_tasks = ["explanation_analysis", "question_generation"]
         all_required_completed = all(task in completed_tasks for task in required_tasks)
@@ -644,15 +671,18 @@ class MultiAgentWorkflow:
             "active_agents": [],
             "completed_tasks": [],
             "error_log": []
+            ,
+            "iteration_count": 0
         }
         
         try:
             self.logger.info(f"开始执行多Agent工作流: {initial_state['session_id']}")
             
-            # 执行工作流（设置递归限制）
+        # 执行工作流（设置递归限制）
             final_state = await self.workflow_graph.ainvoke(
                 initial_state,
-                config={"recursion_limit": 50}  # 增加递归限制
+            # 提高递归限制，并启用时间/步数护栏
+            config={"recursion_limit": 200}
             )
             
             execution_time = time.time() - start_time

@@ -92,8 +92,19 @@ def update_last_activity():
 
 
 # --- API 调用函数 (V3.3: 流式改造) ---
-def stream_chat_api(topic: str, explanation: str, session_id: str, memory: List[Dict]) -> Generator[str, None, None]:
-    """调用后端的Agent流式聊天API。"""
+def _clean_piece(value):
+    """清洗SSE片段，过滤无效/噪声。"""
+    if not isinstance(value, str):
+        return None
+    text = value.strip()
+    if not text:
+        return None
+    noise = {"undefined", "json", "{", "}", "null"}
+    if text in noise:
+        return None
+    return text
+def stream_chat_api(topic: str, explanation: str, session_id: str, memory: List[Dict]) -> Generator[Dict, None, None]:
+    """调用后端的Agent流式聊天API，逐条产出结构化事件字典。"""
     payload = {
         "topic": topic,
         "explanation": explanation,
@@ -108,22 +119,18 @@ def stream_chat_api(topic: str, explanation: str, session_id: str, memory: List[
                     decoded_line = line.decode('utf-8')
                     if decoded_line.startswith('data: '):
                         try:
-
                             content_json = decoded_line[len('data: '):]
+                            if content_json == "[END_OF_STREAM]":
+                                continue
                             content = json.loads(content_json)
-                            if content != "[END_OF_STREAM]":
-                                # 确保返回字符串而不是字典
-                                if isinstance(content, dict):
-                                    # 如果是字典，提取消息内容
-                                    yield content.get('content', str(content))
-                                else:
-                                    yield str(content)
+                            if isinstance(content, dict):
+                                yield content
                         except json.JSONDecodeError:
                             # 忽略无法解析的行
                             continue
     except requests.exceptions.RequestException as e:
         st.error(f"API请求失败: {e}")
-        yield "" # 发生错误时，生成器也应终止
+        yield {"type": "error", "message": str(e)}
 
 def call_memorize_api(topic: str, memory: List[Dict]):
     """调用后端的记忆API（即发即忘）。"""
@@ -229,22 +236,62 @@ def render_chat_interface():
 
 
         with st.chat_message("assistant"):
-            placeholder = st.empty()
-            full_response = ""
-            response_generator = stream_chat_api(
+            st.markdown("**思考步骤**")
+            think_box = st.empty()
+            st.markdown("**回答**")
+            answer_box = st.empty()
+
+            questions: List[str] = []
+            insights: List[str] = []
+            question_set = set()
+            insight_set = set()
+
+            for evt in stream_chat_api(
                 st.session_state.current_topic,
                 user_explanation,
                 st.session_state.session_id,
                 st.session_state.short_term_memory
-            )
-            for chunk in response_generator:
-                full_response += chunk
-                placeholder.markdown(full_response)
+            ):
+                etype = evt.get("type") if isinstance(evt, dict) else None
+                if etype == "question":
+                    content = _clean_piece(evt.get("content") or "")
+                    if content and content not in question_set:
+                        question_set.add(content)
+                        questions.append(f"- {content}")
+                        think_box.markdown("\n".join(questions))
+                elif etype == "insight":
+                    content = _clean_piece(evt.get("content") or "")
+                    if content and content not in insight_set:
+                        insight_set.add(content)
+                        insights.append(f"- {content}")
+                        answer_box.markdown("\n".join(insights))
+                elif etype == "error":
+                    answer_box.markdown(f"⚠️ {evt.get('message','发生错误')}")
+                elif etype == "result":
+                    data = evt.get("data", {})
+                    if isinstance(data, dict):
+                        qs = data.get("questions") or []
+                        for q in qs:
+                            cq = _clean_piece(q) if isinstance(q, str) else None
+                            if cq and cq not in question_set:
+                                question_set.add(cq)
+                                questions.append(f"- {cq}")
+                        if questions:
+                            think_box.markdown("\n".join(questions))
+                        li = data.get("learning_insights") or []
+                        for ins in li:
+                            ci = _clean_piece(ins) if isinstance(ins, str) else None
+                            if ci and ci not in insight_set:
+                                insight_set.add(ci)
+                                insights.append(f"- {ci}")
+                        if insights:
+                            answer_box.markdown("\n".join(insights))
         
-        # 将完整的流式响应添加到聊天历史和短期记忆中
-        st.session_state.chat_history.append({"role": "assistant", "content": full_response})
+        # 将最终回答保存
+        final_answer = "\n".join(insights) if insights else ""
+        st.session_state.chat_history.append({"role": "assistant", "content": final_answer})
         st.session_state.short_term_memory.append({"role": "user", "content": user_explanation})
-        st.session_state.short_term_memory.append({"role": "assistant", "content": full_response})
+        st.session_state.short_term_memory.append({"role": "assistant", "content": final_answer})
 
         # 更新活动时间并保存状态
         update_last_activity()

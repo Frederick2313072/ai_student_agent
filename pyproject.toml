@@ -60,7 +60,7 @@ dependencies = [
   "neo4j",
   "py2neo",
   "pytest",
-  "httpx",
+  "httpx[socks]",
   "redis>=6.4.0",
   "celery>=5.5.3",
   "flower>=2.0.1",

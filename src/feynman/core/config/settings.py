@@ -10,7 +10,7 @@ from typing import Dict, List, Optional, Any, Union
 from enum import Enum
 from pathlib import Path
 from dotenv import load_dotenv
-from pydantic import Field, validator
+from pydantic import Field, validator, model_validator
 from pydantic_settings import BaseSettings
 
 
@@ -117,14 +117,12 @@ class FeynmanSettings(BaseSettings):
                 return [origin.strip() for origin in v.split(',')]
         return v
     
-    @validator('openai_api_key', 'zhipu_api_key')
-    def validate_llm_keys(cls, v, values):
-        # 至少需要一个LLM API密钥
-        openai_key = values.get('openai_api_key')
-        zhipu_key = values.get('zhipu_api_key')
-        if not openai_key and not zhipu_key:
+    @model_validator(mode="after")
+    def validate_llm_keys(self):
+        """在模型构建完成后检查LLM密钥，避免字段级校验顺序导致的误报。"""
+        if not (self.openai_api_key or self.zhipu_api_key):
             print("⚠️  警告：未设置LLM API密钥，系统将以受限模式运行")
-        return v
+        return self
     
     class Config:
         env_file = [".env", "environments/test.env"]  # 优先级: .env > environments/test.env

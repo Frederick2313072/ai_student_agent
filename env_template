@@ -139,14 +139,14 @@ RATE_LIMIT_BURST=10
 # ======================
 LOG_LEVEL=INFO
 LOG_FORMAT=json
-LOG_FILE=storage/logs/feynman.log
+LOG_FILE=logs/feynman.log
 
 # ======================
 # 前端配置
 # ======================
 FRONTEND_URL=http://localhost:3000
 NEXT_PUBLIC_API_URL=http://localhost:8005
-BACKEND_URL=http://localhost:8001
+BACKEND_URL=http://localhost:8005
 BACKEND_TIMEOUT=30
 
 # ======================
