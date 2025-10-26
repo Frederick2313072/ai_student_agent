@@ -111,26 +111,99 @@ async def liveness_check():
 
 
 @router.get("/metrics", summary="Prometheus指标", tags=["监控"])
-async def get_metrics():
+async def get_metrics(format: Optional[str] = None, request: Request = None):
     """
-    返回Prometheus格式的指标数据
+    返回指标数据，支持 Prometheus 文本格式和 JSON 格式
+    
+    Args:
+        format: 指定返回格式，可选值: "json" 或 "prometheus"（默认）
+                也可通过 Accept header 指定: "application/json" 返回 JSON
     """
     try:
-        # 更新系统指标
         metrics_collector.collect_system_metrics()
         
-        # 生成Prometheus格式的指标
         registry = get_registry()
-        metrics_data = generate_latest(registry)
         
-        return Response(
-            content=metrics_data,
-            media_type=CONTENT_TYPE_LATEST
+        should_return_json = (
+            format == "json" or 
+            (request and "application/json" in request.headers.get("accept", ""))
         )
+        
+        if should_return_json:
+            metrics_json = _registry_to_json(registry)
+            return JSONResponse(content=metrics_json)
+        else:
+            metrics_data = generate_latest(registry)
+            return Response(
+                content=metrics_data,
+                media_type=CONTENT_TYPE_LATEST
+            )
         
     except Exception as e:
         logger.error(f"指标收集失败: {str(e)}")
         raise HTTPException(status_code=500, detail="指标收集失败")
+
+
+def _registry_to_json(registry) -> Dict[str, Any]:
+    """
+    将 Prometheus Registry 转换为 JSON 格式
+    
+    Returns:
+        包含所有指标的字典，格式:
+        {
+            "metrics": [
+                {
+                    "name": "metric_name",
+                    "type": "counter|gauge|histogram|summary",
+                    "help": "metric description",
+                    "samples": [
+                        {"labels": {...}, "value": 123.45, "timestamp": ...},
+                        ...
+                    ]
+                },
+                ...
+            ],
+            "timestamp": "2024-01-01T00:00:00Z",
+            "total_metrics": 42
+        }
+    """
+    from datetime import datetime, timezone
+    
+    metrics_list = []
+    
+    for collector in registry._collector_to_names.keys():
+        try:
+            for metric in collector.collect():
+                metric_dict = {
+                    "name": metric.name,
+                    "type": metric.type,
+                    "help": metric.documentation,
+                    "samples": []
+                }
+                
+                for sample in metric.samples:
+                    sample_dict = {
+                        "name": sample.name,
+                        "labels": dict(sample.labels) if sample.labels else {},
+                        "value": sample.value
+                    }
+                    
+                    if sample.timestamp:
+                        sample_dict["timestamp"] = sample.timestamp
+                    
+                    metric_dict["samples"].append(sample_dict)
+                
+                metrics_list.append(metric_dict)
+                
+        except Exception as e:
+            logger.warning(f"解析指标时出错: {str(e)}")
+            continue
+    
+    return {
+        "metrics": metrics_list,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "total_metrics": len(metrics_list)
+    }
 
 
 @router.get("/monitoring/status", summary="监控状态概览", tags=["监控"])

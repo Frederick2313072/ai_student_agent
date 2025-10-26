@@ -215,3 +215,6 @@ return f"思维导图生成成功：\nMermaid代码：\n{mermaid_code}\n在线�
 *影响范围：费曼学习系统多Agent架构*  
 *重构类型：架构简化 + 代码内聚*
 
+
+
+

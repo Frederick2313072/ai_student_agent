@@ -78,8 +78,7 @@ class MultiAgentState(TypedDict):
     active_agents: List[str]
     completed_tasks: List[str]
     error_log: List[Dict[str, Any]]
-    # 控制与容错
-    iteration_count: int  # 工作流路由迭代计数，用于防止无限循环
+    iteration_count: int
 
 
 class MultiAgentWorkflow:
@@ -301,6 +300,9 @@ class MultiAgentWorkflow:
                         "error": response.error,
                         "timestamp": datetime.now().isoformat()
                     })
+                    # 标记为完成以避免重复循环
+                    if "explanation_analysis" not in state["completed_tasks"]:
+                        state["completed_tasks"].append("explanation_analysis")
                 
                 return state
                 
@@ -349,6 +351,8 @@ class MultiAgentWorkflow:
                         "error": response.error,
                         "timestamp": datetime.now().isoformat()
                     })
+                    if "knowledge_validation" not in state["completed_tasks"]:
+                        state["completed_tasks"].append("knowledge_validation")
                 
                 return state
                 
@@ -403,6 +407,8 @@ class MultiAgentWorkflow:
                         "error": response.error,
                         "timestamp": datetime.now().isoformat()
                     })
+                    if "question_generation" not in state["completed_tasks"]:
+                        state["completed_tasks"].append("question_generation")
                 
                 return state
                 
@@ -454,6 +460,8 @@ class MultiAgentWorkflow:
                         "error": response.error,
                         "timestamp": datetime.now().isoformat()
                     })
+                    if "conversation_orchestration" not in state["completed_tasks"]:
+                        state["completed_tasks"].append("conversation_orchestration")
                 
                 return state
                 
@@ -509,6 +517,8 @@ class MultiAgentWorkflow:
                         "error": response.error,
                         "timestamp": datetime.now().isoformat()
                     })
+                    if "insight_synthesis" not in state["completed_tasks"]:
+                        state["completed_tasks"].append("insight_synthesis")
                 
                 return state
                 
@@ -588,6 +598,12 @@ class MultiAgentWorkflow:
         completed_tasks = state.get("completed_tasks", [])
         iteration_count = state.get("iteration_count", 0)
         
+        # 基本循环保护
+        state["loop_counter"] = int(state.get("loop_counter", 0)) + 1
+        if state["loop_counter"] >= 40:
+            self.logger.warning("达到循环保护阈值，进入最终化阶段")
+            return "finalization"
+        
         # 添加调试日志
         self.logger.info(f"路由决策 - 当前阶段: {current_phase}, 已完成任务: {completed_tasks}")
         self.logger.info(f"协调者决策: {decision}")
@@ -612,25 +628,22 @@ class MultiAgentWorkflow:
         if "coordinator_finalization" in completed_tasks:
             self.logger.info("最终化任务已完成，强制结束")
             return "end"
+
+        # 改为固定顺序推进，避免在协调者反复返回同一阶段导致递归不终止
+        ordered_phases = [
+            "explanation_analysis",
+            "question_generation",
+            "knowledge_validation",
+            "conversation_orchestration",
+            "insight_synthesis",
+        ]
+        for phase in ordered_phases:
+            if phase not in completed_tasks:
+                return phase
         
-        # 根据协调者决策和当前状态决定下一步
-        next_phase = decision.get("next_phase", "explanation_analysis")
-        
-        # 按优先级执行任务
-        if next_phase == "explanation_analysis" and "explanation_analysis" not in completed_tasks:
-            return "explanation_analysis"
-        elif next_phase == "knowledge_validation" and "knowledge_validation" not in completed_tasks:
-            return "knowledge_validation"
-        elif next_phase == "question_generation" and "question_generation" not in completed_tasks:
-            return "question_generation"
-        elif next_phase == "conversation_orchestration" and "conversation_orchestration" not in completed_tasks:
-            return "conversation_orchestration"
-        elif next_phase == "insight_synthesis" and "insight_synthesis" not in completed_tasks:
-            return "insight_synthesis"
-        else:
-            # 所有任务完成或无更多任务，进入最终化
-            self.logger.info("无更多任务需要执行，进入最终化")
-            return "finalization"
+        # 所有任务完成或无更多任务，进入最终化
+        self.logger.info("无更多任务需要执行，进入最终化")
+        return "finalization"
     
     def _build_context_from_state(self, state: MultiAgentState) -> ConversationContext:
         """从状态构建对话上下文"""
@@ -670,19 +683,16 @@ class MultiAgentWorkflow:
             "learning_report": None,
             "active_agents": [],
             "completed_tasks": [],
-            "error_log": []
-            ,
+            "error_log": [],
             "iteration_count": 0
         }
         
         try:
             self.logger.info(f"开始执行多Agent工作流: {initial_state['session_id']}")
             
-        # 执行工作流（设置递归限制）
             final_state = await self.workflow_graph.ainvoke(
                 initial_state,
-            # 提高递归限制，并启用时间/步数护栏
-            config={"recursion_limit": 200}
+                config={"recursion_limit": 200}
             )
             
             execution_time = time.time() - start_time

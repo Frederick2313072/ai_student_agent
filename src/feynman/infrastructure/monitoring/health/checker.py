@@ -438,13 +438,22 @@ class HealthChecker:
             self.check_chromadb(),
             return_exceptions=True
         )
-        
-        # 检查是否所有关键组件都健康
-        ready = all(
-            isinstance(check, HealthCheck) and check.status == HealthStatus.HEALTHY
-            for check in checks
-        )
-        
+
+        # 逐项评估：
+        # - chromadb 必须 HEALTHY 才视为就绪
+        # - system_resources 允许 HEALTHY 或 DEGRADED（瞬时资源紧张不阻塞就绪）
+        chroma_ok = False
+        sys_ok = False
+
+        for check in checks:
+            if isinstance(check, HealthCheck):
+                if check.name == "chromadb":
+                    chroma_ok = check.status == HealthStatus.HEALTHY
+                elif check.name == "system_resources":
+                    sys_ok = check.status in (HealthStatus.HEALTHY, HealthStatus.DEGRADED)
+
+        ready = chroma_ok and sys_ok
+
         return {
             "ready": ready,
             "timestamp": datetime.now(timezone.utc).isoformat()
